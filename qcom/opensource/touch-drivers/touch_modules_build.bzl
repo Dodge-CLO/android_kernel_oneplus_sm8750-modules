@@ -1,5 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module", "ddk_submodule", "kernel_module_group")
-load("@rules_pkg//pkg:install.bzl", "pkg_install")
+load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("@rules_pkg//pkg:mappings.bzl", "pkg_files", "strip_prefix")
 
 def _register_module_to_map(module_map, name, path, config_option, srcs, deps):
@@ -44,12 +44,12 @@ def touch_module_entry(hdrs = []):
 
 def define_target_variant_modules(target, variant, registry, modules, config_options = [], vm_target = False):
     kernel_build = "{}_{}".format(target, variant)
-    kernel_build_label = "//vendor/qcom/kernel:{}".format(kernel_build)
+    kernel_build_label = "//msm-kernel:{}".format(kernel_build)
     modules = [registry.get(module_name) for module_name in modules]
     options = _get_kernel_build_options(modules, config_options)
     build_print = lambda message: print("{}: {}".format(kernel_build, message))
     formatter = lambda s: s.replace("%b", kernel_build).replace("%t", target)
-    deps = ["//vendor/qcom/kernel:all_headers"]
+    deps = ["//msm-kernel:all_headers"]
 
     all_module_rules = []
 
@@ -88,8 +88,12 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
         strip_prefix = strip_prefix.files_only(),
     )
 
-    pkg_install(
+    copy_to_dist_dir(
         name = "{}_touch_drivers_dist".format(kernel_build),
-        srcs = [":{}_dist_files".format(kernel_build)],
-        destdir = "out/target/product/{}/dlkm/lib/modules".format(target),
+        data = [":{}_touch_modules".format(kernel_build)],
+        dist_dir = "out/target/product/{}/dlkm/lib/modules".format(target),
+        flat = True,
+        wipe_dist_dir = False,
+        allow_duplicate_filenames = False,
+        mode_overrides = {"**/*": "644"},
     )

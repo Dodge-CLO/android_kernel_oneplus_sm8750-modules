@@ -41,9 +41,8 @@ def _define_module(target, variant):
         local_defines = ["OPLUS_FEATURE_CAMERA_COMMON", "FEATURE_ENABLE=1"],
         deps  = [
              "//msm-kernel:all_headers",
-             "//vendor/qcom/opensource/camera-kernel:camera_headers",
-             "//vendor/qcom/opensource/camera-kernel:camera_banner",
-             "//vendor/qcom/opensource/camera-kernel:{}_camera".format(tv),
+             "//vendor/oplus/sm8750-modules/qcom/opensource/camera-kernel:camera_headers",
+             "//vendor/oplus/sm8750-modules/qcom/opensource/camera-kernel:{}_camera".format(tv),
              ":camera_extension_headers",
         ],
         kernel_build = "//msm-kernel:{}".format(tv),

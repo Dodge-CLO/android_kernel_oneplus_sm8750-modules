@@ -1,3 +1,5 @@
+# UBWCP has build targets only for pineapple.
+ifeq ($(TARGET_BOARD_PLATFORM),pineapple)
 # SPDX-License-Identifier: GPL-2.0-only
 
 ifneq ($(TARGET_KERNEL_DLKM_DISABLE), true)
@@ -12,4 +14,6 @@ LOCAL_EXPORT_KO_INCLUDE_DIRS    += $(LOCAL_PATH)/include/kernel
 LOCAL_MODULE      := ubwcp.ko
 LOCAL_MODULE_PATH := $(KERNEL_MODULES_OUT)
 include $(DLKM_DIR)/Build_external_kernelmodule.mk
+endif
+
 endif

@@ -4,12 +4,13 @@ load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 def define_modules(target, variant):
     tv = "{}_{}".format(target, variant)
     copts = []
-    deps = ["//vendor/qcom/kernel:all_headers"]
+    deps = ["//msm-kernel:all_headers"]
 
     if target == "sun":
+       deps.append("//vendor/oplus/sm8750-modules/oplus/kernel/nfc/oplus_nfc:{}_oplus_nfc".format(tv))
        copts.append("-DNFC_SECURE_PERIPHERAL_ENABLED")
-       deps += ["//vendor/qcom/sm8750-modules/qcom/opensource/securemsm-kernel:smcinvoke_kernel_headers",
-                "//vendor/qcom/sm8750-modules/qcom/opensource/securemsm-kernel:{}_smcinvoke_dlkm".format(tv)
+       deps += ["//vendor/oplus/sm8750-modules/qcom/opensource/securemsm-kernel:smcinvoke_kernel_headers",
+                "//vendor/oplus/sm8750-modules/qcom/opensource/securemsm-kernel:{}_smcinvoke_dlkm".format(tv)
        ]
 
     if target == "parrot":
@@ -35,7 +36,7 @@ def define_modules(target, variant):
         includes = [".", "linux", "nfc", "include/uapi/linux/nfc"],
         copts = copts,
         deps = deps,
-        kernel_build= "//vendor/qcom/kernel:{}".format(tv),
+        kernel_build= "//msm-kernel:{}".format(tv),
         visibility = ["//visibility:public"]
     )
 

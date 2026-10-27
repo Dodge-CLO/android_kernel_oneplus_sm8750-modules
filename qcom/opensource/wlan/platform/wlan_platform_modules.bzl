@@ -1,5 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
-load("@rules_pkg//pkg:install.bzl", "pkg_install")
+load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("@rules_pkg//pkg:mappings.bzl", "pkg_files", "strip_prefix")
 load(":target_variants.bzl", "get_all_variants", "targets", "get_16k_mtv")
 
@@ -100,7 +100,7 @@ def _define_platform_config_rule(module, target, variant):
 def _define_modules_for_target_variant(target, variant):
     tv = "{}_{}".format(target, variant)
 
-    kernel_build = "//vendor/qcom/kernel:{}".format(tv)
+    kernel_build = "//msm-kernel:{}".format(tv)
 
     cnss2_enabled = 0
     plat_ipc_qmi_svc_enabled = 0
@@ -114,9 +114,9 @@ def _define_modules_for_target_variant(target, variant):
         icnss2_enabled = 1
 
     if target != "sa510m" and target != "sa510m.1g":
-        kernel_header = "//vendor/qcom/kernel:all_headers"
+        kernel_header = "//msm-kernel:all_headers"
     else:
-        kernel_header = "//vendor/qcom/kernel:all_headers_arm"
+        kernel_header = "//msm-kernel:all_headers_arm"
 
     if cnss2_enabled:
         module = "cnss2"
@@ -134,7 +134,7 @@ def _define_modules_for_target_variant(target, variant):
                 ":{}_cnss_plat_ipc_qmi_svc".format(tv),
             ]
         if target != "sa510m" and target != "sa510m.1g":
-            deps += ["//vendor/qcom/kernel:all_headers",]
+            deps += ["//msm-kernel:all_headers",]
         else:
             deps += [ kernel_header ]
 
@@ -181,7 +181,7 @@ def _define_modules_for_target_variant(target, variant):
         module = "icnss2"
         _define_platform_config_rule(module, target, variant)
         defconfig = ":{}/{}_defconfig_generate_{}".format(module, tv, variant)
-        deps = ["//vendor/qcom/kernel:all_headers",]
+        deps = ["//msm-kernel:all_headers",]
         ddk_module(
             name = "{}_icnss2".format(tv),
             srcs = native.glob([
@@ -216,7 +216,7 @@ def _define_modules_for_target_variant(target, variant):
     _define_platform_config_rule(module, target, variant)
     defconfig = ":{}/{}_defconfig_generate_{}".format(module, tv, variant)
     if target != "sa510m" and target != "sa510m.1g":
-        deps = ["//vendor/qcom/kernel:all_headers"]
+        deps = ["//msm-kernel:all_headers"]
     else:
         deps = [ kernel_header ]
     ddk_module(
@@ -258,12 +258,12 @@ def _define_modules_for_target_variant(target, variant):
     ]
 
     if target != "sa510m" and target != "sa510m.1g":
-        cnss_utils_dep_list += ["//vendor/qcom/kernel:all_headers"]
+        cnss_utils_dep_list += ["//msm-kernel:all_headers"]
     else:
         cnss_utils_dep_list += [ kernel_header ]
 
     if target == "sun" or target == "canoe" or target == "art" or target == "chora" or target == "art16k":
-        cnss_utils_dep_list = cnss_utils_dep_list + ["//vendor/qcom/sm8750-modules/qcom/opensource/data-kernel/drivers/smem-mailbox:{}_smem_mailbox".format(tv),]
+        cnss_utils_dep_list = cnss_utils_dep_list + ["//vendor/oplus/sm8750-modules/qcom/opensource/data-kernel/drivers/smem-mailbox:{}_smem_mailbox".format(tv),]
     if target == "sdxkova":
         tgt = "target-aarch64_cortex-a53_musl"
         board = "sdx85"
@@ -287,7 +287,7 @@ def _define_modules_for_target_variant(target, variant):
     module = "cnss_utils"
     defconfig = ":{}/{}_defconfig_generate_{}".format(module, tv, variant)
     if target != "sa510m" and target != "sa510m.1g":
-        deps = ["//vendor/qcom/kernel:all_headers"]
+        deps = ["//msm-kernel:all_headers"]
     else:
         deps = [ kernel_header ]
     ddk_module(
@@ -310,7 +310,7 @@ def _define_modules_for_target_variant(target, variant):
 
     if plat_ipc_qmi_svc_enabled:
         if target != "sa510m" and target != "sa510m.1g":
-            deps = ["//vendor/qcom/kernel:all_headers"]
+            deps = ["//msm-kernel:all_headers"]
         else:
             deps = [ kernel_header ]
     ddk_module(
@@ -335,10 +335,14 @@ def _define_modules_for_target_variant(target, variant):
         strip_prefix = strip_prefix.files_only(),
     )
 
-    pkg_install(
+    copy_to_dist_dir(
         name = "{}_wlan_platform_modules_dist".format(tv),
-        srcs = [":{}_dist_files".format(tv)],
-        destdir = "out/target/product/{}/dlkm/lib/modules/".format(target),
+        data = _get_module_list(target, variant),
+        dist_dir = "out/target/product/{}/dlkm/lib/modules/".format(target),
+        flat = True,
+        wipe_dist_dir = False,
+        allow_duplicate_filenames = False,
+        mode_overrides = {"**/*": "644"},
     )
 
 def define_modules():

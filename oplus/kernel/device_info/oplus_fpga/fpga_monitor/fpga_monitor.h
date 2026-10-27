@@ -13,7 +13,7 @@
 #include <linux/hrtimer.h>
 #include <linux/platform_device.h>
 #include <linux/version.h>
-#include "../../../../fs/proc/internal.h"
+#include <linux/proc_fs.h>
 #include <soc/oplus/system/oplus_project.h>
 
 #include "fpga_exception.h"

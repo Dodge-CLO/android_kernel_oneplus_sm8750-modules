@@ -10,6 +10,8 @@ RMNET_WLAN_DLKM_PLATFORMS_LIST += tuna
 
 ifeq ($(call is-board-platform-in-list, $(RMNET_WLAN_DLKM_PLATFORMS_LIST)),true)
 LOCAL_PATH := $(call my-dir)
+# Resolve dependencies next to the real techpack source directory.
+DATARMNET_OPENSOURCE_DIR := $(patsubst %/datarmnet-ext/,%,$(dir $(LOCAL_PATH)))
 include $(CLEAR_VARS)
 
 #Enabling BAZEL
@@ -22,7 +24,7 @@ LOCAL_SRC_FILES := $(wildcard $(LOCAL_PATH)/**/*) $(wildcard $(LOCAL_PATH)/*)
 
 #path from build top to the core directory
 DATARMNET_CORE_PATH := datarmnet/core
-RMNET_CORE_PATH := vendor/qcom/opensource/$(DATARMNET_CORE_PATH)
+RMNET_CORE_PATH := $(DATARMNET_OPENSOURCE_DIR)/$(DATARMNET_CORE_PATH)
 DLKM_DIR := $(TOP)/device/qcom/common/dlkm
 #absolute path to the build directory. Can't use $(TOP) here since
 #that resolves to ., and we pass this to Kbuild, where . is different

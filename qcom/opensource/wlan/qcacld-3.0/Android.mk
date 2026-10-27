@@ -52,7 +52,7 @@ endif
 
 LOCAL_PATH := $(call my-dir)
 $(call wlog,LOCAL_PATH=$(LOCAL_PATH))
-BOARD_OPENSOURCE_DIR ?= vendor/qcom/opensource
+BOARD_OPENSOURCE_DIR ?= $(patsubst %/wlan/qcacld-3.0,%,$(LOCAL_PATH))
 
 ENABLE_QCACLD := true
 ifeq ($(TARGET_USES_QMAA), true)
@@ -108,7 +108,6 @@ endif
 ifeq ($(LOCAL_MULTI_KO), true)
 LOCAL_ANDROID_ROOT := $(shell pwd)
 LOCAL_WLAN_BLD_DIR := $(LOCAL_ANDROID_ROOT)/$(WLAN_BLD_DIR)
-$(shell `find $(LOCAL_WLAN_BLD_DIR)/qcacld-3.0/ -maxdepth 1 -name '.*' ! -name '.git' -delete`)
 
 ifeq ($(LOCAL_MODULE_DDK_BUILD), true)
 ifeq ($(CHIPSET),)

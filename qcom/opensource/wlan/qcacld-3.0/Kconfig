@@ -1947,6 +1947,10 @@ config WIFI_MONITOR_SUPPORT_2_0
 	bool "Enable WIFI MONITOR SUPPORT 2_0"
 	default n
 
+config WLAN_TX_MON_2_0
+	bool "Enable WLAN TX monitor 2.0"
+	default y if WIFI_MONITOR_SUPPORT && WIFI_MONITOR_SUPPORT_Y_WLAN_TX_MON_2_0
+
 config WLAN_TX_MON_2_0_Y_WLAN_DP_LOCAL_PKT_CAPTURE
 	bool "Enable WLAN_TX_MON_2_0_Y_DP_LOCAL_PKT_CAPTURE"
 	default n
