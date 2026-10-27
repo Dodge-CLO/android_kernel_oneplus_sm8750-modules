@@ -41,3 +41,20 @@ cc_library_headers {
     vendor: true,
     recovery_available: true
 }
+
+// The sun audio userspace (graphservices) asks for audio_kernel_headers, which
+// LineageOS defines over its generated kernel headers. Here the audio UAPI
+// comes from this techpack and the rest from qti_kernel_headers.
+cc_library_headers {
+    name: "audio_kernel_headers",
+    header_libs: [
+        "qti_audio_kernel_uapi",
+        "qti_kernel_headers",
+    ],
+    export_header_lib_headers: [
+        "qti_audio_kernel_uapi",
+        "qti_kernel_headers",
+    ],
+    vendor: true,
+    recovery_available: true,
+}
