@@ -21,3 +21,30 @@ sh_binary_host {
     src: ":gen-headers_install.sh",
     required: ["unifdef"],
 }
+
+// LineageOS CAF HALs (PAL and others) depend on generated_kernel_headers, the
+// kernel headers its kernel build generates. Here the kernel UAPI comes from
+// qti_kernel_headers and the techpack UAPIs from the techpacks themselves.
+cc_library_headers {
+    name: "generated_kernel_headers",
+    header_libs: [
+        "qti_audio_kernel_uapi",
+        "qti_display_kernel_headers",
+        "qti_gfx_kernel_uapi",
+        "qti_ipa_kernel_headers",
+        "qti_kernel_headers",
+        "qti_mm_drivers_kernel_headers",
+        "qti_video_kernel_uapi",
+    ],
+    export_header_lib_headers: [
+        "qti_audio_kernel_uapi",
+        "qti_display_kernel_headers",
+        "qti_gfx_kernel_uapi",
+        "qti_ipa_kernel_headers",
+        "qti_kernel_headers",
+        "qti_mm_drivers_kernel_headers",
+        "qti_video_kernel_uapi",
+    ],
+    vendor: true,
+    recovery_available: true,
+}
