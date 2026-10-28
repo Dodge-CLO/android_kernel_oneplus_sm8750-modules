@@ -148,11 +148,13 @@ def _define_modules_for_target_variant(target, variant):
                 "cnss2/pci_platform.h",
                 "cnss2/power.c",
                 "cnss2/genl.c",
+                "cnss2/oplus_wifi.c",
                 "cnss2/*.h",
                 "cnss_utils/*.h",
             ]),
             includes = ["cnss", "cnss_utils"],
             kconfig = "cnss2/Kconfig",
+            copts = ["-DOPLUS_FEATURE_WIFI_BDF", "-DOPLUS_FEATURE_WIFI_MAC"],
             defconfig = defconfig,
             conditional_srcs = {
                 "CONFIG_CNSS2_QMI": {
@@ -194,7 +196,7 @@ def _define_modules_for_target_variant(target, variant):
             ]),
             includes = ["icnss2", "cnss_utils"],
             kconfig = "icnss2/Kconfig",
-            copts = [],
+            copts = ["-DOPLUS_FEATURE_WIFI_BDF", "-DOPLUS_FEATURE_WIFI_MAC"],
             defconfig = defconfig,
             conditional_srcs = {
                 "CONFIG_ICNSS2_QMI": {
