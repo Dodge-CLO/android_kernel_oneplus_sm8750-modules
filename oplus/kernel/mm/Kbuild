@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: GPL-2.0-only
+# Copyright (C) 2026 The PenguinOS Project
+#
+# OnePlus reclaim tuning that works on its own, without the OnePlus framework
+# or its scheduler modules. Sources from the OnePlus 13 kernel modules release.
+
+obj-m := oplus_bsp_kswapd_opt.o oplus_bsp_mglru_opt.o oplus_bsp_abort_mm_opt.o \
+	oplus_bsp_kshrink_slabd.o oplus_bsp_pcppages_opt.o
+
+oplus_bsp_kswapd_opt-y := kswapd_opt/kswapd_opt.o
+oplus_bsp_mglru_opt-y := mglru_opt/mglru_opt.o
+oplus_bsp_abort_mm_opt-y := async_reclaim_opt/abort_mm_opt/abort_mm_opt.o
+oplus_bsp_kshrink_slabd-y := async_reclaim_opt/kshrink_slabd/kshrink_slabd.o
+oplus_bsp_pcppages_opt-y := async_reclaim_opt/pcppages_opt/pcppages_opt.o
+
+ccflags-y := -I$(srctree) -I$(srctree)/$(src)
+CFLAGS_kswapd_opt/kswapd_opt.o := -DCONFIG_OPLUS_FEATURE_KSWAPD_OPT \
+	-DCONFIG_COSTLY_ALLOC_MASK_RECLAIM -DCONFIG_QCOM_ALLOC_MASK_RECLAIM
+CFLAGS_mglru_opt/mglru_opt.o := -DCONFIG_OPLUS_FEATURE_MGLRU_OPT
