@@ -37,7 +37,7 @@ def _define_module(target, variant):
             "//msm-kernel:all_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/synx-kernel:synx_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/mm-drivers:mm_drivers_headers",
-        ] + soc_modules(),
+        ] + soc_modules(["gh_dbl", "gh_rm_drv", "qcom-scm", "qcom_q6v5_pas", "rproc_qcom_common"]),
         kernel_build = "//msm-kernel:{}".format(tv),
     )
 
