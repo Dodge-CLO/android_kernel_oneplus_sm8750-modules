@@ -6,6 +6,7 @@
 #include "cam_trace.h"
 #include "cam_kevent_fb_custom.h"
 #include <linux/iio/consumer.h>
+#include <linux/vmalloc.h>
 
 bool is_ftm_current_test = false;
 struct cam_sensor_i2c_reg_setting sensor_setting;

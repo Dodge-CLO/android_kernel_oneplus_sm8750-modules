@@ -1,4 +1,5 @@
 #include <linux/module.h>
+#include <linux/vmalloc.h>
 #include <linux/kernel.h>
 #include <linux/of.h>
 #include <linux/of_gpio.h>

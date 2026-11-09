@@ -432,6 +432,11 @@ static const struct of_device_id tof8806_pltf_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, tof8801_pltf_dt_match);
 MODULE_DEVICE_TABLE(of, tof8806_pltf_dt_match);
+static void cam_tof_pltf_remove_void(struct platform_device *pdev)
+{
+	cam_tof_pltf_remove(pdev);
+}
+
 struct platform_driver tof8806_pltf_driver = {
 	.driver = {
 		.name = "ams,pltf_tof8806",
@@ -440,7 +445,7 @@ struct platform_driver tof8806_pltf_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = cam_tof_pltf_probe,
-	 .remove = cam_tof_pltf_remove,
+	 .remove = cam_tof_pltf_remove_void,
 };
 
 struct platform_driver tof8801_pltf_driver = {
@@ -451,7 +456,7 @@ struct platform_driver tof8801_pltf_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = cam_tof_pltf_probe,
-	.remove = cam_tof_pltf_remove,
+	.remove = cam_tof_pltf_remove_void,
 };
 
 int is_tof_use_cci_i2c(void)

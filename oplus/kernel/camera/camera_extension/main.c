@@ -278,9 +278,14 @@ static const struct dev_pm_ops camera_extension_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(camera_extension_suspend, camera_extension_resume)
 };
 
+static void camera_extension_remove_void(struct platform_device *pdev)
+{
+	camera_extension_remove(pdev);
+}
+
 static struct platform_driver camera_extension_platform_driver = {
 	.probe  = camera_extension_probe,
-	.remove = camera_extension_remove,
+	.remove = camera_extension_remove_void,
 	.driver = {
 		.name = "camera_extension",
 		.of_match_table = camera_extension_of_match_table,

@@ -1,4 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//msm-kernel:target_variants.bzl", "get_all_variants")
 
@@ -44,8 +45,9 @@ def _define_module(target, variant):
              "//vendor/oplus/sm8750-modules/qcom/opensource/camera-kernel:camera_headers",
              "//vendor/oplus/sm8750-modules/qcom/opensource/camera-kernel:{}_camera".format(tv),
              ":camera_extension_headers",
-        ],
+        ] + soc_modules(),
         kernel_build = "//msm-kernel:{}".format(tv),
+        config = "//msm-kernel:{}_config".format(tv),
     )
 
     copy_to_dist_dir(
