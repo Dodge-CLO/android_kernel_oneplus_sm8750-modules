@@ -1542,9 +1542,14 @@ static const struct of_device_id qbt_match[] = {
 	{}
 };
 
+static void qbt_remove_void(struct platform_device *pdev)
+{
+	qbt_remove(pdev);
+}
+
 static struct platform_driver qbt_plat_driver = {
 	.probe = qbt_probe,
-	.remove = qbt_remove,
+	.remove = qbt_remove_void,
 	.suspend = qbt_suspend,
 	.resume = qbt_resume,
 	.driver = {

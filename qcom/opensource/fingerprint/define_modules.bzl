@@ -1,4 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 
 def define_basic_modules(targets, variants):
@@ -13,13 +14,14 @@ def define_modules(target, variant):
     ddk_module(
         name = rule_base,
         out = "qbt_handler.ko",
-        deps = ["//msm-kernel:all_headers"],
+        deps = ["//msm-kernel:all_headers"] + soc_modules(),
         srcs = [
             "qbt_handler.c",
             "qbt_handler.h"
         ],
         includes = ["include/linux"],
         kernel_build = "//msm-kernel:{}".format(tv),
+        config = "//msm-kernel:{}_config".format(tv),
         visibility = ["//visibility:public"]
     )
 
