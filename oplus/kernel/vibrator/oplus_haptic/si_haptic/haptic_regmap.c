@@ -16,7 +16,7 @@
 #include "haptic_mid.h"
 #include "sih688x_reg.h"
 #ifdef CONFIG_HAPTIC_FEEDBACK_MODULE
-#include "../../haptic_feedback/haptic_feedback.h"
+#include "haptic_feedback.h"
 #endif
 int  haptic_regmap_read(struct regmap *regmap, unsigned int start_reg,
 	unsigned int reg_num, char *buf)

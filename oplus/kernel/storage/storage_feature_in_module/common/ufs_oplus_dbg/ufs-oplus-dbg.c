@@ -14,7 +14,7 @@
 
 #include "ufs-oplus-dbg.h"
 #ifdef CONFIG_OPLUS_QCOM_UFS_DRIVER
-#include "../../../../../../drivers/ufs/host/ufs-qcom.h"
+#include "ufs-qcom.h"
 #endif /* CONFIG_OPLUS_QCOM_UFS_DRIVER */
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0))

@@ -39,7 +39,7 @@
 #include <mt-plat/mtk_boot_common.h>
 #endif
 #ifdef CONFIG_HAPTIC_FEEDBACK_MODULE
-#include "../../haptic_feedback/haptic_feedback.h"
+#include "haptic_feedback.h"
 #endif
 #endif
 

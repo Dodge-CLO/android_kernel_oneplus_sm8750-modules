@@ -13,7 +13,7 @@
 #include "sih688x_reg.h"
 #include "haptic_regmap.h"
 #ifdef CONFIG_HAPTIC_FEEDBACK_MODULE
-#include "../../haptic_feedback/haptic_feedback.h"
+#include "haptic_feedback.h"
 #endif
 
 typedef struct sih_match_funclist {

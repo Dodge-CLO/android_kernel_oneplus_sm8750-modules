@@ -928,7 +928,7 @@ static struct device_attribute *tps6128xd_attributes[] = {
 };
 #endif
 
-static void oplus_tps6128xd_retry_init_work(struct work_struct *work)
+static __maybe_unused void oplus_tps6128xd_retry_init_work(struct work_struct *work)
 {
 	struct delayed_work *dwork = to_delayed_work(work);
 	struct chip_tps6128xd *chip = container_of(

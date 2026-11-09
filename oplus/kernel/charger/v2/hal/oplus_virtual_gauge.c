@@ -90,7 +90,7 @@ struct oplus_virtual_gauge_ic {
 static int oplus_chg_vg_virq_register(struct oplus_virtual_gauge_ic *chip);
 static int oplus_chg_vg_get_sub_btb_state(struct oplus_chg_ic_dev *ic_dev,
 					  enum oplus_sub_btb_state *state);
-static void oplus_test_feature_register_sub_btb(struct oplus_virtual_gauge_ic *chip);
+static __maybe_unused void oplus_test_feature_register_sub_btb(struct oplus_virtual_gauge_ic *chip);
 
 static inline bool func_is_support(struct oplus_virtual_gauge_child *ic,
 				   enum oplus_chg_ic_func func_id)

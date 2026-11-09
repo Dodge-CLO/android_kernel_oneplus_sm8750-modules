@@ -45,7 +45,7 @@
 #include <linux/wait.h>
 
 #ifdef CONFIG_HAPTIC_FEEDBACK_MODULE
-#include "../../haptic_feedback/haptic_feedback.h"
+#include "haptic_feedback.h"
 #endif
 
 /* add for DX-2 bringup */

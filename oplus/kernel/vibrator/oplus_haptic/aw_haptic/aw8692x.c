@@ -15,7 +15,7 @@
 #include "haptic_hv_reg.h"
 
 #ifdef CONFIG_HAPTIC_FEEDBACK_MODULE
-#include "../../haptic_feedback/haptic_feedback.h"
+#include "haptic_feedback.h"
 #endif
 
 #ifdef OPLUS_FEATURE_CHG_BASIC

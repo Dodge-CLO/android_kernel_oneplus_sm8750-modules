@@ -86,7 +86,7 @@ static ssize_t hung_up_tty_write(struct file *file, const char __user *buf,
 {
 	return -EIO;
 }
-static void tty_update_time(struct timespec64 *time)
+static __maybe_unused void tty_update_time(struct timespec64 *time)
 {
 	time64_t sec = ktime_get_real_seconds();
 
