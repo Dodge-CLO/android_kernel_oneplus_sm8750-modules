@@ -3,6 +3,7 @@
  * Copyright (C) 2018-2020 . All rights reserved.
  */
 #include <linux/uaccess.h>
+#include <linux/vmalloc.h>
 #include <linux/module.h>
 #include <linux/irq.h>
 #include <linux/kernel.h>

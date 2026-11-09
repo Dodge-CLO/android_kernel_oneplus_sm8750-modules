@@ -10,6 +10,7 @@
  */
 
 #include "sih688x_reg.h"
+#include <linux/vmalloc.h>
 #include "sih688x.h"
 #include "haptic.h"
 #include "haptic_mid.h"

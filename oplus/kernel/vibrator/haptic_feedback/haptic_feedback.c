@@ -765,6 +765,11 @@ static const struct of_device_id oplus_haptic_drv_match[] = {
 	{},
 };
 
+static void oplus_haptic_feedback_remove_void(struct platform_device *pdev)
+{
+	oplus_haptic_feedback_remove(pdev);
+}
+
 static struct platform_driver oplus_haptic_feedback_driver = {
 	.driver =
 	{
@@ -773,7 +778,7 @@ static struct platform_driver oplus_haptic_feedback_driver = {
 		.of_match_table = of_match_ptr(oplus_haptic_drv_match),
 	},
 	.probe      = oplus_haptic_feedback_probe,
-	.remove     = oplus_haptic_feedback_remove,
+	.remove     = oplus_haptic_feedback_remove_void,
 };
 
 static int __init haptic_feedback_init(void)

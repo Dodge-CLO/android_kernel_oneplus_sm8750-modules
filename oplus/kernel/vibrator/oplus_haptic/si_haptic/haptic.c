@@ -2303,7 +2303,7 @@ static int sih_parse_dts(struct device *dev, sih_haptic_t *sih_haptic,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 		oplus_strlcpy(sih_haptic->chip_attr.lra_name, str, SIH_LRA_NAME_LEN);
 #else
-		strlcpy(sih_haptic->chip_attr.lra_name, str, SIH_LRA_NAME_LEN);
+		strscpy(sih_haptic->chip_attr.lra_name, str, SIH_LRA_NAME_LEN);
 #endif
 		hp_info("%s:lra_name = %s\n", __func__, sih_haptic->chip_attr.lra_name);
 	}
