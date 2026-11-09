@@ -258,7 +258,7 @@ def _define_module(target, variant):
             },
         },
         local_defines = ["OPLUS_FEATURE_CAMERA_COMMON", "FEATURE_ENABLE=1"],
-        deps = deps + soc_modules(),
+        deps = deps + soc_modules(["clk-qcom", "crm-v2", "leds-qti-flash", "llcc-qcom", "mdt_loader", "mem_buf_dev", "qcom-scm", "qcom_iommu_util", "qcom_rpmh", "qcom_va_minidump", "socinfo"]),
         kconfig = "Kconfig",
         defconfig = "{}_defconfig_generated".format(tv),
         kernel_build = "//msm-kernel:{}".format(tv),

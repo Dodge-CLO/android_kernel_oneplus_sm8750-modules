@@ -11,10 +11,7 @@ def define_oplus_local_modules():
             "horae_shell_temp.c",
         ]),
         includes = ["."],
-        copts = select({
-            "//build/kernel/kleaf:kocov_is_true": ["-fprofile-arcs", "-ftest-coverage"],
-            "//conditions:default": [],
-        }),
+        copts = [],
     )
 
     define_oplus_ddk_module(
@@ -24,10 +21,7 @@ def define_oplus_local_modules():
             "thermal_pa_adc.c",
         ]),
         includes = ["."],
-        copts = select({
-            "//build/kernel/kleaf:kocov_is_true": ["-fprofile-arcs", "-ftest-coverage"],
-            "//conditions:default": [],
-        }),
+        copts = [],
     )
 
     define_oplus_ddk_module(
@@ -40,10 +34,7 @@ def define_oplus_local_modules():
             "//vendor/oplus/kernel/cpu/thermal:horae_shell_temp",
         ],
         includes = ["."],
-        copts = select({
-            "//build/kernel/kleaf:kocov_is_true": ["-fprofile-arcs", "-ftest-coverage"],
-            "//conditions:default": [],
-        }),
+        copts = [],
     )
 
     ddk_copy_to_dist_dir(

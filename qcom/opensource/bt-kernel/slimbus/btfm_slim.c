@@ -734,6 +734,7 @@ static const struct slim_device_id btfm_slim_id[] = {
 	.dev_index = 0x1,
 	.instance = 0x0,
 	}
+	{}
 };
 
 MODULE_DEVICE_TABLE(slim, btfm_slim_id);

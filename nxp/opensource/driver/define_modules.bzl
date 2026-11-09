@@ -36,7 +36,7 @@ def define_modules(target, variant):
                 "include/uapi/linux/nfc/sn_uapi.h"],
         includes = [".", "linux", "nfc", "include/uapi/linux/nfc"],
         copts = copts,
-        deps = deps + soc_modules(),
+        deps = deps + soc_modules(["pinctrl-msm", "qcom_ipc_logging"]),
         kernel_build= "//msm-kernel:{}".format(tv),
         visibility = ["//visibility:public"]
     )

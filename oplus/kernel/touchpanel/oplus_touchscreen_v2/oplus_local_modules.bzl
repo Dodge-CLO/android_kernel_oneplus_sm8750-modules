@@ -446,7 +446,7 @@ def define_oplus_local_modules():
             "**/*.h",
             "touch_custom/touch.c"
         ]),
-        ko_deps = tp_custom_ko_deps + oplus_bsp_boot_projectinfo_ko_deps,
+        ko_deps = tp_custom_ko_deps + oplus_bsp_boot_projectinfo_ko_deps + ["//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo"],
         includes = ["."],
         copts = copts,
         local_defines = ["CONFIG_OPLUS_FEATURE_OPROJECT"],
@@ -470,7 +470,7 @@ def define_oplus_local_modules():
             "touch_pen/touch_pen_core.c",
             "touch_pen/touch_pen_algo.c",
         ]),
-        ko_deps = tp_common_ko_deps + oplusboot_ko_deps + oplus_bsp_boot_projectinfo_ko_deps + panel_event_notifier_ko_deps + tp_others_ko_deps,
+        ko_deps = tp_common_ko_deps + oplusboot_ko_deps + oplus_bsp_boot_projectinfo_ko_deps + panel_event_notifier_ko_deps + tp_others_ko_deps + ["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/boot:oplusboot", "//vendor/oplus/kernel/device_info/device_info:device_info", "//vendor/oplus/kernel/touchpanel/kernelFwUpdate:oplus_bsp_fw_update", "//vendor/oplus/kernel/touchpanel/touchpanel_notify:oplus_bsp_tp_notify"],
         includes = ["."],
         copts = copts,
         local_defines = ["CONFIG_TOUCHPANEL_NOTIFY", "CONFIG_TOUCHPANEL_OPLUS_MODULE"],

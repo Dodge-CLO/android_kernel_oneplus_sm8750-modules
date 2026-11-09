@@ -34,7 +34,7 @@ def define_shs(target, variant):
             "//msm-kernel:all_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/datarmnet:{}_rmnet_core".format(kernel_build_variant),
             "//vendor/oplus/sm8750-modules/qcom/opensource/datarmnet:rmnet_core_headers",
-        ] + soc_modules(),
+        ] + soc_modules(["sched-walt"]),
         copts = ["-Wno-misleading-indentation"],
     )
 
