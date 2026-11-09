@@ -742,8 +742,8 @@ static int btfmcodec_dai_set_channel_map(struct snd_soc_dai *dai,
 	if (states.current_state != IDLE) {
 		BTFMCODEC_WARN("Received probe when state is :%s", coverttostring(states.current_state));
 	} else {
-		return btfmcodec_hwep_set_channel_map((void *)btfmcodec->hwep_info, tx_num,
-						   tx_slot, rx_num, rx_slot);
+		return btfmcodec_hwep_set_channel_map((void *)btfmcodec->hwep_info, tx_num, (unsigned int *)
+						   tx_slot, rx_num, (unsigned int *)rx_slot);
 	}
 
 	return 0;

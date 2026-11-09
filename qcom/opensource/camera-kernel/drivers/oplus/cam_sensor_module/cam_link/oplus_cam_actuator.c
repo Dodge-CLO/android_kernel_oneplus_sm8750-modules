@@ -182,7 +182,7 @@ int oplus_cam_actuator_read_current(void *arg)
 	uint32_t register_value = 0;
 	int af_current = 0;
 	while (!kthread_should_stop()) {
-		if (gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == GPIOF_INIT_LOW)
+		if (gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == 0)
 		{
 			rc = camera_io_dev_read(
 				&(a_ctrl->io_master_info),
@@ -193,7 +193,7 @@ int oplus_cam_actuator_read_current(void *arg)
 			af_current = (uint32_t)(register_value >> 7);
 			if (af_current < a_ctrl->min_current || af_current > a_ctrl->max_current)
 			{
-				gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, GPIOF_INIT_HIGH);
+				gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, 1);
 				CAM_INFO(CAM_ACTUATOR, "min_current: %d max_current:%d, current:%d, need pull gpio:%d", a_ctrl->min_current, a_ctrl->max_current, af_current, a_ctrl->pull_gpio);
 			}
 		}

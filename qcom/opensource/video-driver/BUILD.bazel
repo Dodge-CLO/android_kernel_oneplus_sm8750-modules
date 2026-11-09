@@ -32,7 +32,7 @@ ddk_headers(
 ddk_headers(
     name = "tuna_headers",
     hdrs = glob([
-      "driver/platform/tuna/inc/*.h",
+      "driver/platform/tuna/inc/**/*.h",
     ]),
     includes = ["driver/platform/tuna/inc"]
 )
@@ -40,7 +40,7 @@ ddk_headers(
 ddk_headers(
     name = "kera_headers",
     hdrs = glob([
-      "driver/platform/kera/inc/*.h",
+      "driver/platform/kera/inc/**/*.h",
     ]),
     includes = ["driver/platform/kera/inc"]
 )

@@ -707,6 +707,7 @@ int ipa3_deregister_pull_msg(struct ipa_msg_meta *meta)
 ssize_t ipa3_read(struct file *filp, char __user *buf, size_t count,
 		  loff_t *f_pos)
 {
+	(void)count;
 	char __user *start;
 	struct ipa3_push_msg *msg = NULL;
 	int ret;

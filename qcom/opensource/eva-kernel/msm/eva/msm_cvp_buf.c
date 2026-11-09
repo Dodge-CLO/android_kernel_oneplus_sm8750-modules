@@ -252,7 +252,7 @@ loop:
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 13, 0))
 	file = fcheck_files(files, fd);
 #else
-	file = files_lookup_fd_rcu(files, fd);
+	file = files_lookup_fd_raw(files, fd);
 #endif
 	if (file) {
 		/* File object ref couldn't be taken.
@@ -261,7 +261,7 @@ loop:
 		 */
 		if (file->f_mode & mask)
 			file = NULL;
-		else if (!get_file_rcu(file))
+		else if (!atomic_long_inc_not_zero(&file->f_count))
 			goto loop;
 	}
 	rcu_read_unlock();

@@ -184,9 +184,9 @@ static int32_t cam_actuator_power_down(struct cam_actuator_ctrl_t *a_ctrl)
 		return -EINVAL;
 	}
 #ifdef OPLUS_FEATURE_CAMERA_COMMON
-	if (a_ctrl->is_need_read_current && a_ctrl->is_default_high_voltage && gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == GPIOF_INIT_HIGH) {
+	if (a_ctrl->is_need_read_current && a_ctrl->is_default_high_voltage && gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == 1) {
 		CAM_INFO(CAM_ACTUATOR, "actuator: %s power down, need pull down gpio:%d", a_ctrl->actuator_name, a_ctrl->pull_gpio);
-		gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, GPIOF_INIT_LOW);
+		gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, 0);
 	}
 #endif
 	rc = cam_sensor_util_power_down(power_info, soc_info);
@@ -392,14 +392,14 @@ int32_t cam_actuator_apply_settings(struct cam_actuator_ctrl_t *a_ctrl,
 #ifdef OPLUS_FEATURE_CAMERA_COMMON
 	if (a_ctrl->is_need_read_current) {
                 if (a_ctrl->is_default_high_voltage) {
-			if (gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == GPIOF_INIT_HIGH) {
+			if (gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == 1) {
 				CAM_INFO(CAM_ACTUATOR, "actuator: %s update code, need pull down gpio:%d", a_ctrl->actuator_name, a_ctrl->pull_gpio);
-				gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, GPIOF_INIT_LOW);
+				gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, 0);
 			}
 		} else {
-			if (gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == GPIOF_INIT_LOW) {
+			if (gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == 0) {
 				CAM_INFO(CAM_ACTUATOR, "actuator: %s update code, need pull up gpio:%d", a_ctrl->actuator_name, a_ctrl->pull_gpio);
-				gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, GPIOF_INIT_HIGH);
+				gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, 1);
 			}
 		}
 	}
