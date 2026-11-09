@@ -279,13 +279,18 @@ static const struct of_device_id cdsp_loader_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cdsp_loader_dt_match);
 
+static void cdsp_loader_remove_void(struct platform_device *pdev)
+{
+	cdsp_loader_remove(pdev);
+}
+
 static struct platform_driver cdsp_loader_driver = {
 	.driver = {
 		.name = "cdsp-loader",
 		.of_match_table = cdsp_loader_dt_match,
 	},
 	.probe = cdsp_loader_probe,
-	.remove = cdsp_loader_remove,
+	.remove = cdsp_loader_remove_void,
 };
 
 static int __init cdsp_loader_init(void)

@@ -6046,9 +6046,14 @@ static const struct of_device_id fastrpc_match_table[] = {
 	{}
 };
 
+static void fastrpc_cb_remove_void(struct platform_device *pdev)
+{
+	fastrpc_cb_remove(pdev);
+}
+
 static struct platform_driver fastrpc_cb_driver = {
 	.probe = fastrpc_cb_probe,
-	.remove = fastrpc_cb_remove,
+	.remove = fastrpc_cb_remove_void,
 	.driver = {
 		.name = "qcom,fastrpc-cb",
 		.of_match_table = fastrpc_match_table,

@@ -1,3 +1,4 @@
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 # TODO
 # Add ddk module definition for frpc-trusted driver
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
@@ -19,7 +20,8 @@ def define_modules(target, variant):
     ddk_module(
         name = "{}_frpc-adsprpc".format(kernel_build_variant),
         kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
-        deps = ["//msm-kernel:all_headers"],
+        config = "//msm-kernel:{}_config".format(kernel_build_variant),
+        deps = ["//msm-kernel:all_headers"] + soc_modules(["mem_buf_dev", "pdr_interface", "qcom-scm"]),
         srcs = [
             "dsp/fastrpc.c",
             "dsp/fastrpc_rpmsg.c",
@@ -41,7 +43,8 @@ def define_modules(target, variant):
     ddk_module(
         name = "{}_cdsp-loader".format(kernel_build_variant),
         kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
-        deps = ["//msm-kernel:all_headers"],
+        config = "//msm-kernel:{}_config".format(kernel_build_variant),
+        deps = ["//msm-kernel:all_headers"] + soc_modules(["mem_buf_dev", "pdr_interface", "qcom-scm"]),
         srcs = ["dsp/cdsp-loader.c"],
         out = "cdsp-loader.ko",
     )
