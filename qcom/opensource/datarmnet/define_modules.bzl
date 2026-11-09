@@ -1,5 +1,6 @@
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 
 def define_modules(target, variant):
     kernel_build_variant = "{}_{}".format(target, variant)
@@ -49,7 +50,7 @@ def define_modules(target, variant):
             "//vendor/oplus/sm8750-modules/qcom/opensource/dataipa:{}_ipam".format(kernel_build_variant),
             "//msm-kernel:all_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/dataipa:include_headers",
-        ],
+        ] + soc_modules(),
     )
 
     ddk_module(
@@ -77,6 +78,7 @@ def define_modules(target, variant):
             "RMNET_TRACE_INCLUDE_PATH={}/core".format(include_base),
         ],
         kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
+        config = "//msm-kernel:{}_config".format(kernel_build_variant),
         deps = [
             ":rmnet_core_headers",
             ":{}_rmnet_ctl".format(kernel_build_variant),
@@ -85,7 +87,7 @@ def define_modules(target, variant):
             "//msm-kernel:all_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/dataipa:include_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/datarmnet-ext/mem:rmnet_mem_headers",
-        ],
+        ] + soc_modules(),
     )
 
     copy_to_dist_dir(
