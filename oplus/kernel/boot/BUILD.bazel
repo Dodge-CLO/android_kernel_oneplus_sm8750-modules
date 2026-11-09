@@ -40,6 +40,7 @@ define_oplus_ddk_module(
 
 define_oplus_ddk_module(
     name = "oplus_bsp_boot_projectinfo",
+    ko_deps = ["//vendor/oplus/kernel/boot:buildvariant", "//vendor/oplus/kernel/boot:oplusboot"],
     srcs = glob(["oplus_projectinfo/**/*.h"], allow_empty = True) + [
         "oplus_projectinfo/qcom/oplus_project.c",
     ],

@@ -86,7 +86,6 @@ def define_target_variant_modules(target, variant, modules, extra_options = [], 
         ddk_module(
             name = rule_name,
             kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
-            config = "//msm-kernel:{}_config".format(kernel_build_variant),
             srcs = module_srcs,
             out = "{}.ko".format(module["name"]),
             deps = headers + [_replace_formatting_codes(target, variant, dep) for dep in module["deps"]] + soc_modules(["gh_msgq", "mem_buf_dev", "qcom-scm", "qcom_dma_heaps", "qseecom_proxy", "si_core_module", "sps_drv"]),

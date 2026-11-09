@@ -25,7 +25,6 @@ def define_mem(target, variant):
             "rmnet_mem_priv.h",
         ],
         kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
-        config = "//msm-kernel:{}_config".format(kernel_build_variant),
         deps = [
             "//msm-kernel:all_headers",
         ] + soc_modules(),

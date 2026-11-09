@@ -111,7 +111,6 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
     ddk_module(
         name = "{}_modules".format(kernel_build),
         kernel_build = kernel_build_label,
-        config = "{}_config".format(kernel_build_label),
         deps = all_module_rules,
     )
 

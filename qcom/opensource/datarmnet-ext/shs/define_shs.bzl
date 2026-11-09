@@ -30,7 +30,6 @@ def define_shs(target, variant):
             "rmnet_shs_wq_mem.h",
         ],
         kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
-        config = "//msm-kernel:{}_config".format(kernel_build_variant),
         deps = [
             "//msm-kernel:all_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/datarmnet:{}_rmnet_core".format(kernel_build_variant),

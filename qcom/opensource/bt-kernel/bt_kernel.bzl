@@ -69,7 +69,6 @@ def define_target_variant_modules(target, variant, modules, config_options = [])
         ddk_module(
             name = rule_name,
             kernel_build = kernel_build_label,
-            config = "{}_config".format(kernel_build_label),
             srcs = module_srcs,
             out = "{}.ko".format(module.name),
             deps = ["//msm-kernel:all_headers"] + _get_module_deps(module, options, formatter) + soc_modules(["rproc_qcom_common", "smem"]),

@@ -71,7 +71,6 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
             srcs = module_srcs,
             out = "{}.ko".format(module.name),
             kernel_build = kernel_build_label,
-            config = "{}_config".format(kernel_build_label),
             deps = deps + module_dep + registry.hdrs + soc_modules(["gh_irq_lend", "gh_mem_notifier", "gh_rm_drv", "panel_event_notifier", "pinctrl-msm"]),
             local_defines = options.keys(),
         )

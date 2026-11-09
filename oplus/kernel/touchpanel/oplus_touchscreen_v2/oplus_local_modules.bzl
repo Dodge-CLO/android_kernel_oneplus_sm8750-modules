@@ -26,9 +26,9 @@ def define_oplus_local_modules():
             "//soc-repo:{}/drivers/soc/qcom/panel_event_notifier".format(kernel_build_variant),
         ]
         tp_others_ko_deps = [
-            "//vendor/oplus/kernel/device_info/device_info/bazel:device_info",
-            "//vendor/oplus/kernel/touchpanel/touchpanel_notify/bazel:oplus_bsp_tp_notify",
-            "//vendor/oplus/kernel/touchpanel/kernelFwUpdate/bazel:oplus_bsp_fw_update",
+            "//vendor/oplus/kernel/device_info/device_info:device_info",
+            "//vendor/oplus/kernel/touchpanel/touchpanel_notify:oplus_bsp_tp_notify",
+            "//vendor/oplus/kernel/touchpanel/kernelFwUpdate:oplus_bsp_fw_update",
         ]
     else :
         oplusboot_ko_deps = []
@@ -42,7 +42,7 @@ def define_oplus_local_modules():
             "//vendor/oplus/kernel/touchpanel/oplus_touchscreen_v2:oplus_bsp_tp_custom",
         ]
         oplus_bsp_tp_nt36672c_noflash_ko_deps = [
-            "//vendor/oplus/kernel/touchpanel/touchpanel_notify/bazel:oplus_bsp_tp_notify",
+            "//vendor/oplus/kernel/touchpanel/touchpanel_notify:oplus_bsp_tp_notify",
             "//vendor/oplus/kernel/touchpanel/oplus_touchscreen_v2:oplus_bsp_tp_custom",
             "//vendor/oplus/kernel/touchpanel/oplus_touchscreen_v2:oplus_bsp_tp_common",
             "//vendor/oplus/kernel/touchpanel/oplus_touchscreen_v2:oplus_bsp_tp_novatek_common",
@@ -442,7 +442,6 @@ def define_oplus_local_modules():
 
     define_oplus_ddk_module(
         name = "oplus_bsp_tp_custom",
-    ko_deps = ["//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo"],
         srcs = native.glob([
             "**/*.h",
             "touch_custom/touch.c"

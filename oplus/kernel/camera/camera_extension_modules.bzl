@@ -47,7 +47,6 @@ def _define_module(target, variant):
              ":camera_extension_headers",
         ] + soc_modules(),
         kernel_build = "//msm-kernel:{}".format(tv),
-        config = "//msm-kernel:{}_config".format(tv),
     )
 
     copy_to_dist_dir(

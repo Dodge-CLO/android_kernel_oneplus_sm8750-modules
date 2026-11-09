@@ -85,7 +85,6 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
     ddk_module(
         name = "{}_video_driver_modules".format(kernel_build),
         kernel_build = kernel_build_label,
-        config = "{}_config".format(kernel_build_label),
         deps = all_module_rules,
     )
     copy_to_dist_dir(
@@ -163,7 +162,6 @@ def define_lunch_target_variant_modules(target, variant, registry, modules, lunc
     ddk_module(
         name = ddk_mod_name,
         kernel_build = kernel_build_label,
-        config = "{}_config".format(kernel_build_label),
         deps = all_module_rules,
     )
 

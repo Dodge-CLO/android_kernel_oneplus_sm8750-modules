@@ -24,8 +24,8 @@ def define_oplus_local_modules():
         })
         tp_others_ko_deps = select({
             "//build/kernel/kleaf:socrepo_true": [
-                "//vendor/oplus/kernel/touchpanel/touchpanel_notify/bazel:oplus_bsp_tp_notify",
-                "//vendor/oplus/kernel/touchpanel/kernelFwUpdate/bazel:oplus_bsp_fw_update",
+                "//vendor/oplus/kernel/touchpanel/touchpanel_notify:oplus_bsp_tp_notify",
+                "//vendor/oplus/kernel/touchpanel/kernelFwUpdate:oplus_bsp_fw_update",
             ],
             "//build/kernel/kleaf:socrepo_false": [],
         })

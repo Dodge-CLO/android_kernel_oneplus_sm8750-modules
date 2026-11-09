@@ -71,7 +71,8 @@ static int dp_altmode_set_usb_dp_mode(struct dp_altmode_private *altmode)
 	}
 
 	while (timeout) {
-		rc = dwc3_msm_set_dp_mode(&usb_pdev->dev, altmode->connected, altmode->lanes);
+		rc = dwc3_msm_set_dp_mode(&usb_pdev->dev, altmode->connected, altmode->lanes,
+					  0, 0, 0, 0, 0);
 		if (rc != -EBUSY && rc != -EAGAIN)
 			break;
 

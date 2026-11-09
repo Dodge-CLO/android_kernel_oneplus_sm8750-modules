@@ -2470,7 +2470,7 @@ def _define_module_for_target_variant_chipset(target, variant, chipset):
         copts = copts,
         out = out,
         kernel_build = kernel_build,
-        deps = deps + soc_modules(["qcom_ipc_logging", "qmi_helpers", "smem"]),
+        deps = deps + soc_modules(["cfg80211", "qcom_iommu_util", "qcom_ipc_logging", "qcom_va_minidump", "qmi_helpers", "rproc_qcom_common", "sched-walt", "smem"]),
     )
 
 def define_dist(target, variant, chipsets):

@@ -26,9 +26,9 @@ def define_oplus_local_modules():
             "//soc-repo:{}/drivers/soc/qcom/panel_event_notifier".format(kernel_build_variant),
         ]
         tp_others_ko_deps = [
-            "//vendor/oplus/kernel/device_info/device_info/bazel:device_info",
-            "//vendor/oplus/kernel/touchpanel/touchpanel_notify/bazel:oplus_bsp_tp_notify",
-            "//vendor/oplus/kernel/touchpanel/kernelFwUpdate/bazel:oplus_bsp_fw_update",
+            "//vendor/oplus/kernel/device_info/device_info:device_info",
+            "//vendor/oplus/kernel/touchpanel/touchpanel_notify:oplus_bsp_tp_notify",
+            "//vendor/oplus/kernel/touchpanel/kernelFwUpdate:oplus_bsp_fw_update",
         ]
     else :
         oplusboot_ko_deps = []

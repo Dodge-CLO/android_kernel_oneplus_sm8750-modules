@@ -19,7 +19,6 @@ def define_modules(target, variant):
         deps = ["//msm-kernel:all_headers"] + soc_modules(),
         includes = ["include", "include/kernel"],
         kernel_build = "//msm-kernel:{}".format(tv),
-        config = "//msm-kernel:{}_config".format(tv),
         visibility = ["//visibility:public"]
     )
 

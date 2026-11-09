@@ -349,6 +349,15 @@ static int dp_mst_calc_pbn_mode(struct dp_display_mode *dp_mode)
 	return pbn;
 }
 
+#if (KERNEL_VERSION(6, 8, 0) <= LINUX_VERSION_CODE)
+/* 6.8 dropped the state argument of drm_dp_add_payload_part2() */
+static int dp_mst_add_payload_part2(struct drm_dp_mst_topology_mgr *mgr,
+		struct drm_atomic_state *state, struct drm_dp_mst_atomic_payload *payload)
+{
+	return drm_dp_add_payload_part2(mgr, payload);
+}
+#endif
+
 static const struct dp_drm_mst_fw_helper_ops drm_dp_mst_fw_helper_ops = {
 #if (KERNEL_VERSION(6, 7, 0) <= LINUX_VERSION_CODE)
 	.calc_pbn_mode             = dp_mst_calc_pbn_mode,
@@ -356,7 +365,7 @@ static const struct dp_drm_mst_fw_helper_ops drm_dp_mst_fw_helper_ops = {
 	.atomic_find_time_slots    = drm_dp_atomic_find_time_slots,
 	.update_payload_part1      = drm_dp_add_payload_part1,
 	.check_act_status          = drm_dp_check_act_status,
-	.update_payload_part2      = drm_dp_add_payload_part2,
+	.update_payload_part2      = dp_mst_add_payload_part2,
 	.detect_port_ctx           = dp_mst_detect_port,
 	.get_edid                  = drm_dp_mst_get_edid,
 	.topology_mgr_set_mst      = drm_dp_mst_topology_mgr_set_mst,

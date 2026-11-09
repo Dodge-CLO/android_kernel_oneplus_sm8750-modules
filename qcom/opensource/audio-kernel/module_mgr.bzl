@@ -70,7 +70,6 @@ def _define_target_modules(target, variant, registry, modules, product = None, c
         ddk_module(
             name = rule_name,
             kernel_build = "//msm-kernel:{}_{}".format(target, variant),
-            config = "//msm-kernel:{}_{}_config".format(target, variant),
             srcs = srcs,
             out = "{}.ko".format(module.name),
             deps = deps + soc_modules(["fsa4480_i2c", "pdr_interface", "pinctrl-msm", "qcom-scm", "qcom_ipc_logging", "qti-regmap-debugfs", "qti_battery_charger", "rproc_qcom_common", "socinfo", "wcd_usbss_i2c"]),

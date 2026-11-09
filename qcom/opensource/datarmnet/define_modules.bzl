@@ -78,7 +78,6 @@ def define_modules(target, variant):
             "RMNET_TRACE_INCLUDE_PATH={}/core".format(include_base),
         ],
         kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
-        config = "//msm-kernel:{}_config".format(kernel_build_variant),
         deps = [
             ":rmnet_core_headers",
             ":{}_rmnet_ctl".format(kernel_build_variant),

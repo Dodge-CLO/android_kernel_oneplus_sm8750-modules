@@ -38,7 +38,6 @@ def define_modules(target, variant):
         copts = copts,
         deps = deps + soc_modules(),
         kernel_build= "//msm-kernel:{}".format(tv),
-        config = "//msm-kernel:{}_config".format(tv),
         visibility = ["//visibility:public"]
     )
 

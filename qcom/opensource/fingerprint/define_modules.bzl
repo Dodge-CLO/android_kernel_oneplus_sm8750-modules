@@ -21,7 +21,6 @@ def define_modules(target, variant):
         ],
         includes = ["include/linux"],
         kernel_build = "//msm-kernel:{}".format(tv),
-        config = "//msm-kernel:{}_config".format(tv),
         visibility = ["//visibility:public"]
     )
 
