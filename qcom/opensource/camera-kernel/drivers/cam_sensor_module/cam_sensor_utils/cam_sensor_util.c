@@ -5,6 +5,7 @@
  */
 
 #include <linux/kernel.h>
+#include <linux/vmalloc.h>
 #include <clocksource/arm_arch_timer.h>
 #include "cam_sensor_util.h"
 #include "cam_packet_util.h"

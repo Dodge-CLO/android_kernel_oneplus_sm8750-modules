@@ -4,6 +4,7 @@
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
 #include <linux/delay.h>
+#include <linux/vmalloc.h>
 #include "cam_io_util.h"
 #include "cam_hw_intf.h"
 #include "cam_debug_util.h"

@@ -235,9 +235,14 @@ static int cam_custom_dev_probe(struct platform_device *pdev)
 	return rc;
 }
 
+static void cam_custom_dev_remove_void(struct platform_device *pdev)
+{
+	cam_custom_dev_remove(pdev);
+}
+
 struct platform_driver custom_driver = {
 	.probe = cam_custom_dev_probe,
-	.remove = cam_custom_dev_remove,
+	.remove = cam_custom_dev_remove_void,
 	.driver = {
 		.name = "cam_custom",
 		.of_match_table = cam_custom_dt_match,

@@ -271,9 +271,14 @@ static int cam_icp_v2_driver_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void cam_icp_v2_driver_remove_void(struct platform_device *pdev)
+{
+	cam_icp_v2_driver_remove(pdev);
+}
+
 struct platform_driver cam_icp_v2_driver = {
 	.probe = cam_icp_v2_driver_probe,
-	.remove = cam_icp_v2_driver_remove,
+	.remove = cam_icp_v2_driver_remove_void,
 	.driver = {
 		.name = "cam-icp_v2",
 		.of_match_table = cam_icp_v2_match,

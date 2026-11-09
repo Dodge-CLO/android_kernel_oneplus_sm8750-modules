@@ -128,9 +128,14 @@ static const struct of_device_id cam_ife_csid_lite_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, cam_ife_csid_lite_dt_match);
 
+static void cam_ife_csid_remove_void(struct platform_device *pdev)
+{
+	cam_ife_csid_remove(pdev);
+}
+
 struct platform_driver cam_ife_csid_lite_driver = {
 	.probe = cam_ife_csid_probe,
-	.remove = cam_ife_csid_remove,
+	.remove = cam_ife_csid_remove_void,
 	.driver = {
 		.name = CAM_CSID_LITE_DRV_NAME,
 		.owner = THIS_MODULE,

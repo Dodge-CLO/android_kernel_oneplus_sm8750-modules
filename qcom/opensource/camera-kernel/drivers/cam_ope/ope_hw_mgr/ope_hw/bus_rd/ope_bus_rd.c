@@ -5,6 +5,7 @@
  */
 
 #include <linux/of.h>
+#include <linux/vmalloc.h>
 #include <linux/debugfs.h>
 #include <linux/videodev2.h>
 #include <linux/uaccess.h>

@@ -855,9 +855,14 @@ static const struct of_device_id cam_cci_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, cam_cci_dt_match);
 
+static void cam_cci_device_remove_void(struct platform_device *pdev)
+{
+	cam_cci_device_remove(pdev);
+}
+
 struct platform_driver cci_driver = {
 	.probe = cam_cci_platform_probe,
-	.remove = cam_cci_device_remove,
+	.remove = cam_cci_device_remove_void,
 	.driver = {
 		.name = CAMX_CCI_DEV_NAME,
 		.owner = THIS_MODULE,

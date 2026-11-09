@@ -150,9 +150,14 @@ static const struct of_device_id cam_vfe_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cam_vfe_dt_match);
 
+static void cam_vfe_remove_void(struct platform_device *pdev)
+{
+	cam_vfe_remove(pdev);
+}
+
 struct platform_driver cam_vfe_driver = {
 	.probe = cam_vfe_probe,
-	.remove = cam_vfe_remove,
+	.remove = cam_vfe_remove_void,
 	.driver = {
 		.name = "cam_vfe",
 		.owner = THIS_MODULE,

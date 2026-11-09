@@ -724,9 +724,14 @@ static const struct of_device_id cam_csiphy_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, cam_csiphy_dt_match);
 
+static void cam_csiphy_device_remove_void(struct platform_device *pdev)
+{
+	cam_csiphy_device_remove(pdev);
+}
+
 struct platform_driver csiphy_driver = {
 	.probe = cam_csiphy_platform_probe,
-	.remove = cam_csiphy_device_remove,
+	.remove = cam_csiphy_device_remove_void,
 	.driver = {
 		.name = CAMX_CSIPHY_DEV_NAME,
 		.owner = THIS_MODULE,

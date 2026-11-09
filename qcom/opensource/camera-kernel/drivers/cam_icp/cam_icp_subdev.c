@@ -474,9 +474,14 @@ static int cam_icp_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void cam_icp_remove_void(struct platform_device *pdev)
+{
+	cam_icp_remove(pdev);
+}
+
 struct platform_driver cam_icp_driver = {
 	.probe = cam_icp_probe,
-	.remove = cam_icp_remove,
+	.remove = cam_icp_remove_void,
 	.driver = {
 		.name = "cam_icp",
 		.owner = THIS_MODULE,

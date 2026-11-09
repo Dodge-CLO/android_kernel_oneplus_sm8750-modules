@@ -703,6 +703,21 @@ static const struct of_device_id cam_eeprom_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, cam_eeprom_dt_match);
 
+static void cam_eeprom_platform_driver_remove_void(struct platform_device *pdev)
+{
+	cam_eeprom_platform_driver_remove(pdev);
+}
+
+static void cam_eeprom_spi_driver_remove_void(struct platform_device *pdev)
+{
+	cam_eeprom_spi_driver_remove(pdev);
+}
+
+static void cam_i3c_driver_remove_void(struct platform_device *pdev)
+{
+	cam_i3c_driver_remove(pdev);
+}
+
 struct platform_driver cam_eeprom_platform_driver = {
 	.driver = {
 		.name = "qcom,eeprom",
@@ -711,7 +726,7 @@ struct platform_driver cam_eeprom_platform_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = cam_eeprom_platform_driver_probe,
-	.remove = cam_eeprom_platform_driver_remove,
+	.remove = cam_eeprom_platform_driver_remove_void,
 };
 
 static const struct i2c_device_id cam_eeprom_i2c_id[] = {
@@ -745,12 +760,11 @@ static struct spi_driver cam_eeprom_spi_driver = {
 		.of_match_table = cam_eeprom_dt_match,
 	},
 	.probe = cam_eeprom_spi_driver_probe,
-	.remove = cam_eeprom_spi_driver_remove,
+	.remove = cam_eeprom_spi_driver_remove_void,
 };
 
 static struct i3c_device_id eeprom_i3c_id[MAX_I3C_DEVICE_ID_ENTRIES + 1];
-
-static int cam_eeprom_i3c_driver_probe(struct i3c_device *client)
+.remove = cam_eeprom_spi_driver_remove,ct i3c_device *client)
 {
 	int32_t rc = 0;
 	struct cam_eeprom_ctrl_t       *e_ctrl = NULL;
@@ -885,12 +899,11 @@ static int cam_i3c_driver_remove(struct i3c_device *client)
 static struct i3c_driver cam_eeprom_i3c_driver = {
 	.id_table = eeprom_i3c_id,
 	.probe = cam_eeprom_i3c_driver_probe,
-	.remove = cam_i3c_driver_remove,
+	.remove = cam_i3c_driver_remove_void,
 	.driver = {
 		.owner = THIS_MODULE,
 		.name = EEPROM_DRIVER_I3C,
-		.of_match_table = cam_eeprom_dt_match,
-		.suppress_bind_attrs = true,
+		.of_match_table = cam_.remove = cam_i3c_driver_remove,rs = true,
 	},
 };
 

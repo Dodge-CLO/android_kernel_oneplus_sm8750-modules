@@ -5,6 +5,7 @@
  */
 
 #include <linux/devcoredump.h>
+#include <linux/vmalloc.h>
 #include <linux/of_address.h>
 #include <linux/soc/qcom/mdt_loader.h>
 

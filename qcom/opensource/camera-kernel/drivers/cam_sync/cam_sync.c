@@ -5,6 +5,7 @@
  */
 
 #include <linux/init.h>
+#include <linux/vmalloc.h>
 #include <linux/module.h>
 #include <linux/irqflags.h>
 #include <linux/module.h>
@@ -2955,9 +2956,14 @@ static const struct of_device_id cam_sync_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, cam_sync_dt_match);
 
+static void cam_sync_remove_void(struct platform_device *pdev)
+{
+	cam_sync_remove(pdev);
+}
+
 struct platform_driver cam_sync_driver = {
 	.probe = cam_sync_probe,
-	.remove = cam_sync_remove,
+	.remove = cam_sync_remove_void,
 	.driver = {
 		.name = "cam_sync",
 		.owner = THIS_MODULE,

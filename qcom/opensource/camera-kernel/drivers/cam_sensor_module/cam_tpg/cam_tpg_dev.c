@@ -420,9 +420,14 @@ static const struct of_device_id cam_tpg_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, cam_tpg_dt_match);
 
+static void cam_tpg_device_remove_void(struct platform_device *pdev)
+{
+	cam_tpg_device_remove(pdev);
+}
+
 struct platform_driver cam_tpg_driver = {
 	.probe = cam_tpg_platform_probe,
-	.remove = cam_tpg_device_remove,
+	.remove = cam_tpg_device_remove_void,
 	.driver = {
 		.name = CAMX_TPG_DEV_NAME,
 		.owner = THIS_MODULE,

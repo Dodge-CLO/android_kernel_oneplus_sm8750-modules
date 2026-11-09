@@ -2680,9 +2680,14 @@ int cam_hw_cdm_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void cam_hw_cdm_remove_void(struct platform_device *pdev)
+{
+	cam_hw_cdm_remove(pdev);
+}
+
 struct platform_driver cam_hw_cdm_driver = {
 	.probe = cam_hw_cdm_probe,
-	.remove = cam_hw_cdm_remove,
+	.remove = cam_hw_cdm_remove_void,
 	.driver = {
 		.name = "msm_cam_cdm",
 		.owner = THIS_MODULE,

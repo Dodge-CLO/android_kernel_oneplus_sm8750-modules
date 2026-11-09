@@ -25,9 +25,14 @@ static const struct of_device_id cam_csid_ppi100_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, cam_csid_ppi100_dt_match);
 
+static void cam_csid_ppi_remove_void(struct platform_device *pdev)
+{
+	cam_csid_ppi_remove(pdev);
+}
+
 struct platform_driver cam_csid_ppi100_driver = {
 	.probe  = cam_csid_ppi_probe,
-	.remove = cam_csid_ppi_remove,
+	.remove = cam_csid_ppi_remove_void,
 	.driver = {
 		.name = CAM_PPI_DRV_NAME,
 		.of_match_table = cam_csid_ppi100_dt_match,

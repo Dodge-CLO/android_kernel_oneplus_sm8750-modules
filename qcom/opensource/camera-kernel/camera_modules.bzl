@@ -1,4 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//msm-kernel:target_variants.bzl", "get_all_variants")
 load(":project_defconfig.bzl", "get_project_defconfig")
@@ -257,7 +258,7 @@ def _define_module(target, variant):
             },
         },
         local_defines = ["OPLUS_FEATURE_CAMERA_COMMON", "FEATURE_ENABLE=1"],
-        deps = deps,
+        deps = deps + soc_modules(),
         kconfig = "Kconfig",
         defconfig = "{}_defconfig_generated".format(tv),
         kernel_build = "//msm-kernel:{}".format(tv),

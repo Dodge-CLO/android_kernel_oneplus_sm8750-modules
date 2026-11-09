@@ -269,9 +269,14 @@ static const struct of_device_id cam_icp_v1_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cam_icp_v1_dt_match);
 
+static void cam_icp_v1_remove_void(struct platform_device *pdev)
+{
+	cam_icp_v1_remove(pdev);
+}
+
 struct platform_driver cam_icp_v1_driver = {
 	.probe = cam_icp_v1_probe,
-	.remove = cam_icp_v1_remove,
+	.remove = cam_icp_v1_remove_void,
 	.driver = {
 		.name = "cam-icp_v1",
 		.owner = THIS_MODULE,

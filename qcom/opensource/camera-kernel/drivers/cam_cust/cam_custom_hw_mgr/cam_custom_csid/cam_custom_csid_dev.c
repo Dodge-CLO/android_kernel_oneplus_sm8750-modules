@@ -188,6 +188,11 @@ static const struct of_device_id cam_custom_csid_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, cam_custom_csid_dt_match);
 
+static void cam_custom_csid_remove_void(struct platform_device *pdev)
+{
+	cam_custom_csid_remove(pdev);
+}
+
 struct platform_driver cam_custom_csid_driver = {
 	.probe = cam_custom_csid_probe,
 	.driver = {
@@ -195,7 +200,7 @@ struct platform_driver cam_custom_csid_driver = {
 		.of_match_table = cam_custom_csid_dt_match,
 		.suppress_bind_attrs = true,
 	},
-	.remove = cam_custom_csid_remove,
+	.remove = cam_custom_csid_remove_void,
 };
 
 int cam_custom_csid_driver_init(void)

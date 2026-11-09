@@ -24,9 +24,14 @@ static const struct of_device_id cam_tfe_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cam_tfe_dt_match);
 
+static void cam_tfe_remove_void(struct platform_device *pdev)
+{
+	cam_tfe_remove(pdev);
+}
+
 struct platform_driver cam_tfe_driver = {
 	.probe = cam_tfe_probe,
-	.remove = cam_tfe_remove,
+	.remove = cam_tfe_remove_void,
 	.driver = {
 		.name = "cam_tfe",
 		.of_match_table = cam_tfe_dt_match,

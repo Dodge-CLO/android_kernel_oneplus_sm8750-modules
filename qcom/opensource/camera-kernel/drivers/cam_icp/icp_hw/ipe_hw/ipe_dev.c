@@ -269,9 +269,14 @@ static const struct of_device_id cam_ipe_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cam_ipe_dt_match);
 
+static void cam_ipe_remove_void(struct platform_device *pdev)
+{
+	cam_ipe_remove(pdev);
+}
+
 struct platform_driver cam_ipe_driver = {
 	.probe = cam_ipe_probe,
-	.remove = cam_ipe_remove,
+	.remove = cam_ipe_remove_void,
 	.driver = {
 		.name = "cam-ipe",
 		.owner = THIS_MODULE,

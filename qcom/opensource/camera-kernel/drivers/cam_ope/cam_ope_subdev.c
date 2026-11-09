@@ -318,9 +318,14 @@ static const struct of_device_id cam_ope_dt_match[] = {
 };
 
 
+static void cam_ope_subdev_remove_void(struct platform_device *pdev)
+{
+	cam_ope_subdev_remove(pdev);
+}
+
 struct platform_driver cam_ope_subdev_driver = {
 	.probe = cam_ope_subdev_probe,
-	.remove = cam_ope_subdev_remove,
+	.remove = cam_ope_subdev_remove_void,
 	.driver = {
 		.name = "cam_ope",
 		.of_match_table = cam_ope_dt_match,

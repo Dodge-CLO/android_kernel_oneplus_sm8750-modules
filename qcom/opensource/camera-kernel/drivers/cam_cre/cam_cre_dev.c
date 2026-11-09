@@ -250,9 +250,14 @@ static const struct of_device_id cam_cre_subdev_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cam_cre_subdev_dt_match);
 
+static void cam_cre_subdev_remove_void(struct platform_device *pdev)
+{
+	cam_cre_subdev_remove(pdev);
+}
+
 struct platform_driver cam_cre_subdev_driver = {
 	.probe = cam_cre_subdev_probe,
-	.remove = cam_cre_subdev_remove,
+	.remove = cam_cre_subdev_remove_void,
 	.driver = {
 		.name = "cam_cre",
 		.of_match_table = cam_cre_subdev_dt_match,

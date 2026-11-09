@@ -5,6 +5,7 @@
  */
 
 #include <media/cam_defs.h>
+#include <linux/vmalloc.h>
 #include <media/cam_isp.h>
 #include "cam_mem_mgr.h"
 #include "cam_isp_hw.h"

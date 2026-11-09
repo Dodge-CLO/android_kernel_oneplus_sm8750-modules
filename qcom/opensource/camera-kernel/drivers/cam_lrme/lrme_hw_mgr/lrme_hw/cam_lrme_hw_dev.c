@@ -317,9 +317,14 @@ static const struct of_device_id cam_lrme_hw_dt_match[] = {
 
 MODULE_DEVICE_TABLE(of, cam_lrme_hw_dt_match);
 
+static void cam_lrme_hw_dev_remove_void(struct platform_device *pdev)
+{
+	cam_lrme_hw_dev_remove(pdev);
+}
+
 struct platform_driver cam_lrme_hw_driver = {
 	.probe = cam_lrme_hw_dev_probe,
-	.remove = cam_lrme_hw_dev_remove,
+	.remove = cam_lrme_hw_dev_remove_void,
 	.driver = {
 		.name = "cam_lrme_hw",
 		.owner = THIS_MODULE,

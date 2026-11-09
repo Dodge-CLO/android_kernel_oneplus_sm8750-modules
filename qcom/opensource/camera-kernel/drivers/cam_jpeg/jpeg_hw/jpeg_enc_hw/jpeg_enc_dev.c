@@ -273,9 +273,14 @@ static const struct of_device_id cam_jpeg_enc_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cam_jpeg_enc_dt_match);
 
+static void cam_jpeg_enc_remove_void(struct platform_device *pdev)
+{
+	cam_jpeg_enc_remove(pdev);
+}
+
 struct platform_driver cam_jpeg_enc_driver = {
 	.probe = cam_jpeg_enc_probe,
-	.remove = cam_jpeg_enc_remove,
+	.remove = cam_jpeg_enc_remove_void,
 	.driver = {
 		.name = "cam-jpeg-enc",
 		.owner = THIS_MODULE,

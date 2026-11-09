@@ -5825,9 +5825,14 @@ static int cam_smmu_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void cam_smmu_remove_void(struct platform_device *pdev)
+{
+	cam_smmu_remove(pdev);
+}
+
 struct platform_driver cam_smmu_driver = {
 	.probe = cam_smmu_probe,
-	.remove = cam_smmu_remove,
+	.remove = cam_smmu_remove_void,
 	.driver = {
 		.name = "msm_cam_smmu",
 		.owner = THIS_MODULE,

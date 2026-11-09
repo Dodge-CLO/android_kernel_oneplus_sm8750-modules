@@ -5,6 +5,7 @@
  */
 
 #include <linux/iopoll.h>
+#include <linux/vmalloc.h>
 #include <linux/slab.h>
 
 #include <media/cam_isp.h>

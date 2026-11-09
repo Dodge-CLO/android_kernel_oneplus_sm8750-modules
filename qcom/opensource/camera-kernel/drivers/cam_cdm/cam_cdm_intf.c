@@ -807,9 +807,14 @@ static int cam_cdm_intf_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void cam_cdm_intf_remove_void(struct platform_device *pdev)
+{
+	cam_cdm_intf_remove(pdev);
+}
+
 struct platform_driver cam_cdm_intf_driver = {
 	.probe = cam_cdm_intf_probe,
-	.remove = cam_cdm_intf_remove,
+	.remove = cam_cdm_intf_remove_void,
 	.driver = {
 		.name = "msm_cam_cdm_intf",
 		.owner = THIS_MODULE,

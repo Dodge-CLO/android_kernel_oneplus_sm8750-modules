@@ -575,6 +575,16 @@ static const struct of_device_id cam_ois_i2c_dt_match[] = {
 MODULE_DEVICE_TABLE(of, cam_ois_dt_match);
 MODULE_DEVICE_TABLE(of, cam_ois_i2c_dt_match);
 
+static void cam_ois_platform_driver_remove_void(struct platform_device *pdev)
+{
+	cam_ois_platform_driver_remove(pdev);
+}
+
+static void cam_i3c_driver_remove_void(struct platform_device *pdev)
+{
+	cam_i3c_driver_remove(pdev);
+}
+
 struct platform_driver cam_ois_platform_driver = {
 	.driver = {
 		.name = "qcom,ois",
@@ -582,7 +592,7 @@ struct platform_driver cam_ois_platform_driver = {
 		.of_match_table = cam_ois_dt_match,
 	},
 	.probe = cam_ois_platform_driver_probe,
-	.remove = cam_ois_platform_driver_remove,
+	.remove = cam_ois_platform_driver_remove_void,
 };
 static const struct i2c_device_id cam_ois_i2c_id[] = {
 	{ OIS_DRIVER_I2C, (kernel_ulong_t)NULL},
@@ -738,12 +748,11 @@ static int cam_i3c_driver_remove(struct i3c_device *client)
 static struct i3c_driver cam_ois_i3c_driver = {
 	.id_table = ois_i3c_id,
 	.probe = cam_ois_i3c_driver_probe,
-	.remove = cam_i3c_driver_remove,
+	.remove = cam_i3c_driver_remove_void,
 	.driver = {
 		.owner = THIS_MODULE,
 		.name = OIS_DRIVER_I3C,
-		.of_match_table = cam_ois_dt_match,
-		.suppress_bind_attrs = true,
+		.of_match_tabl.remove = cam_i3c_driver_remove,d_attrs = true,
 	},
 };
 

@@ -272,9 +272,14 @@ static const struct of_device_id cam_jpeg_dma_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cam_jpeg_dma_dt_match);
 
+static void cam_jpeg_dma_remove_void(struct platform_device *pdev)
+{
+	cam_jpeg_dma_remove(pdev);
+}
+
 struct platform_driver cam_jpeg_dma_driver = {
 	.probe = cam_jpeg_dma_probe,
-	.remove = cam_jpeg_dma_remove,
+	.remove = cam_jpeg_dma_remove_void,
 	.driver = {
 		.name = "cam-jpeg-dma",
 		.owner = THIS_MODULE,

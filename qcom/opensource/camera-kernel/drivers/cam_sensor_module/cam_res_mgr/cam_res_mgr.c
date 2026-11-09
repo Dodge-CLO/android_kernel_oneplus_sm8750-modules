@@ -981,9 +981,14 @@ static const struct of_device_id cam_res_mgr_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, cam_res_mgr_dt_match);
 
+static void cam_res_mgr_remove_void(struct platform_device *pdev)
+{
+	cam_res_mgr_remove(pdev);
+}
+
 struct platform_driver cam_res_mgr_driver = {
 	.probe = cam_res_mgr_probe,
-	.remove = cam_res_mgr_remove,
+	.remove = cam_res_mgr_remove_void,
 	.driver = {
 		.name = "cam_res_mgr",
 		.owner = THIS_MODULE,

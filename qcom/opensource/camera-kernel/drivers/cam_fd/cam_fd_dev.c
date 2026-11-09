@@ -238,9 +238,14 @@ static const struct of_device_id cam_fd_dt_match[] = {
 	{}
 };
 
+static void cam_fd_dev_remove_void(struct platform_device *pdev)
+{
+	cam_fd_dev_remove(pdev);
+}
+
 struct platform_driver cam_fd_driver = {
 	.probe = cam_fd_dev_probe,
-	.remove = cam_fd_dev_remove,
+	.remove = cam_fd_dev_remove_void,
 	.driver = {
 		.name = "cam_fd",
 		.owner = THIS_MODULE,

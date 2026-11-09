@@ -272,9 +272,14 @@ static int cam_jpeg_dev_probe(struct platform_device *pdev)
 
 }
 
+static void cam_jpeg_dev_remove_void(struct platform_device *pdev)
+{
+	cam_jpeg_dev_remove(pdev);
+}
+
 struct platform_driver jpeg_driver = {
 	.probe = cam_jpeg_dev_probe,
-	.remove = cam_jpeg_dev_remove,
+	.remove = cam_jpeg_dev_remove_void,
 	.driver = {
 		.name = "cam_jpeg",
 		.owner = THIS_MODULE,

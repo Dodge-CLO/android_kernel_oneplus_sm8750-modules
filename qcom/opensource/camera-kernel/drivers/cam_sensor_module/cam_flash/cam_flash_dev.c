@@ -843,9 +843,14 @@ static int32_t cam_flash_i2c_driver_remove(struct i2c_client *client)
 
 MODULE_DEVICE_TABLE(of, cam_flash_dt_match);
 
+static void cam_flash_platform_remove_void(struct platform_device *pdev)
+{
+	cam_flash_platform_remove(pdev);
+}
+
 struct platform_driver cam_flash_platform_driver = {
 	.probe = cam_flash_platform_probe,
-	.remove = cam_flash_platform_remove,
+	.remove = cam_flash_platform_remove_void,
 	.driver = {
 		.name = "CAM-FLASH-DRIVER",
 		.owner = THIS_MODULE,

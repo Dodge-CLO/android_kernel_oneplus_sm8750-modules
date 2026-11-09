@@ -2144,9 +2144,14 @@ static const struct of_device_id cam_cpas_dt_match[] = {
 	{}
 };
 
+static void cam_cpas_dev_remove_void(struct platform_device *pdev)
+{
+	cam_cpas_dev_remove(pdev);
+}
+
 struct platform_driver cam_cpas_driver = {
 	.probe = cam_cpas_dev_probe,
-	.remove = cam_cpas_dev_remove,
+	.remove = cam_cpas_dev_remove_void,
 	.driver = {
 		.name = CAM_CPAS_DEV_NAME,
 		.owner = THIS_MODULE,

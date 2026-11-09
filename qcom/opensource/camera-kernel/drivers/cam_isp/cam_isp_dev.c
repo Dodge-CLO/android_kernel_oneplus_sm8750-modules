@@ -372,9 +372,14 @@ static int cam_isp_dev_probe(struct platform_device *pdev)
 	return rc;
 }
 
+static void cam_isp_dev_remove_void(struct platform_device *pdev)
+{
+	cam_isp_dev_remove(pdev);
+}
+
 struct platform_driver isp_driver = {
 	.probe = cam_isp_dev_probe,
-	.remove = cam_isp_dev_remove,
+	.remove = cam_isp_dev_remove_void,
 	.driver = {
 		.name = "cam_isp",
 		.owner = THIS_MODULE,
