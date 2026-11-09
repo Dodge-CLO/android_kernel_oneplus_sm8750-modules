@@ -5,6 +5,7 @@
  */
 
 #include <linux/types.h>
+#include <linux/vmalloc.h>
 #include <linux/hash.h>
 
 #include "msm_vidc_core.h"

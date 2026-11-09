@@ -5,6 +5,7 @@
  */
 
 #include <linux/iommu.h>
+#include <linux/vmalloc.h>
 #include <linux/workqueue.h>
 #include "msm_media_info.h"
 

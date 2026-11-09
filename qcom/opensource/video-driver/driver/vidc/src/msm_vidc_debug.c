@@ -6,6 +6,7 @@
 
 #define CREATE_TRACE_POINTS
 #include "msm_vidc_debug.h"
+#include <linux/vmalloc.h>
 #include "msm_vidc_driver.h"
 #include "msm_vidc.h"
 #include "msm_vidc_core.h"

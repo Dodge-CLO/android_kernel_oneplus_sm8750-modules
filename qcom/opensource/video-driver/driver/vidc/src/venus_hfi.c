@@ -5,6 +5,7 @@
  */
 
 #include <linux/iommu.h>
+#include <linux/vmalloc.h>
 #include <linux/soc/qcom/smem.h>
 #include <linux/irqreturn.h>
 #include <linux/of_address.h>

@@ -4,6 +4,7 @@
  */
 
 #include "msm_vidc_fence.h"
+#include <linux/vmalloc.h>
 #include "msm_vidc_driver.h"
 #include "msm_vidc_debug.h"
 

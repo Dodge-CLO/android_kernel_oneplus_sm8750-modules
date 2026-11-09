@@ -3,6 +3,7 @@
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
 #include <linux/types.h>
+#include <linux/vmalloc.h>
 #include <linux/list.h>
 #include <linux/of_address.h>
 #include <linux/devcoredump.h>

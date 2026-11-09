@@ -989,9 +989,14 @@ static const struct dev_pm_ops msm_vidc_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(msm_vidc_pm_suspend, msm_vidc_pm_resume)
 };
 
+static void msm_vidc_remove_void(struct platform_device *pdev)
+{
+	msm_vidc_remove(pdev);
+}
+
 struct platform_driver msm_vidc_driver = {
 	.probe = msm_vidc_probe,
-	.remove = msm_vidc_remove,
+	.remove = msm_vidc_remove_void,
 	.driver = {
 		.name = "msm_vidc_v4l2",
 		.of_match_table = msm_vidc_dt_match,

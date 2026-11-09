@@ -5,6 +5,7 @@
  */
 
 #include <linux/dma-buf.h>
+#include <linux/vmalloc.h>
 #include <linux/dma-heap.h>
 #include <linux/dma-mapping.h>
 

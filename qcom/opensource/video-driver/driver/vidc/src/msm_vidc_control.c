@@ -5,6 +5,7 @@
  */
 
 #include "msm_vidc_internal.h"
+#include <linux/vmalloc.h>
 #include "msm_vidc_driver.h"
 #include "msm_venc.h"
 #include "msm_vidc_platform.h"
