@@ -1,5 +1,6 @@
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 
 def define_sch(target, variant):
     kernel_build_variant = "{}_{}".format(target, variant)
@@ -11,9 +12,10 @@ def define_sch(target, variant):
         srcs = [
             "rmnet_sch_main.c",
         ],
-        deps = ["//msm-kernel:all_headers"],
+        deps = ["//msm-kernel:all_headers"] + soc_modules(),
         copts = ["-Wno-misleading-indentation"],
         kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
+        config = "//msm-kernel:{}_config".format(kernel_build_variant),
     )
 
     copy_to_dist_dir(
