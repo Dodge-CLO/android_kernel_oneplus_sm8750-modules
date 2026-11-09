@@ -166,6 +166,11 @@ static const struct of_device_id magcvr_mkh100a_match[] = {
 	{},
 };
 
+static void magcvr_mkh100a_remove_void(struct platform_device *pdev)
+{
+	magcvr_mkh100a_remove(pdev);
+}
+
 static struct platform_driver magcvr_mkh100a_driver = {
 	.driver = {
 		.name = "oplus,magcvr_mkh100a",
@@ -173,7 +178,7 @@ static struct platform_driver magcvr_mkh100a_driver = {
 		.pm = &magcvr_mkh100a_pm_ops,
 	},
 	.probe = magcvr_mkh100a_probe,
-	.remove = magcvr_mkh100a_remove,
+	.remove = magcvr_mkh100a_remove_void,
 };
 
 static int __init magcvr_mkh100a_init(void)

@@ -1647,9 +1647,14 @@ static struct of_device_id devinfo_id[] = {
 	{},
 };
 
+static void devinfo_remove_void(struct platform_device *pdev)
+{
+	devinfo_remove(pdev);
+}
+
 static struct platform_driver devinfo_platform_driver = {
 	.probe = devinfo_probe,
-	.remove = devinfo_remove,
+	.remove = devinfo_remove_void,
 	.driver = {
 		.name = DEVINFO_NAME,
 		.of_match_table = devinfo_id,

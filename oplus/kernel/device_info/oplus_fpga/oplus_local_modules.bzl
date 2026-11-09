@@ -6,6 +6,7 @@ def define_oplus_local_modules():
 
     define_oplus_ddk_module(
         name = "oplus_bsp_fpga_monitor",
+    ko_deps = ["//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo"],
         srcs = native.glob([
             "**/*.h",
             "fpga_monitor/fpga_exception.c",

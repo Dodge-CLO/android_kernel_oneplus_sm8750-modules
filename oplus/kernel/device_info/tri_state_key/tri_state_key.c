@@ -366,9 +366,14 @@ static const struct of_device_id tristate_dev_of_match[] = {
 	{ },
 };
 
+static void tristate_dev_remove_void(struct platform_device *pdev)
+{
+	tristate_dev_remove(pdev);
+}
+
 struct platform_driver tristate_dev_driver = {
 	.probe		= tristate_dev_probe,
-	.remove		= tristate_dev_remove,
+	.remove		= tristate_dev_remove_void,
 	.driver		= {
 		.name	= DRV_NAME,
 		.owner	= THIS_MODULE,

@@ -3612,9 +3612,14 @@ static const struct of_device_id pogo_keyboard_plat_of_match[] = {
     {.compatible = KEYBOARD_CORE_NAME,},
     {},
 };
+static void pogo_keyboard_plat_remove_void(struct platform_device *pdev)
+{
+	pogo_keyboard_plat_remove(pdev);
+}
+
 static struct platform_driver pogo_keyboard_plat_driver = {
     .probe = pogo_keyboard_plat_probe,
-    .remove = pogo_keyboard_plat_remove,
+    .remove = pogo_keyboard_plat_remove_void,
     .shutdown = pogo_keyboard_plat_shutdown,
     .driver = {
         .name = KEYBOARD_CORE_NAME,

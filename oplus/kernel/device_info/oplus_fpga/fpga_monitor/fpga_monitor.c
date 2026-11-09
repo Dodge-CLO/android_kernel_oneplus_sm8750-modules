@@ -1267,7 +1267,7 @@ static int fpga_monitor_dev_probe(struct platform_device *pdev)
 }
 
 
-static int __exit fpga_monitor_dev_remove(struct platform_device *pdev)
+static int fpga_monitor_dev_remove(struct platform_device *pdev)
 {
 	FPGA_INFO("is called\n");
 	return -EBUSY;
@@ -1304,9 +1304,14 @@ static const struct of_device_id fpga_monitor_dev_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, fpga_monitor_dev_of_match);
 
+static void fpga_monitor_dev_remove_void(struct platform_device *pdev)
+{
+	fpga_monitor_dev_remove(pdev);
+}
+
 static struct platform_driver fpga_monitor_dev_driver = {
 	.probe = fpga_monitor_dev_probe,
-	.remove = __exit_p(fpga_monitor_dev_remove),
+	.remove = fpga_monitor_dev_remove_void,
 	.shutdown = fpga_monitor_dev_shutdown,
 	.driver = {
 		.name = "fpga_monitor_dev",
