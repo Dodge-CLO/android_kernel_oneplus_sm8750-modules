@@ -196,13 +196,18 @@ static const struct of_device_id mmrm_vm_fe_match[] = {
 };
 MODULE_DEVICE_TABLE(of, mmrm_vm_fe_match);
 
+static void mmrm_vm_fe_driver_remove_void(struct platform_device *pdev)
+{
+	mmrm_vm_fe_driver_remove(pdev);
+}
+
 static struct platform_driver mmrm_vm_fe_driver = {
 	.probe = mmrm_vm_fe_driver_probe,
 	.driver = {
 		.name = "mmrm-vm-fe",
 		.of_match_table = mmrm_vm_fe_match,
 	},
-	.remove = mmrm_vm_fe_driver_remove,
+	.remove = mmrm_vm_fe_driver_remove_void,
 };
 
 static int __init mmrm_vm_fe_module_init(void)

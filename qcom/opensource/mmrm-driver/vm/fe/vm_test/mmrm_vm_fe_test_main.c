@@ -366,9 +366,14 @@ static const struct of_device_id mmrm_vm_fe_test_dt_match[] = {
 	{.compatible = "qcom,mmrm-vm-fe-test"}, {} // empty
 };
 
+static void mmrm_vm_fe_test_remove_void(struct platform_device *pdev)
+{
+	mmrm_vm_fe_test_remove(pdev);
+}
+
 static struct platform_driver mmrm_vm_fe_test_driver = {
 	.probe = mmrm_vm_fe_test_probe,
-	.remove = mmrm_vm_fe_test_remove,
+	.remove = mmrm_vm_fe_test_remove_void,
 	.driver = {
 			.name = MODULE_NAME,
 			.owner = THIS_MODULE,
