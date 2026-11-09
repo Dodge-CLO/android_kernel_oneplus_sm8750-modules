@@ -719,9 +719,14 @@ static const struct of_device_id mmu_match_table[] = {
 	{},
 };
 
+static void kgsl_mmu_dev_remove_void(struct platform_device *pdev)
+{
+	kgsl_mmu_dev_remove(pdev);
+}
+
 static struct platform_driver kgsl_mmu_driver = {
 	.probe = kgsl_mmu_dev_probe,
-	.remove = kgsl_mmu_dev_remove,
+	.remove = kgsl_mmu_dev_remove_void,
 	.driver = {
 		.name = "kgsl-iommu",
 		.of_match_table = mmu_match_table,

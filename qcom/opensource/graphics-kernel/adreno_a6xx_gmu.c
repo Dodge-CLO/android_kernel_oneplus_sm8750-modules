@@ -6,6 +6,7 @@
 
 #include <dt-bindings/power/qcom-rpmpd.h>
 #include <linux/clk.h>
+#include <linux/vmalloc.h>
 #include <linux/component.h>
 #include <linux/delay.h>
 #include <linux/dma-map-ops.h>
@@ -3793,9 +3794,14 @@ static const struct of_device_id a6xx_gmu_match_table[] = {
 	{ },
 };
 
+static void a6xx_gmu_remove_dev_void(struct platform_device *pdev)
+{
+	a6xx_gmu_remove_dev(pdev);
+}
+
 struct platform_driver a6xx_gmu_driver = {
 	.probe = a6xx_gmu_probe_dev,
-	.remove = a6xx_gmu_remove_dev,
+	.remove = a6xx_gmu_remove_dev_void,
 	.driver = {
 		.name = "adreno-a6xx-gmu",
 		.of_match_table = a6xx_gmu_match_table,

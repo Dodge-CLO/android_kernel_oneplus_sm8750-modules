@@ -944,7 +944,7 @@ static void adreno_read_soc_code(struct kgsl_device *device)
 	int feature_code, pcode;
 	bool internal_sku;
 
-	feature_code = max_t(int, socinfo_get_feature_code(), SOCINFO_FC_UNKNOWN);
+	feature_code = max_t(int, socinfo_get_feature_code(), 0);
 	internal_sku = (feature_code >= SOCINFO_FC_Y0) && (feature_code < SOCINFO_FC_INT_RESERVE);
 
 	/* Pcode is significant only for internal SKUs */
@@ -3999,9 +3999,14 @@ static const struct dev_pm_ops adreno_pm_ops = {
 };
 #endif /* IS_ENABLED(CONFIG_QCOM_KGSL_HIBERNATION) */
 
+static void adreno_remove_void(struct platform_device *pdev)
+{
+	adreno_remove(pdev);
+}
+
 static struct platform_driver adreno_platform_driver = {
 	.probe = adreno_probe,
-	.remove = adreno_remove,
+	.remove = adreno_remove_void,
 	.driver = {
 		.name = "kgsl-3d",
 		.pm = &adreno_pm_ops,

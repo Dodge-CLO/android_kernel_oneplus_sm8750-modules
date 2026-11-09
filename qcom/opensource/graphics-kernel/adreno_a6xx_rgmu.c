@@ -1383,9 +1383,14 @@ static const struct of_device_id a6xx_rgmu_match_table[] = {
 	{ },
 };
 
+static void a6xx_rgmu_remove_dev_void(struct platform_device *pdev)
+{
+	a6xx_rgmu_remove_dev(pdev);
+}
+
 struct platform_driver a6xx_rgmu_driver = {
 	.probe = a6xx_rgmu_probe_dev,
-	.remove = a6xx_rgmu_remove_dev,
+	.remove = a6xx_rgmu_remove_dev_void,
 	.driver = {
 		.name = "kgsl-rgmu",
 		.of_match_table = a6xx_rgmu_match_table,
