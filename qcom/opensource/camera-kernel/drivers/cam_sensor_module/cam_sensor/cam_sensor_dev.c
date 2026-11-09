@@ -812,11 +812,6 @@ static void cam_sensor_platform_remove_void(struct platform_device *pdev)
 	cam_sensor_platform_remove(pdev);
 }
 
-static void cam_i3c_driver_remove_void(struct platform_device *pdev)
-{
-	cam_i3c_driver_remove(pdev);
-}
-
 struct platform_driver cam_sensor_platform_driver = {
 	.probe = cam_sensor_driver_platform_probe,
 	.driver = {
@@ -856,11 +851,12 @@ static struct i3c_device_id sensor_i3c_id[MAX_I3C_DEVICE_ID_ENTRIES + 1];
 static struct i3c_driver cam_sensor_i3c_driver = {
 	.id_table = sensor_i3c_id,
 	.probe = cam_sensor_i3c_driver_probe,
-	.remove = cam_i3c_driver_remove_void,
+	.remove = cam_i3c_driver_remove,
 	.driver = {
 		.owner = THIS_MODULE,
 		.name = SENSOR_DRIVER_I3C,
-		.of_match_table =.remove = cam_i3c_driver_remove,ess_bind_attrs = true,
+		.of_match_table = cam_sensor_driver_dt_match,
+		.suppress_bind_attrs = true,
 	},
 };
 

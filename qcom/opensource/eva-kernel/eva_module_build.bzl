@@ -103,7 +103,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
             srcs = module_srcs,
             out = "{}.ko".format(module.name),
 			copts = ["-Wno-format","-Wno-array-bounds"],
-            deps = headers + _get_kernel_build_module_deps(module, options, formatter) + soc_modules(),
+            deps = headers + _get_kernel_build_module_deps(module, options, formatter) + soc_modules(["gh_msgq", "gh_rm_drv", "llcc-qcom", "mdt_loader", "mem_buf_dev", "qcom-scm"]),
             local_defines = options.keys(),
         )
 

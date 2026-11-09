@@ -7,6 +7,7 @@ package(default_visibility = ["//visibility:public"])
 
 define_oplus_ddk_module(
     name = "device_info",
+    ko_deps = ["//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo"],
     srcs = glob(["**/*.h"], allow_empty = True) + [
         "device_info.c",
     ],

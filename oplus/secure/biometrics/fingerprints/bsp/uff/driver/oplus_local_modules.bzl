@@ -25,7 +25,7 @@ def define_oplus_local_modules():
             oplus_fp_copts =[]
     else :
         oplus_fp_ko_deps =select({
-                "//build/kernel/kleaf:socrepo_true": ["//vendor/oplus/kernel/touchpanel/touchpanel_notify/bazel:oplus_bsp_tp_notify"],
+                "//build/kernel/kleaf:socrepo_true": ["//vendor/oplus/kernel/touchpanel/touchpanel_notify:oplus_bsp_tp_notify"],
                 "//build/kernel/kleaf:socrepo_false": [],
             })
         oplus_fp_copts =[]

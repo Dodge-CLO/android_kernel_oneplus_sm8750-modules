@@ -8,7 +8,7 @@ ddk_module(
     name = "sun_perf_oplus_nfc",
     srcs = ["oplus_nfc.c", "oplus_nfc.h"],
     out = "oplus_nfc.ko",
-    deps = ["//msm-kernel:all_headers"] + soc_modules(),
+    deps = ["//msm-kernel:all_headers"] + soc_modules(["//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo"]),
     kernel_build = "//msm-kernel:sun_perf",
     config = "//msm-kernel:sun_perf_config",
 )

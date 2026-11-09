@@ -50,7 +50,7 @@ def define_modules(target, variant):
             "//vendor/oplus/sm8750-modules/qcom/opensource/dataipa:{}_ipam".format(kernel_build_variant),
             "//msm-kernel:all_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/dataipa:include_headers",
-        ] + soc_modules(),
+        ] + soc_modules(["qcom_ipc_logging"]),
     )
 
     ddk_module(
@@ -87,7 +87,7 @@ def define_modules(target, variant):
             "//msm-kernel:all_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/dataipa:include_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/datarmnet-ext/mem:rmnet_mem_headers",
-        ] + soc_modules(),
+        ] + soc_modules(["qcom_ipc_logging"]),
     )
 
     copy_to_dist_dir(

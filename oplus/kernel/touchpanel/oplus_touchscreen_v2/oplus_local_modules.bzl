@@ -442,6 +442,7 @@ def define_oplus_local_modules():
 
     define_oplus_ddk_module(
         name = "oplus_bsp_tp_custom",
+    ko_deps = ["//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo"],
         srcs = native.glob([
             "**/*.h",
             "touch_custom/touch.c"

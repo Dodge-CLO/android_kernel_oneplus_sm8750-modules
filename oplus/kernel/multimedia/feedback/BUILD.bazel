@@ -16,6 +16,7 @@ define_oplus_ddk_module(
 
 define_oplus_ddk_module(
     name = "oplus_mm_kevent_fb",
+    ko_deps = ["//vendor/oplus/kernel/multimedia/feedback:oplus_mm_kevent"],
     srcs = glob(["**/*.h"], allow_empty = True) + [
         "oplus_mm_kevent_fb.c",
     ],

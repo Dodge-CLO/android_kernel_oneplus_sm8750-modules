@@ -614,11 +614,6 @@ static void cam_actuator_platform_remove_void(struct platform_device *pdev)
 	cam_actuator_platform_remove(pdev);
 }
 
-static void cam_i3c_driver_remove_void(struct platform_device *pdev)
-{
-	cam_i3c_driver_remove(pdev);
-}
-
 struct platform_driver cam_actuator_platform_driver = {
 	.probe = cam_actuator_driver_platform_probe,
 	.driver = {
@@ -791,11 +786,12 @@ static int cam_i3c_driver_remove(struct i3c_device *client)
 static struct i3c_driver cam_actuator_i3c_driver = {
 	.id_table = actuator_i3c_id,
 	.probe = cam_actuator_i3c_driver_probe,
-	.remove = cam_i3c_driver_remove_void,
+	.remove = cam_i3c_driver_remove,
 	.driver = {
 		.owner = THIS_MODULE,
 		.name = ACTUATOR_DRIVER_I3C,
-		.of_match_table = c.remove = cam_i3c_driver_remove,ess_bind_attrs = true,
+		.of_match_table = cam_actuator_driver_dt_match,
+		.suppress_bind_attrs = true,
 	},
 };
 

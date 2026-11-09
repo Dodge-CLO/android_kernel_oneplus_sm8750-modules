@@ -7,6 +7,7 @@ package(default_visibility = ["//visibility:public"])
 
 define_oplus_ddk_module(
     name = "haptic_feedback",
+    ko_deps = ["//vendor/oplus/kernel/dft:kernel_fb"],
     srcs = glob(["**/*.h"], allow_empty = True) + [
         "haptic_feedback.c",
     ],
