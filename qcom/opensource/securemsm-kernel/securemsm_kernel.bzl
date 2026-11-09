@@ -9,6 +9,7 @@ load(
     "securemsm_modules_by_config",
 )
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 
 def _replace_formatting_codes(target, variant, s):
     kernel_build = "{}_{}".format(target, variant)
@@ -85,9 +86,10 @@ def define_target_variant_modules(target, variant, modules, extra_options = [], 
         ddk_module(
             name = rule_name,
             kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
+            config = "//msm-kernel:{}_config".format(kernel_build_variant),
             srcs = module_srcs,
             out = "{}.ko".format(module["name"]),
-            deps = headers + [_replace_formatting_codes(target, variant, dep) for dep in module["deps"]],
+            deps = headers + [_replace_formatting_codes(target, variant, dep) for dep in module["deps"]] + soc_modules(),
             hdrs = module["hdrs"],
             local_defines = target_local_defines,
             copts = module["copts"],
