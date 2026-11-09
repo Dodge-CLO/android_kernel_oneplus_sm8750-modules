@@ -1293,9 +1293,14 @@ static const struct of_device_id of_drv_match[] = {
 };
 MODULE_DEVICE_TABLE(of, of_drv_match);
 
+static void sensor_feedback_remove_void(struct platform_device *pdev)
+{
+	sensor_feedback_remove(pdev);
+}
+
 static struct platform_driver _driver = {
 	.probe      = sensor_feedback_probe,
-	.remove     = sensor_feedback_remove,
+	.remove     = sensor_feedback_remove_void,
 	.driver     = {
 		.name       = "sensor_feedback",
 		.of_match_table = of_drv_match,

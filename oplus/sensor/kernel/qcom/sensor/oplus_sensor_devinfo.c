@@ -1762,9 +1762,14 @@ static const struct of_device_id of_drv_match[] = {
 };
 MODULE_DEVICE_TABLE(of, of_drv_match);
 
+static void oplus_devinfo_remove_void(struct platform_device *pdev)
+{
+	oplus_devinfo_remove(pdev);
+}
+
 static struct platform_driver _driver = {
 	.probe	  = oplus_devinfo_probe,
-	.remove	 = oplus_devinfo_remove,
+	.remove	 = oplus_devinfo_remove_void,
 	.driver	 = {
 	.name	   = "sensor_devinfo",
 	.of_match_table = of_drv_match,

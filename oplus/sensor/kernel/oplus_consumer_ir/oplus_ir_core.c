@@ -625,6 +625,11 @@ static struct of_device_id ir_core_of_match_table[] = {
 	{},
 };
 
+static void ir_core_remove_void(struct platform_device *pdev)
+{
+	ir_core_remove(pdev);
+}
+
 static struct platform_driver ir_core_driver_platform = {
 	.driver = {
 		.name = CORE_MODULE_NAME,
@@ -632,7 +637,7 @@ static struct platform_driver ir_core_driver_platform = {
 		.of_match_table = ir_core_of_match_table,
 	},
 	.probe = ir_core_probe,
-	.remove = ir_core_remove,
+	.remove = ir_core_remove_void,
 };
 
 module_platform_driver(ir_core_driver_platform);

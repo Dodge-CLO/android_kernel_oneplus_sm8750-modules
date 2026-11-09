@@ -278,6 +278,11 @@ static struct of_device_id oplus_ir_pwm_of_match_table[] = {
 MODULE_DEVICE_TABLE(of, oplus_ir_pwm_of_match_table);
 
 
+static void oplus_ir_pwm_remove_void(struct platform_device *pdev)
+{
+	oplus_ir_pwm_remove(pdev);
+}
+
 static struct platform_driver oplus_ir_pwm_driver = {
 	.driver = {
 		.name = PWM_MODULE_NAME,
@@ -285,7 +290,7 @@ static struct platform_driver oplus_ir_pwm_driver = {
 		.of_match_table = oplus_ir_pwm_of_match_table,
 	},
 	.probe = oplus_ir_pwm_probe,
-	.remove = oplus_ir_pwm_remove,
+	.remove = oplus_ir_pwm_remove_void,
 };
 
 module_platform_driver(oplus_ir_pwm_driver);
