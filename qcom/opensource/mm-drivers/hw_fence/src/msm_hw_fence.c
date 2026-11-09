@@ -926,9 +926,14 @@ static const struct of_device_id msm_hw_fence_dt_match[] = {
 	{}
 };
 
+static void msm_hw_fence_remove_void(struct platform_device *pdev)
+{
+	msm_hw_fence_remove(pdev);
+}
+
 static struct platform_driver msm_hw_fence_driver = {
 	.probe = msm_hw_fence_probe,
-	.remove = msm_hw_fence_remove,
+	.remove = msm_hw_fence_remove_void,
 	.driver = {
 		.name = "msm-hw-fence",
 		.of_match_table = of_match_ptr(msm_hw_fence_dt_match),
