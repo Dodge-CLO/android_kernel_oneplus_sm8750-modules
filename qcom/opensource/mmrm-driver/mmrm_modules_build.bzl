@@ -58,7 +58,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
             name = rule_name,
             srcs = module_srcs,
             out = "{}.ko".format(module.name),
-            deps = ["//msm-kernel:all_headers"] + registry.hdrs + soc_modules(kernel_build_label),
+            deps = ["//msm-kernel:all_headers"] + registry.hdrs + soc_modules(["clk-qcom"]),
             local_defines = options.keys()
         )
         all_module_rules.append(rule_name)
