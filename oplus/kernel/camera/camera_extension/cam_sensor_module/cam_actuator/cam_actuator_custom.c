@@ -826,10 +826,10 @@ free_power_settings:
 		soc_info = &a_ctrl->soc_info;
 
 		if (a_ctrl->is_need_read_current && a_ctrl->is_default_high_voltage
-			&& gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == GPIOF_INIT_HIGH) {
+			&& gpio_get_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE) == 1) {
 			CAM_INFO(CAM_ACTUATOR, "actuator: %s power down, need pull down gpio:%d",
 						a_ctrl->actuator_name, a_ctrl->pull_gpio);
-			gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, GPIOF_INIT_LOW);
+			gpio_set_value_cansleep(a_ctrl->pull_gpio + GPIO_DYNAMIC_BASE, 0);
 		}
 
 		rc = cam_sensor_util_power_down(parklens_power_info, soc_info);

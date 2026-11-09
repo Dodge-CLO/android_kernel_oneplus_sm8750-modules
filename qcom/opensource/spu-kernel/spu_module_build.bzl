@@ -2,7 +2,7 @@ load("//build/kernel/kleaf:kernel.bzl", "kernel_module",
                                         "kernel_modules_install",
                                         "ddk_module",
                                         "ddk_submodule")
-load("//msm-kernel:soc_modules.bzl", "soc_modules")
+load("//msm-kernel:soc_modules.bzl", "soc_config", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 
 def _register_module_to_map(module_map, name, path, config_option, srcs, config_srcs, deps):

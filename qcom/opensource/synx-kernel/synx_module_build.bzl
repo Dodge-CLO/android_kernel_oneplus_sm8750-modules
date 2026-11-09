@@ -6,7 +6,7 @@ load(
     "kernel_modules_install",
 )
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
-load("//msm-kernel:soc_modules.bzl", "soc_modules")
+load("//msm-kernel:soc_modules.bzl", "soc_config", "soc_modules")
 
 def _register_module_to_map(module_map, name, path, config_option, srcs, config_srcs, deps, config_deps):
     processed_config_srcs = {}
@@ -111,7 +111,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
     ddk_module(
         name = "{}_modules".format(kernel_build),
         kernel_build = kernel_build_label,
-        deps = all_module_rules,
+        deps = all_module_rules + soc_config(),
     )
 
     copy_to_dist_dir(

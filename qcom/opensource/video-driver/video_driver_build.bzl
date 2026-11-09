@@ -1,5 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module", "ddk_submodule")
-load("//msm-kernel:soc_modules.bzl", "soc_modules")
+load("//msm-kernel:soc_modules.bzl", "soc_config", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 
 def _register_module_to_map(module_map, name, path, config_option, srcs, config_srcs, deps, config_deps):
@@ -85,7 +85,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
     ddk_module(
         name = "{}_video_driver_modules".format(kernel_build),
         kernel_build = kernel_build_label,
-        deps = all_module_rules,
+        deps = all_module_rules + soc_config(),
     )
     copy_to_dist_dir(
         name = "{}_video_driver_modules_dist".format(kernel_build),
@@ -162,7 +162,7 @@ def define_lunch_target_variant_modules(target, variant, registry, modules, lunc
     ddk_module(
         name = ddk_mod_name,
         kernel_build = kernel_build_label,
-        deps = all_module_rules,
+        deps = all_module_rules + soc_config(),
     )
 
     copy_to_dist_dir(

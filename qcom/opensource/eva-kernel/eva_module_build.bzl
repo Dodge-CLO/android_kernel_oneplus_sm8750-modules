@@ -1,4 +1,4 @@
-load("//msm-kernel:soc_modules.bzl", "soc_modules")
+load("//msm-kernel:soc_modules.bzl", "soc_config", "soc_modules")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_module",
@@ -112,7 +112,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
     ddk_module(
         name = "{}_modules".format(kernel_build),
         kernel_build = kernel_build_label,
-        deps = all_module_rules,
+        deps = all_module_rules + soc_config(),
     )
 
     copy_to_dist_dir(
