@@ -6,6 +6,7 @@
  * These files contain modifications made by Pixelworks, Inc., in 2023.
  */
 
+#include <linux/platform_device.h>
 #include <linux/of_device.h>
 
 #include "pw_iris_api.h"

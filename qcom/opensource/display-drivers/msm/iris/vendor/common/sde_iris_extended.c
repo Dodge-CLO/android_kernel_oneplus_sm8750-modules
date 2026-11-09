@@ -19,7 +19,7 @@
 #include "dsi_iris_lp.h"
 #include "pw_iris_api.h"
 
-void iris_sde_plane_setup_csc(void *csc_ptr)
+void iris_sde_plane_setup_csc(void *csc_ptr __maybe_unused)
 {
 	static const struct sde_csc_cfg hdrYUV = {
 		{

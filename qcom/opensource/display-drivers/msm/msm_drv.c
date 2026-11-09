@@ -107,7 +107,7 @@
 
 static DEFINE_MUTEX(msm_release_lock);
 
-static void msm_fb_output_poll_changed(struct drm_device *dev)
+static void __maybe_unused msm_fb_output_poll_changed(struct drm_device *dev)
 {
 	struct msm_drm_private *priv = NULL;
 
@@ -171,7 +171,6 @@ int msm_atomic_check(struct drm_device *dev,
 
 static const struct drm_mode_config_funcs mode_config_funcs = {
 	.fb_create = msm_framebuffer_create,
-	.output_poll_changed = msm_fb_output_poll_changed,
 	.atomic_check = msm_atomic_check,
 	.atomic_commit = msm_atomic_commit,
 	.atomic_state_alloc = msm_atomic_state_alloc,
@@ -1923,9 +1922,19 @@ static const struct file_operations fops = {
 	.compat_ioctl       = drm_compat_ioctl,
 	.poll               = drm_poll,
 	.read               = drm_read,
-	.llseek             = no_llseek,
 	.mmap               = msm_gem_mmap,
 };
+
+/*
+ * 6.12 dropped drm_driver.lastclose. drm_release() calls .postclose before it
+ * drops open_count, so open_count == 1 here means the last client is closing.
+ */
+static void msm_postclose_last(struct drm_device *dev, struct drm_file *file)
+{
+	msm_postclose(dev, file);
+	if (atomic_read(&dev->open_count) == 1)
+		msm_lastclose(dev);
+}
 
 static struct drm_driver msm_driver = {
 	.driver_features    = DRIVER_GEM |
@@ -1933,8 +1942,7 @@ static struct drm_driver msm_driver = {
 				DRIVER_ATOMIC |
 				DRIVER_MODESET,
 	.open               = msm_open,
-	.postclose          = msm_postclose,
-	.lastclose          = msm_lastclose,
+	.postclose          = msm_postclose_last,
 	.release	    = msm_drm_release,
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 15, 0))
 	.irq_handler        = msm_irq,
