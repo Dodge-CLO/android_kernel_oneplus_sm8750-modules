@@ -43,9 +43,18 @@ define_oplus_ddk_module(
     includes = ['qcom/qcom_pmic_monitor'],
 )
 
-# oplus_bsp_dfr_pmic_watchdog: disabled for 6.12 (see DODGE-6.12-MODULES-HANDOFF.md)
+define_oplus_ddk_module(
+    name = "oplus_bsp_dfr_pmic_watchdog",
+    ko_deps = ["//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo"],
+    srcs = glob(["**/*.h"], allow_empty = True) + [
+        "qcom/qcom_pmicwd/qcom_pmicwd.c",
+        "qcom/qcom_pmicwd/qcom_pmicwd_inject.c",
+        "qcom/qcom_pmicwd/qcom_pwkpwr.c",
+    ],
+    includes = ["qcom/qcom_pmicwd"],
+)
 
 ddk_copy_to_dist_dir(
     name = "oplus_dfr",
-    module_list = ["oplus_bsp_dfr_dump_device_info", "oplus_bsp_dfr_dump_reason", "oplus_bsp_dfr_keyevent_handler", "oplus_bsp_dfr_pmic_monitor",],
+    module_list = ["oplus_bsp_dfr_dump_device_info", "oplus_bsp_dfr_dump_reason", "oplus_bsp_dfr_keyevent_handler", "oplus_bsp_dfr_pmic_monitor", "oplus_bsp_dfr_pmic_watchdog",],
 )
