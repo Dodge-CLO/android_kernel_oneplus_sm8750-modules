@@ -722,9 +722,14 @@ static int oplus_gpio_remove(struct platform_device *pdev)
 }
 
 
+static void oplus_gpio_remove_void(struct platform_device *pdev)
+{
+	oplus_gpio_remove(pdev);
+}
+
 static struct platform_driver oplus_gpio_driver = {
 	.probe = oplus_gpio_probe,
-	.remove = oplus_gpio_remove,
+	.remove = oplus_gpio_remove_void,
 	.driver = {
 		.name = GPIO_DEVICE_NAME,
 		.of_match_table = of_match_ptr(oplus_gpio_dt_ids),

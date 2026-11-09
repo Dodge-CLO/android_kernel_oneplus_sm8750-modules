@@ -882,9 +882,14 @@ static int oem_qmi_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void oem_qmi_remove_void(struct platform_device *pdev)
+{
+	oem_qmi_remove(pdev);
+}
+
 static struct platform_driver oem_qmi_driver = {
 	.probe = oem_qmi_probe,
-	.remove = oem_qmi_remove,
+	.remove = oem_qmi_remove_void,
 	.driver = {
 		.name = "oem_qmi_client",
 	},

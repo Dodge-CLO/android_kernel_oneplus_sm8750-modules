@@ -141,9 +141,14 @@ static int sim_detect_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void sim_detect_remove_void(struct platform_device *pdev)
+{
+	sim_detect_remove(pdev);
+}
+
 static struct platform_driver sim_detect_platform_driver = {
 	.probe = sim_detect_probe,
-	.remove = sim_detect_remove,
+	.remove = sim_detect_remove_void,
 	.driver = {
 		.name = SIM_DETECT_NAME,
 		.of_match_table = sim_detect_id,
