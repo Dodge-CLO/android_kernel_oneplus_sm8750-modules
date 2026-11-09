@@ -4,6 +4,7 @@
  */
 
 #include <linux/of_gpio.h>
+#include <linux/vmalloc.h>
 #include <linux/delay.h>
 #include <linux/sysfs.h>
 #include <asm/uaccess.h>

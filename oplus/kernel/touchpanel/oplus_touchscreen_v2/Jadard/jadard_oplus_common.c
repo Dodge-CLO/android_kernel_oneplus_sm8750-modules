@@ -1,4 +1,5 @@
 #include "jadard_oplus_common.h"
+#include <linux/vmalloc.h>
 
 void jadard_baseline_read(struct seq_file *s, void *chip_data)
 {

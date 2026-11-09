@@ -4,6 +4,7 @@
  */
 
 #include <linux/gpio.h>
+#include <linux/vmalloc.h>
 #include <linux/kthread.h>
 #include <linux/interrupt.h>
 #include <linux/regulator/consumer.h>

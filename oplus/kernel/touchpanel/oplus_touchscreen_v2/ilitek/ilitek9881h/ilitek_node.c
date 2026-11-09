@@ -4,6 +4,7 @@
  */
 
 #include "ilitek.h"
+#include <linux/vmalloc.h>
 
 
 #define IOCTL_I2C_BUFF        PAGE_SIZE

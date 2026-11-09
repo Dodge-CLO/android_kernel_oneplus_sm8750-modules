@@ -4,6 +4,7 @@
  */
 
 #include <linux/delay.h>
+#include <linux/vmalloc.h>
 #include <linux/module.h>
 #include <linux/gpio.h>
 #include <linux/version.h>
@@ -1840,7 +1841,7 @@ static fw_check_state fts3658u_fw_check(void *chip_data,
 
 	if (panel_data->manufacture_info.version) {
 		snprintf(dev_version, 16, "%04x", panel_data->tp_fw);
-		strlcpy(&(panel_data->manufacture_info.version[7]), dev_version, 5);
+		strscpy(&(panel_data->manufacture_info.version[7]), dev_version, 5);
 	}
 
 	return FW_NORMAL;

@@ -1,4 +1,5 @@
 #include "jadard_common.h"
+#include <linux/vmalloc.h>
 #include "jadard_module.h"
 #include "jadard_sorting.h"
 extern struct jadard_module_fp g_module_fp;

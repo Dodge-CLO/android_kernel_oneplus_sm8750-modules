@@ -4,6 +4,7 @@
  */
 
 #include "ili7807s.h"
+#include <linux/vmalloc.h>
 
 #define VALUE               0
 #define RETRY_COUNT         3

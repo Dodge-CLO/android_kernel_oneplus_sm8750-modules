@@ -33,9 +33,9 @@ TRACE_EVENT(stats_report,
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0))
 	TP_fast_assign(
 		__entry->id = id;
-		__assign_str(tp_ic,		tp_ic);
-		__assign_str(fw_ver,	fw_ver);
-		__assign_str(detail_info,	detail_info);
+		__assign_str(tp_ic);
+		__assign_str(fw_ver);
+		__assign_str(detail_info);
 	),
 #else
 	TP_fast_assign(

@@ -4,6 +4,7 @@
  */
 
 #include <linux/of_gpio.h>
+#include <linux/vmalloc.h>
 #include <linux/delay.h>
 #include <linux/sysfs.h>
 #include <asm/uaccess.h>
@@ -3015,14 +3016,14 @@ static void hx83102j_read_FW_ver(struct chip_data_hx83102j *chip_info)
 #ifndef HIMAX_DBG
 	if (ts->panel_data.manufacture_info.version) {
 		if (ts->panel_data.vid_len == 0) {
-			strlcpy(&(ts->panel_data.manufacture_info.version[12]), dev_version, 3);
+			strscpy(&(ts->panel_data.manufacture_info.version[12]), dev_version, 3);
 		} else {
 			ver_len = ts->panel_data.vid_len;
 			if (ver_len > MAX_DEVICE_VERSION_LENGTH - 4) {
 				ver_len = MAX_DEVICE_VERSION_LENGTH - 4;
 			}
 
-			strlcpy(&ts->panel_data.manufacture_info.version[ver_len],
+			strscpy(&ts->panel_data.manufacture_info.version[ver_len],
 					dev_version, MAX_DEVICE_VERSION_LENGTH - ver_len);
 		}
 	}
@@ -3155,13 +3156,13 @@ static void hx83102j_read_OPLUS_FW_ver(struct chip_data_hx83102j *chip_info)
 #ifndef HIMAX_DBG
 	if (ts->panel_data.manufacture_info.version) {
 		if (ts->panel_data.vid_len == 0) {
-			strlcpy(&(ts->panel_data.manufacture_info.version[12]), dev_version, 3);
+			strscpy(&(ts->panel_data.manufacture_info.version[12]), dev_version, 3);
 		} else {
 			ver_len = ts->panel_data.vid_len;
 			if (ver_len > MAX_DEVICE_VERSION_LENGTH - 4) {
 				ver_len = MAX_DEVICE_VERSION_LENGTH - 4;
 			}
-			strlcpy(&ts->panel_data.manufacture_info.version[ver_len],
+			strscpy(&ts->panel_data.manufacture_info.version[ver_len],
 					dev_version, MAX_DEVICE_VERSION_LENGTH - ver_len);
 		}
 	}

@@ -965,7 +965,7 @@ static fw_check_state sec_fw_check(void *chip_data,
 
 			snprintf(dev_version, MAX_DEVICE_VERSION_LENGTH,
 					"%X", panel_data->tp_fw);
-			strlcpy(&panel_data->manufacture_info.version[ver_len],
+			strscpy(&panel_data->manufacture_info.version[ver_len],
 					dev_version, MAX_DEVICE_VERSION_LENGTH - ver_len);
 		}
 	}

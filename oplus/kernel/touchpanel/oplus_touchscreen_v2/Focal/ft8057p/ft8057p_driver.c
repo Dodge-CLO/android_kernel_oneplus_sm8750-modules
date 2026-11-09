@@ -4,6 +4,7 @@
  */
 
 #include <linux/delay.h>
+#include <linux/vmalloc.h>
 #include <linux/module.h>
 #include <linux/gpio.h>
 #include <linux/string.h>

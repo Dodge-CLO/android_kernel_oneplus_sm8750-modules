@@ -4635,6 +4635,11 @@ static const struct dev_pm_ops syna_dev_pm_ops = {
 	.resume = syna_spi_resume,
 };
 
+static void syna_dev_remove_void(struct platform_device *pdev)
+{
+	syna_dev_remove(pdev);
+}
+
 static struct platform_driver syna_dev_driver = {
 	.driver = {
 		.name = PLATFORM_DRIVER_NAME,
@@ -4642,7 +4647,7 @@ static struct platform_driver syna_dev_driver = {
 		.pm = &syna_dev_pm_ops,
 	},
 	.probe = syna_dev_probe,
-	.remove = syna_dev_remove,
+	.remove = syna_dev_remove_void,
 	.shutdown = syna_dev_shutdown,
 };
 

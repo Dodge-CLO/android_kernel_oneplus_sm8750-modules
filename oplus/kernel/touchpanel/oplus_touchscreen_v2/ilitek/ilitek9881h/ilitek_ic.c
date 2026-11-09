@@ -746,7 +746,7 @@ int ilitek_tddi_ic_get_fw_ver(void *chip_data)
 
 		if (chip_info->ts->panel_data.vid_len == 0) {
 			/*ver_len = strlen(chip_info->ts->panel_data.manufacture_info.version);*/
-			strlcpy(&(chip_info->ts->panel_data.manufacture_info.version[12]), dev_version,
+			strscpy(&(chip_info->ts->panel_data.manufacture_info.version[12]), dev_version,
 				3);
 
 		} else {
@@ -756,7 +756,7 @@ int ilitek_tddi_ic_get_fw_ver(void *chip_data)
 				ver_len = MAX_DEVICE_VERSION_LENGTH - 4;
 			}
 
-			strlcpy(&chip_info->ts->panel_data.manufacture_info.version[ver_len],
+			strscpy(&chip_info->ts->panel_data.manufacture_info.version[ver_len],
 				dev_version, MAX_DEVICE_VERSION_LENGTH - ver_len);
 		}
 	}

@@ -4,6 +4,7 @@
  */
 
 #include "ili7807s.h"
+#include <linux/vmalloc.h>
 #ifndef REMOVE_OPLUS_FUNCTION
 #ifdef CONFIG_TOUCHPANEL_MTK_PLATFORM
 #include<mt-plat/mtk_boot_common.h>

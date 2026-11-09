@@ -1119,7 +1119,7 @@ static fw_check_state goodix_fw_check(void *chip_data,
 	if (panel_data->manufacture_info.version) {
 		panel_data->tp_fw = cfg_ver | (fw_ver & 0xFF) << 8;
 		sprintf(dev_version, "%04x", panel_data->tp_fw);
-		strlcpy(&(panel_data->manufacture_info.version[7]), dev_version, 5);
+		strscpy(&(panel_data->manufacture_info.version[7]), dev_version, 5);
 	}
 
 	TPD_INFO("%s: panel_data->tp_fw = 0x%x \n", __func__, panel_data->tp_fw);

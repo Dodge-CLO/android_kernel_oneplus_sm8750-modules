@@ -4,6 +4,7 @@
  */
 
 #include "ilitek.h"
+#include <linux/vmalloc.h>
 
 #define UPDATE_PASS            0
 #define UPDATE_FAIL            -1

@@ -4,6 +4,7 @@
  */
 
 #include "ili7807s.h"
+#include <linux/vmalloc.h>
 
 #define USER_STR_BUFF       PAGE_SIZE
 #define IOCTL_I2C_BUFF      PAGE_SIZE

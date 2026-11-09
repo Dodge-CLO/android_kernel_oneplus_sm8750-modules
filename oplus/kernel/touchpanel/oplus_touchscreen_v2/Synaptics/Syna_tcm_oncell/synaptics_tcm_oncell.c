@@ -4,6 +4,7 @@
  */
 
 #include <linux/gpio.h>
+#include <linux/vmalloc.h>
 #include <linux/kthread.h>
 #include <linux/interrupt.h>
 #include "synaptics_tcm_oncell.h"
@@ -3479,7 +3480,7 @@ static fw_check_state syna_fw_check(void *chip_data,
 			}
 			snprintf(dev_version, MAX_DEVICE_VERSION_LENGTH  - ver_len,
 				 "%s", (char *)(tcm_info->app_info.customer_config_id));
-			strlcpy(&panel_data->manufacture_info.version[ver_len],
+			strscpy(&panel_data->manufacture_info.version[ver_len],
 				dev_version, MAX_DEVICE_VERSION_LENGTH - ver_len);
 		}
 	}

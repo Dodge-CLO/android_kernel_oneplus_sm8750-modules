@@ -4,6 +4,7 @@
  */
 
 #include <linux/module.h>
+#include <linux/vmalloc.h>
 #include "ilitek.h"
 #ifndef REMOVE_OPLUS_FUNCTION
 #ifdef CONFIG_TOUCHPANEL_MTK_PLATFORM

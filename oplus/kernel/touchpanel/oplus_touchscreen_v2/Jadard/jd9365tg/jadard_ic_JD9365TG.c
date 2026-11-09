@@ -3376,9 +3376,14 @@ static const struct of_device_id jadard_jd9365tg_mttable[] = {
 //#define jadard_jd9365tg_mttable NULL
 //#endif
 
+static void jadard_jd9365tg_remove_void(struct platform_device *pdev)
+{
+	jadard_jd9365tg_remove(pdev);
+}
+
 static struct platform_driver jadard_jd9365tg_driver = {
     .probe  = jadard_jd9365tg_probe,
-    .remove = jadard_jd9365tg_remove,
+    .remove = jadard_jd9365tg_remove_void,
     .driver = {
         .name           = "JADARD_JD9365TG",
         .owner          = THIS_MODULE,

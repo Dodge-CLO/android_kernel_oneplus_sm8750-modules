@@ -4,6 +4,7 @@
  */
 
 #include "ilitek.h"
+#include <linux/vmalloc.h>
 
 #define MP_PASS            0
 #define MP_FAIL            -1
