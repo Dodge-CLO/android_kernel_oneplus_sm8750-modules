@@ -16,7 +16,7 @@ ddk_headers(
 define_oplus_ddk_module(
     name = "oplus_chg_v2",
     header_deps = [":chg_module_lds"],
-    srcs = glob(["v2/**/*.h"], allow_empty = True) + [
+    srcs = glob(["v2/**/*.h", "test-kit/*.h"], allow_empty = True) + [
         "v2/batt_bal_ic/oplus_hal_sy6603.c",
         "v2/charger_ic/oplus_hal_adsp.c",
         "v2/charger_ic/oplus_hal_tps6128xd.c",

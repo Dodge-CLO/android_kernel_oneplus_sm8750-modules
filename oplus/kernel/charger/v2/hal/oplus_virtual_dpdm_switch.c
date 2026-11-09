@@ -32,17 +32,7 @@
 #include "oplus_chg_audio_switch.h"
 
 #if IS_ENABLED(CONFIG_OPLUS_AUDIO_SWITCH_GLINK)
-int register_chg_glink_notifier(struct notifier_block *nb)
-{
-	return raw_notifier_chain_register(&chg_glink_notifier, nb);
-}
-EXPORT_SYMBOL_GPL(register_chg_glink_notifier);
-
-int unregister_chg_glink_notifier(struct notifier_block *nb)
-{
-	return raw_notifier_chain_unregister(&chg_glink_notifier, nb);
-}
-EXPORT_SYMBOL_GPL(unregister_chg_glink_notifier);
+/* register/unregister_chg_glink_notifier() are exported by wcd_usbss_i2c on 6.12 */
 #endif
 
 struct oplus_dpdm_switch_ic {
