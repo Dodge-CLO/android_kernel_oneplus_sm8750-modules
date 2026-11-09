@@ -563,9 +563,14 @@ static const struct of_device_id qcm_smem_match[] = {
 };
 MODULE_DEVICE_TABLE(of, qcm_smem_match);
 
+static void smem_remove_void(struct platform_device *pdev)
+{
+	smem_remove(pdev);
+}
+
 static struct platform_driver qcom_smem_driver = {
 	.probe = smem_probe,
-	.remove = smem_remove,
+	.remove = smem_remove_void,
 	.driver = {
 		.name = DEVICE_NAME,
 		.of_match_table = qcm_smem_match,

@@ -1,4 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 
 def define_modules(target, variant):
@@ -7,7 +8,8 @@ def define_modules(target, variant):
     ddk_module(
         name = "{}_smem_mailbox".format(kernel_build_variant),
         kernel_build = "//msm-kernel:{}".format(kernel_build_variant),
-        deps = ["//msm-kernel:all_headers"],
+        config = "//msm-kernel:{}_config".format(kernel_build_variant),
+        deps = ["//msm-kernel:all_headers"] + soc_modules(["smem"]),
         srcs = [
             "smem-mailbox.c"
         ],
