@@ -540,9 +540,14 @@ static const struct dev_pm_ops msm_cvp_pm_ops = {
 
 MODULE_DEVICE_TABLE(of, msm_cvp_plat_match);
 
+static void msm_cvp_remove_void(struct platform_device *pdev)
+{
+	msm_cvp_remove(pdev);
+}
+
 static struct platform_driver msm_cvp_driver = {
 	.probe = msm_cvp_probe,
-	.remove = msm_cvp_remove,
+	.remove = msm_cvp_remove_void,
 	.driver = {
 		.name = "msm_cvp",
 		.of_match_table = msm_cvp_plat_match,

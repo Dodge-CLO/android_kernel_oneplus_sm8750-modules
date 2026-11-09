@@ -1,3 +1,4 @@
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_module",
@@ -102,7 +103,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
             srcs = module_srcs,
             out = "{}.ko".format(module.name),
 			copts = ["-Wno-format","-Wno-array-bounds"],
-            deps = headers + _get_kernel_build_module_deps(module, options, formatter),
+            deps = headers + _get_kernel_build_module_deps(module, options, formatter) + soc_modules(),
             local_defines = options.keys(),
         )
 
@@ -111,6 +112,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
     ddk_module(
         name = "{}_modules".format(kernel_build),
         kernel_build = kernel_build_label,
+        config = "{}_config".format(kernel_build_label),
         deps = all_module_rules,
     )
 

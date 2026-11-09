@@ -5,6 +5,7 @@
  */
 
 #include "msm_cvp.h"
+#include <linux/vmalloc.h>
 #include "cvp_hfi.h"
 #include "cvp_core_hfi.h"
 #include "msm_cvp_buf.h"
