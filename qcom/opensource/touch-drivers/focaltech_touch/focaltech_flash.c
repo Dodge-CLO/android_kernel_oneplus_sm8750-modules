@@ -34,6 +34,7 @@
 * 1.Included header files
 *****************************************************************************/
 #include "focaltech_core.h"
+#include <linux/vmalloc.h>
 #include "focaltech_flash.h"
 
 /*****************************************************************************

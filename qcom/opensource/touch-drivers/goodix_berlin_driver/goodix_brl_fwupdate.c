@@ -17,6 +17,7 @@
  */
 #include "goodix_ts_core.h"
 #include <linux/version.h>
+#include <linux/vmalloc.h>
 
 #define BUS_TYPE_SPI					1
 #define BUS_TYPE_I2C					0
