@@ -24,24 +24,12 @@ def define_oplus_local_modules():
         copts = [],
     )
 
-    define_oplus_ddk_module(
-        name = "oplus_ipa_thermal",
-        srcs = native.glob([
-            "**/*.h",
-            "oplus_ipa_thermal.c",
-        ]),
-        ko_deps = [
-            "//vendor/oplus/kernel/cpu/thermal:horae_shell_temp",
-        ],
-        includes = ["."],
-        copts = [],
-    )
+    # oplus_ipa_thermal: disabled for 6.12 (see DODGE-6.12-MODULES-HANDOFF.md)
 
     ddk_copy_to_dist_dir(
         name = "oplus_horae",
         module_list = [
             "horae_shell_temp",
             "thermal_pa_adc",
-            "oplus_ipa_thermal",
         ],
     )
