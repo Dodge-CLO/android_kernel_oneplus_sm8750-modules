@@ -906,9 +906,14 @@ static const struct of_device_id usbc_switch_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, usbc_switch_of_match);
 
+static void usbc_switch_remove_void(struct platform_device *pdev)
+{
+	usbc_switch_remove(pdev);
+}
+
 static struct platform_driver usbc_switch_driver = {
 	.probe          = usbc_switch_probe,
-	.remove         = usbc_switch_remove,
+	.remove         = usbc_switch_remove_void,
 	.driver         = {
 		.name   = USBC_SWITCH_DRIVER_NAME,
 		.owner  = THIS_MODULE,

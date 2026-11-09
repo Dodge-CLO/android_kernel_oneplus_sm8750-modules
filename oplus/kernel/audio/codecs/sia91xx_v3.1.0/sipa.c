@@ -3726,9 +3726,14 @@ static const struct of_device_id si_sipa_dt_match[] = {
 MODULE_DEVICE_TABLE(of, si_sipa_dt_match);
 #endif
 
+static void sipa_remove_void(struct platform_device *pdev)
+{
+	sipa_remove(pdev);
+}
+
 static struct platform_driver si_sipa_dev_driver = {
 	.probe  = sipa_probe,
-	.remove = sipa_remove,
+	.remove = sipa_remove_void,
 	.shutdown = sipa_shutdown,
 	.driver = {
 		.name  = SIPA_NAME,

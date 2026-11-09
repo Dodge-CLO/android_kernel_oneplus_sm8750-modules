@@ -14,6 +14,7 @@
  */
 
 #include <linux/i2c.h>
+#include <linux/vmalloc.h>
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>
 #include <linux/gpio.h>

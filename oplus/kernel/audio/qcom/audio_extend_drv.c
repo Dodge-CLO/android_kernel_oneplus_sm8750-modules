@@ -496,9 +496,14 @@ static const struct of_device_id audio_extend_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, audio_extend_of_match);
 
+static void audio_extend_remove_void(struct platform_device *pdev)
+{
+	audio_extend_remove(pdev);
+}
+
 static struct platform_driver audio_extend_driver = {
 	.probe          = audio_extend_probe,
-	.remove         = audio_extend_remove,
+	.remove         = audio_extend_remove_void,
 	.driver         = {
 		.name   = AUDIO_EXTEND_DRIVER_NAME,
 		.owner  = THIS_MODULE,

@@ -591,9 +591,14 @@ static const struct of_device_id oplus_discrete_typec_switch_of_match[] = {
 	{ }
 };
 
+static void oplus_discrete_typec_switch_remove_void(struct platform_device *pdev)
+{
+	oplus_discrete_typec_switch_remove(pdev);
+}
+
 static struct platform_driver oplus_discrete_typec_switch_driver = {
 	.probe          = oplus_discrete_typec_switch_probe,
-	.remove         = oplus_discrete_typec_switch_remove,
+	.remove         = oplus_discrete_typec_switch_remove_void,
 	.shutdown       = oplus_discrete_typec_switch_shutdown,
 	.driver         = {
 		.name   = OPLUS_DISCRETE_TYPEC_SWITCH_DRIVER_NAME,
