@@ -731,8 +731,8 @@ int btfmcodec_hwep_set_channel_map(void *hwep_info, unsigned int tx_num,
 }
 
 static int btfmcodec_dai_set_channel_map(struct snd_soc_dai *dai,
-				unsigned int tx_num, unsigned int *tx_slot,
-				unsigned int rx_num, unsigned int *rx_slot)
+				unsigned int tx_num, const unsigned int *tx_slot,
+				unsigned int rx_num, const unsigned int *rx_slot)
 {
 	struct btfmcodec_data *btfmcodec = snd_soc_component_get_drvdata(dai->component);
 	struct btfmcodec_state_machine states = btfmcodec->states;
@@ -766,7 +766,7 @@ int btfmcodec_hwep_get_channel_map(void *hwep_info, unsigned int *tx_num,
 	}
 }
 
-static int btfmcodec_dai_get_channel_map(struct snd_soc_dai *dai,
+static int btfmcodec_dai_get_channel_map(const struct snd_soc_dai *dai,
 				 unsigned int *tx_num, unsigned int *tx_slot,
 				 unsigned int *rx_num, unsigned int *rx_slot)
 {

@@ -1,5 +1,6 @@
 load("//msm-kernel:target_variants.bzl", "get_all_variants")
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load(":bt_modules.bzl", "bt_modules")
 
@@ -68,9 +69,10 @@ def define_target_variant_modules(target, variant, modules, config_options = [])
         ddk_module(
             name = rule_name,
             kernel_build = kernel_build_label,
+            config = "{}_config".format(kernel_build_label),
             srcs = module_srcs,
             out = "{}.ko".format(module.name),
-            deps = ["//msm-kernel:all_headers"] + _get_module_deps(module, options, formatter),
+            deps = ["//msm-kernel:all_headers"] + _get_module_deps(module, options, formatter) + soc_modules(["smem"]),
             includes = ["include"],
             local_defines = options.keys(),
             visibility = ["//visibility:public"],

@@ -3023,9 +3023,14 @@ static long bt_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	}
 	return ret;
 }
+static void bt_power_remove_void(struct platform_device *pdev)
+{
+	bt_power_remove(pdev);
+}
+
 static struct platform_driver bt_power_driver = {
 	.probe = bt_power_probe,
-	.remove = bt_power_remove,
+	.remove = bt_power_remove_void,
 	.driver = {
 		.name = "bt_power",
 		.of_match_table = bt_power_match_table,

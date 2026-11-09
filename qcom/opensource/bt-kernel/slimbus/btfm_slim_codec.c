@@ -233,8 +233,8 @@ static int btfm_slim_dai_prepare(struct snd_pcm_substream *substream,
 
 /* This function will be called once during boot up */
 static int btfm_slim_dai_set_channel_map(struct snd_soc_dai *dai,
-				unsigned int tx_num, unsigned int *tx_slot,
-				unsigned int rx_num, unsigned int *rx_slot)
+				unsigned int tx_num, const unsigned int *tx_slot,
+				unsigned int rx_num, const unsigned int *rx_slot)
 {
 	int ret = 0, i;
 	struct btfmslim *btfmslim = snd_soc_component_get_drvdata(dai->component);
@@ -277,7 +277,7 @@ static int btfm_slim_dai_set_channel_map(struct snd_soc_dai *dai,
 	return ret;
 }
 
-static int btfm_slim_dai_get_channel_map(struct snd_soc_dai *dai,
+static int btfm_slim_dai_get_channel_map(const struct snd_soc_dai *dai,
 				 unsigned int *tx_num, unsigned int *tx_slot,
 				 unsigned int *rx_num, unsigned int *rx_slot)
 {
