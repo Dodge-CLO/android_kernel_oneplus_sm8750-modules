@@ -1,0 +1,1 @@
+../../../../touchpanel/kernelFwUpdate/kernelFwUpdate.h

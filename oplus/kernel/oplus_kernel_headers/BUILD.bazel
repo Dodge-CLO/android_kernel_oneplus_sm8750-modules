@@ -1,0 +1,11 @@
+load("//build/kernel/kleaf:kernel.bzl", "ddk_headers")
+
+package(default_visibility = ["//visibility:public"])
+
+# The OnePlus headers that the 6.6 msm-kernel carried in include/ (mostly symlinks into
+# sm8750-modules). On 6.12 the kernel does not ship them; modules get them from here.
+ddk_headers(
+    name = "oplus_kernel_headers",
+    hdrs = glob(["include/**/*.h"]),
+    includes = ["include"],
+)
