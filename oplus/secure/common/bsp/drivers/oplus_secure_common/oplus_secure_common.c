@@ -700,9 +700,14 @@ static struct of_device_id oplus_secure_common_match_table[] = {
         {}
 };
 
+static void oplus_secure_common_remove_void(struct platform_device *pdev)
+{
+	oplus_secure_common_remove(pdev);
+}
+
 static struct platform_driver oplus_secure_common_driver = {
         .probe = oplus_secure_common_probe,
-        .remove = oplus_secure_common_remove,
+        .remove = oplus_secure_common_remove_void,
         .driver = {
                 .name = "oplus_secure_common",
                 .owner = THIS_MODULE,
