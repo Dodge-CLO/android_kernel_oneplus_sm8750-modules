@@ -1195,9 +1195,14 @@ static const struct of_device_id fts_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, fts_dt_match);
 
+static void fts_dev_remove_void(struct platform_device *pdev)
+{
+	fts_dev_remove(pdev);
+}
+
 static struct platform_driver fts_dev_driver = {
 	.probe = fts_dev_probe,
-	.remove = fts_dev_remove,
+	.remove = fts_dev_remove_void,
 	.driver = {
 		.name = PLATFORM_DRIVER_NAME,
 		.owner = THIS_MODULE,

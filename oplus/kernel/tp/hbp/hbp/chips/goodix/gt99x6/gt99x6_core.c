@@ -747,9 +747,14 @@ static const struct of_device_id gt_dt_match[] = {
 	{},
 };
 
+static void gt_dev_remove_void(struct platform_device *pdev)
+{
+	gt_dev_remove(pdev);
+}
+
 static struct platform_driver gt_dev_driver = {
 	.probe = gt_dev_probe,
-	.remove = gt_dev_remove,
+	.remove = gt_dev_remove_void,
 	.shutdown = gt_dev_shutdown,
 	.driver = {
 		.name = PLATFORM_DRIVER_NAME,

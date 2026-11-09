@@ -744,6 +744,11 @@ static struct of_device_id hbp_core_of_match[] = {
 	{},
 };
 
+static void hbp_core_remove_void(struct platform_device *pdev)
+{
+	hbp_core_remove(pdev);
+}
+
 static struct platform_driver hbp_core_driver_platform = {
 	.driver = {
 		.name		= "hbp_core",
@@ -752,7 +757,7 @@ static struct platform_driver hbp_core_driver_platform = {
 		.pm = &hbp_core_pm_ops,
 	},
 	.probe	= hbp_core_probe,
-	.remove = hbp_core_remove,
+	.remove = hbp_core_remove_void,
 };
 
 static int __init register_hbp_core_driver(void)

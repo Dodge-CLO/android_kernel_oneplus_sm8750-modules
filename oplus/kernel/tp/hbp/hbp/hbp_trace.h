@@ -61,7 +61,7 @@ TRACE_EVENT(hbp,
 
 	    TP_fast_assign(
 		    __entry->id = id;
-		    __assign_str(msg, string);
+		    __assign_str(msg);
 		    __entry->phase = phase;
 	    ),
 

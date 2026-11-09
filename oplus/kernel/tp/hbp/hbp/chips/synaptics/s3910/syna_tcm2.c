@@ -581,6 +581,11 @@ static struct of_device_id syna_tcm2_of_match[] = {
 	{},
 };
 
+static void syna_dev_remove_void(struct platform_device *pdev)
+{
+	syna_dev_remove(pdev);
+}
+
 static struct platform_driver syna_dev_driver = {
 	.driver = {
 		.name = PLATFORM_DRIVER_NAME,
@@ -588,7 +593,7 @@ static struct platform_driver syna_dev_driver = {
 		.of_match_table = syna_tcm2_of_match,
 	},
 	.probe = syna_dev_probe,
-	.remove = syna_dev_remove,
+	.remove = syna_dev_remove_void,
 };
 
 static int __init syna_platform_init(void)
