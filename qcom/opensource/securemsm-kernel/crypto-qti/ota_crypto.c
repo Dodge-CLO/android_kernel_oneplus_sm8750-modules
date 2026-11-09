@@ -812,9 +812,14 @@ static const struct of_device_id qcota_match[] = {
 	{}
 };
 
+static void qcota_remove_void(struct platform_device *pdev)
+{
+	qcota_remove(pdev);
+}
+
 static struct platform_driver qcota_plat_driver = {
 	.probe = qcota_probe,
-	.remove = qcota_remove,
+	.remove = qcota_remove_void,
 	.driver = {
 		.name = "qcota",
 		.of_match_table = qcota_match,

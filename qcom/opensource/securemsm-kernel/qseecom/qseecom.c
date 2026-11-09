@@ -10094,9 +10094,14 @@ static const struct of_device_id qseecom_match[] = {
 	{}
 };
 
+static void qseecom_remove_void(struct platform_device *pdev)
+{
+	qseecom_remove(pdev);
+}
+
 static struct platform_driver qseecom_plat_driver = {
 	.probe = qseecom_probe,
-	.remove = qseecom_remove,
+	.remove = qseecom_remove_void,
 	.suspend = qseecom_suspend,
 	.resume = qseecom_resume,
 	.driver = {

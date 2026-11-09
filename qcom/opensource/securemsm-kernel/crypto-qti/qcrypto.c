@@ -5413,9 +5413,14 @@ static const struct of_device_id qcrypto_match[] = {
 	{}
 };
 
+static void _qcrypto_remove_void(struct platform_device *pdev)
+{
+	_qcrypto_remove(pdev);
+}
+
 static struct platform_driver __qcrypto = {
 	.probe      = _qcrypto_probe,
-	.remove     = _qcrypto_remove,
+	.remove     = _qcrypto_remove_void,
 	.suspend    = _qcrypto_suspend,
 	.resume     = _qcrypto_resume,
 	.driver     = {

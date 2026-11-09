@@ -481,9 +481,14 @@ static const struct dev_pm_ops msm_rng_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(msm_rng_suspend, msm_rng_resume)
 };
 
+static void msm_rng_remove_void(struct platform_device *pdev)
+{
+	msm_rng_remove(pdev);
+}
+
 static struct platform_driver rng_driver = {
 	.probe      = msm_rng_probe,
-	.remove     = msm_rng_remove,
+	.remove     = msm_rng_remove_void,
 	.driver     = {
 		.name   = DRIVER_NAME,
 		.of_match_table = qrng_match,

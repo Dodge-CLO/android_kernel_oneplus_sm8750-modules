@@ -1969,9 +1969,14 @@ static const struct of_device_id tzlog_match[] = {
 	{}
 };
 
+static void tz_log_remove_void(struct platform_device *pdev)
+{
+	tz_log_remove(pdev);
+}
+
 static struct platform_driver tz_log_driver = {
 	.probe		= tz_log_probe,
-	.remove		= tz_log_remove,
+	.remove		= tz_log_remove_void,
 	.driver		= {
 		.name = "tz_log",
 		.of_match_table = tzlog_match,

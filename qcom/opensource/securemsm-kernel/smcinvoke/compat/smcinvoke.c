@@ -3295,9 +3295,14 @@ static const struct of_device_id smcinvoke_match[] = {
 	{},
 };
 
+static void smcinvoke_remove_void(struct platform_device *pdev)
+{
+	smcinvoke_remove(pdev);
+}
+
 static struct platform_driver smcinvoke_plat_driver = {
 	.probe = smcinvoke_probe,
-	.remove = smcinvoke_remove,
+	.remove = smcinvoke_remove_void,
 	.suspend = smcinvoke_suspend,
 	.resume = smcinvoke_resume,
 	.driver = {

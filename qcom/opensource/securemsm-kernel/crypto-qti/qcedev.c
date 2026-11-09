@@ -2829,9 +2829,14 @@ resume_exit:
 	return 0;
 }
 
+static void qcedev_remove_void(struct platform_device *pdev)
+{
+	qcedev_remove(pdev);
+}
+
 static struct platform_driver qcedev_plat_driver = {
 	.probe = qcedev_probe,
-	.remove = qcedev_remove,
+	.remove = qcedev_remove_void,
 	.suspend = qcedev_suspend,
 	.resume = qcedev_resume,
 	.driver = {
