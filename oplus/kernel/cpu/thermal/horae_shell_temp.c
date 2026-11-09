@@ -50,7 +50,7 @@ static int horae_get_shell_temp(struct thermal_zone_device *tz,
 	if (!temp || !tz)
 		return -EINVAL;
 
-	hst = tz->devdata;
+	hst = thermal_zone_device_priv(tz);
 	*temp = shell_temp[hst->shell_id];
 	return 0;
 }

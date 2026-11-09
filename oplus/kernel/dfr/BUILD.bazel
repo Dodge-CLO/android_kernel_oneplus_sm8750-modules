@@ -7,7 +7,7 @@ package(default_visibility = ["//visibility:public"])
 
 define_oplus_ddk_module(
     name = "oplus_bsp_dfr_dump_device_info",
-    srcs = glob(["qcom/dump_device_info/**/*.h"], allow_empty = True) + [
+    srcs = glob(["**/*.h"], allow_empty = True) + [
         "qcom/dump_device_info/dump_device_info.c",
     ],
     includes = ['qcom/dump_device_info'],
@@ -15,7 +15,7 @@ define_oplus_ddk_module(
 
 define_oplus_ddk_module(
     name = "oplus_bsp_dfr_dump_reason",
-    srcs = glob(["qcom/dump_reason/**/*.h"], allow_empty = True) + [
+    srcs = glob(["**/*.h"], allow_empty = True) + [
         "qcom/dump_reason/dump_reason.c",
     ],
     includes = ['qcom/dump_reason'],
@@ -23,7 +23,7 @@ define_oplus_ddk_module(
 
 define_oplus_ddk_module(
     name = "oplus_bsp_dfr_keyevent_handler",
-    srcs = glob(["common/keyevent_handler/**/*.h"], allow_empty = True) + [
+    srcs = glob(["**/*.h"], allow_empty = True) + [
         "common/keyevent_handler/keyevent_handler.c",
     ],
     includes = ['common/keyevent_handler'],
@@ -31,7 +31,7 @@ define_oplus_ddk_module(
 
 define_oplus_ddk_module(
     name = "oplus_bsp_dfr_pmic_monitor",
-    srcs = glob(["qcom/qcom_pmic_monitor/**/*.h"], allow_empty = True) + [
+    srcs = glob(["**/*.h"], allow_empty = True) + [
         "qcom/qcom_pmic_monitor/main.c",
         "qcom/qcom_pmic_monitor/oplus_ocp_dev.c",
         "qcom/qcom_pmic_monitor/oplus_ocp_state_nvmem.c",
@@ -43,7 +43,7 @@ define_oplus_ddk_module(
 
 define_oplus_ddk_module(
     name = "oplus_bsp_dfr_pmic_watchdog",
-    srcs = glob(["qcom/qcom_pmicwd/**/*.h"], allow_empty = True) + [
+    srcs = glob(["**/*.h"], allow_empty = True) + [
         "qcom/qcom_pmicwd/qcom_pmicwd.c",
         "qcom/qcom_pmicwd/qcom_pmicwd_inject.c",
         "qcom/qcom_pmicwd/qcom_pwkpwr.c",

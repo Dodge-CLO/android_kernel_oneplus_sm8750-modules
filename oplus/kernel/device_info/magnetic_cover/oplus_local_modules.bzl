@@ -49,7 +49,7 @@ def define_oplus_local_modules():
 #            "qcom":  ["CONFIG_QCOM_PANEL_EVENT_NOTIFIER"],
 #            "mtk":  ["CONFIG_OPLUS_MTK_DRM_GKI_NOTIFY"],
         },
-        ko_deps = ko_deps + others_ko_deps,
+        ko_deps = ko_deps + others_ko_deps + ["//vendor/oplus/kernel/device_info/magnetic_cover/magtransfer:oplus_magcvr_notify"],
         copts = copts,
     )
 

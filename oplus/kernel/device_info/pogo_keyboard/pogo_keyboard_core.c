@@ -1567,7 +1567,7 @@ static int pogo_keyboard_get_dts_info(struct platform_device *pdev)
         kb_err("uart_wake_gpio is not valid %d\n", pogo_keyboard_client->uart_wake_gpio);
         return -EINVAL;
     }
-    ret = gpio_request_one(pogo_keyboard_client->uart_wake_gpio, GPIOF_DIR_IN, "uart_wake_gpio");
+    ret = gpio_request_one(pogo_keyboard_client->uart_wake_gpio, GPIOF_IN, "uart_wake_gpio");
     if (ret) {
         kb_err("gpio_request_one err:%d\n", ret);
         return ret;

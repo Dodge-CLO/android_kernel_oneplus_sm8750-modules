@@ -119,6 +119,7 @@ define_oplus_ddk_module(
 
 define_oplus_ddk_module(
     name = "oplus_wireless_pen",
+    ko_deps = ["//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo"],
     srcs = glob(["wireless_pen/**/*.h"], allow_empty = True) + [
         "wireless_pen/oplus_cps8601.c",
         "wireless_pen/oplus_wireless_pen_glink.c",

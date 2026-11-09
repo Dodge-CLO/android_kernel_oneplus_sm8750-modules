@@ -9,7 +9,7 @@
 #include <linux/version.h>
 #include <soc/oplus/system/oplus_project.h>
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0)
-#include <../drivers/soc/qcom/debug_symbol.h>
+#include "debug_symbol.h"
 #else
 #include <linux/android_debug_symbols.h>
 #endif

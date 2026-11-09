@@ -2769,13 +2769,8 @@ static int oplus_mpc7022_get_batt_sn(
 		mpc7022_get_batt_sn(chip);
 
 	chg_info("batt_sn(%s):%s\n", ic_dev->name, chip->battinfo.batt_serial_num);
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
-	strscpy = strlen(chip->battinfo.batt_serial_num);
-	strscpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
-#else
 	bsnlen = strlen(chip->battinfo.batt_serial_num);
 	strscpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
-#endif
 
 	return bsnlen;
 }
