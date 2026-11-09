@@ -1,5 +1,6 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module", "ddk_submodule")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load("//msm-kernel:target_variants.bzl", "get_all_variants")
 
 def _define_module(target, variant):
@@ -36,7 +37,7 @@ def _define_module(target, variant):
             "//msm-kernel:all_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/synx-kernel:synx_headers",
             "//vendor/oplus/sm8750-modules/qcom/opensource/mm-drivers:mm_drivers_headers",
-        ],
+        ] + soc_modules(),
         kernel_build = "//msm-kernel:{}".format(tv),
     )
 
