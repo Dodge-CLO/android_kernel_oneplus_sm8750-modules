@@ -1,6 +1,7 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//msm-kernel:target_variants.bzl", "get_all_la_variants")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 
 msm_kgsl_includes = [
     "include/linux/msm_kgsl.h",
@@ -149,7 +150,7 @@ def define_target_variant_module(target, variant):
             "CONFIG_DEVFREQ_GOV_QCOM_ADRENO_TZ": { False: [ "governor_msm_adreno_tz.c" ] },
             "CONFIG_DEVFREQ_GOV_QCOM_GPUBW_MON": { False: [ "governor_gpubw_mon.c" ] }
         },
-        deps = [ "//msm-kernel:all_headers" ] + ext_deps,
+        deps = [ "//msm-kernel:all_headers" ] + ext_deps + soc_modules(["clk-qcom", "cmd-db", "coresight", "llcc-qcom", "mdt_loader", "mem_buf_dev", "minidump", "msm_performance", "msm_sysstats", "qcom-dcvs", "qcom-scm", "qcom_aoss", "qcom_iommu_util", "qcom_q6v5_pas", "qcom_va_minidump", "secure_buffer", "socinfo"]),
         includes = ["include", "."],
         kernel_build = kernel_build,
         visibility = ["//visibility:private"]
