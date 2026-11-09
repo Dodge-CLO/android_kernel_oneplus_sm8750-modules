@@ -126,6 +126,11 @@ static int horae_shell_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void horae_shell_remove_void(struct platform_device *pdev)
+{
+	horae_shell_remove(pdev);
+}
+
 static struct platform_driver horae_shell_platdrv = {
 	.driver = {
 		.name		= "horae-shell-temp",
@@ -133,7 +138,7 @@ static struct platform_driver horae_shell_platdrv = {
 		.of_match_table = horae_shell_of_match,
 	},
 	.probe	= horae_shell_probe,
-	.remove = horae_shell_remove,
+	.remove = horae_shell_remove_void,
 };
 
 #define BUF_LEN		256

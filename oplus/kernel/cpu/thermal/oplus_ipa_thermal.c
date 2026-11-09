@@ -1294,6 +1294,11 @@ static SIMPLE_DEV_PM_OPS(oplus_thermal_pm,
 #define OPLUS_THERMAL_PM	NULL
 #endif
 
+static void oplus_thermal_remove_void(struct platform_device *pdev)
+{
+	oplus_thermal_remove(pdev);
+}
+
 static struct platform_driver oplus_thermal_driver = {
 	.driver = {
 		.name   = "oplus-thermal",
@@ -1302,7 +1307,7 @@ static struct platform_driver oplus_thermal_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = oplus_thermal_probe,
-	.remove	= oplus_thermal_remove,
+	.remove	= oplus_thermal_remove_void,
 };
 
 module_platform_driver(oplus_thermal_driver);
