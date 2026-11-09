@@ -1,4 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 
 def define_modules(target, variant):
@@ -35,8 +36,9 @@ def define_modules(target, variant):
                 "include/uapi/linux/nfc/sn_uapi.h"],
         includes = [".", "linux", "nfc", "include/uapi/linux/nfc"],
         copts = copts,
-        deps = deps,
+        deps = deps + soc_modules(),
         kernel_build= "//msm-kernel:{}".format(tv),
+        config = "//msm-kernel:{}_config".format(tv),
         visibility = ["//visibility:public"]
     )
 
