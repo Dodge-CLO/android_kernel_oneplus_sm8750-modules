@@ -3303,13 +3303,18 @@ static const struct of_device_id ipa_mpm_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, ipa_mpm_dt_match);
 
+static void ipa_mpm_remove_void(struct platform_device *pdev)
+{
+	ipa_mpm_remove(pdev);
+}
+
 static struct platform_driver ipa_ipa_mpm_driver = {
 	.driver = {
 		.name = "ipa_mpm",
 		.of_match_table = ipa_mpm_dt_match,
 	},
 	.probe = ipa_mpm_probe,
-	.remove = ipa_mpm_remove,
+	.remove = ipa_mpm_remove_void,
 };
 
 /**

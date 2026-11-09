@@ -1072,13 +1072,18 @@ static const struct of_device_id imp_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, imp_dt_match);
 
+static void imp_remove_void(struct platform_device *pdev)
+{
+	imp_remove(pdev);
+}
+
 static struct platform_driver ipa_mhi_proxy_driver = {
 	.driver = {
 		.name = "ipa_mhi_proxy",
 		.of_match_table = imp_dt_match,
 	},
 	.probe = imp_probe,
-	.remove = imp_remove,
+	.remove = imp_remove_void,
 };
 
 /**

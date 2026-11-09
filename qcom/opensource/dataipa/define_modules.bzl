@@ -1,6 +1,7 @@
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//msm-kernel:target_variants.bzl", "get_all_variants")
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 
 def define_modules(target, variant):
     kernel_build_variant = "{}_{}".format(target, variant)
@@ -45,7 +46,7 @@ def define_modules(target, variant):
             ":gsi_headers",
             ":include_headers",
             "//msm-kernel:all_headers",
-        ],
+        ] + soc_modules(["qcom_ipc_logging", "qcom_va_minidump"]),
     )
     mod_list.append("{}_gsim".format(kernel_build_variant))
 
@@ -210,7 +211,7 @@ def define_modules(target, variant):
             "//msm-kernel:all_headers",
             ":{}_gsim".format(kernel_build_variant),
             "//vendor/oplus/sm8750-modules/qcom/opensource/datarmnet-ext/mem:{}_rmnet_mem".format(kernel_build_variant),
-        ],
+        ] + soc_modules(["qcom_ipc_logging", "qcom_va_minidump"]),
     )
     mod_list.append("{}_ipam".format(kernel_build_variant))
 
@@ -234,7 +235,7 @@ def define_modules(target, variant):
             ":ipa_headers",
             ":ipa_clients",
             "//msm-kernel:all_headers",
-        ],
+        ] + soc_modules(["qcom_ipc_logging", "qcom_va_minidump"]),
     )
     mod_list.append("{}_ipanetm".format(kernel_build_variant))
 
@@ -261,7 +262,7 @@ def define_modules(target, variant):
                 ":ipa_clients",
                 "//msm-kernel:all_headers",
                 ":{}_gsim".format(kernel_build_variant),
-            ],
+            ] + soc_modules(["qcom_ipc_logging", "qcom_va_minidump"]),
         )
         mod_list.append("{}_ipatestm".format(kernel_build_variant))
 
