@@ -7,6 +7,7 @@ package(default_visibility = ["//visibility:public"])
 
 define_oplus_ddk_module(
     name = "oplus_haptic",
+    ko_deps = ["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/vibrator/haptic_feedback:haptic_feedback"],
     srcs = glob(["**/*.h"], allow_empty = True) + [
         "aw_haptic/aw8692x.c",
         "aw_haptic/aw8693xs.c",

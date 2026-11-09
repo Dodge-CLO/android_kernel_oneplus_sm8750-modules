@@ -19,7 +19,7 @@
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0))
 #ifdef CONFIG_OPLUS_QCOM_UFS_DRIVER
-#include "../../../../../../drivers/ufs/core/ufshcd-priv.h"
+#include "ufshcd-priv.h"
 #endif /* CONFIG_OPLUS_QCOM_UFS_DRIVER */
 #include "ufshcd-priv.h"
 #else
