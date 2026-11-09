@@ -190,7 +190,7 @@ fail_out:
 	return err;
 }
 
-static int __exit bootloader_log_remove(struct platform_device *pdev)
+static int bootloader_log_remove(struct platform_device *pdev)
 {
 	return -EBUSY;
 }
@@ -201,9 +201,14 @@ static const struct of_device_id bootloader_log_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, bootloader_log_of_match);
 
+static void bootloader_log_remove_void(struct platform_device *pdev)
+{
+	bootloader_log_remove(pdev);
+}
+
 static struct platform_driver bootloader_log_driver = {
 	.probe		= bootloader_log_probe,
-	.remove		= __exit_p(bootloader_log_remove),
+	.remove		= bootloader_log_remove_void,
 	.driver		= {
 		.name	= "bootloader_log",
 		.owner	= THIS_MODULE,
