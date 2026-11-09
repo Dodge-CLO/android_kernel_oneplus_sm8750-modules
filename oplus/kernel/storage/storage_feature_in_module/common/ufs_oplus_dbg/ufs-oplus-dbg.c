@@ -555,8 +555,7 @@ void ufs_compl_cmd_handle(void *data, struct ufs_hba *hba, struct ufshcd_lrb *lr
 			lrbp->compl_time_stamp = ktime_get();
 			ufshcd_lrb_scsicmd_time_statistics(hba, lrbp);
 		}
-	} else if (lrbp->command_type == UTP_CMD_TYPE_DEV_MANAGE ||
-			lrbp->command_type == UTP_CMD_TYPE_UFS_STORAGE) {
+	} else if (lrbp->command_type == UTP_CMD_TYPE_UFS_STORAGE) {
 		if (ufs_transmission_status.transmission_status_enable) {
 			ufshcd_lrb_devcmd_time_statistics(hba, lrbp);
 		}
