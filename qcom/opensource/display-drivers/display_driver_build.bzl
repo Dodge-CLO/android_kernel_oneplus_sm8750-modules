@@ -96,7 +96,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
             name = rule_name,
             srcs = module_srcs,
             out = "{}.ko".format(module.name),
-            deps = headers + _get_kernel_build_module_deps(module, options, formatter) + soc_modules(),
+            deps = headers + _get_kernel_build_module_deps(module, options, formatter) + soc_modules(["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo", "//vendor/oplus/kernel/device_info/device_info:device_info", "//vendor/oplus/kernel/device_info/oplus_fpga/fpga_notify:oplus_bsp_fpga_notify", "//vendor/oplus/kernel/touchpanel/touchpanel_notify:oplus_bsp_tp_notify", "//vendor/qcom/opensource/display-drivers:oplus_trackpoint_report", "altmode-glink", "clk-qcom", "crm-v2", "drm_display_helper", "dwc3-msm", "fsa4480_i2c", "gh_irq_lend", "gh_mem_notifier", "gh_msgq", "gh_rm_drv", "llcc-qcom", "mem_buf_dev", "msm_dma_iommu_mapping", "panel_event_notifier", "pinctrl-msm", "qcom-scm", "qcom_iommu_util", "qcom_ipc_logging", "qcom_va_minidump", "spmi-pmic-arb", "wcd_usbss_i2c"]),
             local_defines = options.keys(),
         )
         all_module_rules.append(rule_name)

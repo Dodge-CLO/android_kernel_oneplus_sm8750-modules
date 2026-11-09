@@ -129,3 +129,15 @@ define_niobe()
 
 load(":targets/monaco.bzl", "define_monaco")
 define_monaco()
+
+# oplus_trackpoint_report.ko: built inside the 6.6 kernel (CONFIG_OPLUS_TRACKPOINT_REPORT=m), msm_drm uses it
+load("//build/kernel/oplus:oplus_modules_define.bzl", "define_oplus_ddk_module")
+
+define_oplus_ddk_module(
+    name = "oplus_trackpoint_report",
+    srcs = [
+        "oplus/common/trackpoint/oplus_trackpoint_report.c",
+        "oplus/common/trackpoint/oplus_trackpoint_report.h",
+    ],
+    includes = ["oplus/common/trackpoint"],
+)
