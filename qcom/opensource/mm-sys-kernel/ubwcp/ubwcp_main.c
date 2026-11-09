@@ -3400,9 +3400,14 @@ static const struct of_device_id ubwcp_dt_match[] = {
 	{}
 };
 
+static void ubwcp_remove_void(struct platform_device *pdev)
+{
+	ubwcp_remove(pdev);
+}
+
 struct platform_driver ubwcp_platform_driver = {
 	.probe = ubwcp_probe,
-	.remove = ubwcp_remove,
+	.remove = ubwcp_remove_void,
 	.driver = {
 		.name = "qcom,ubwcp",
 		.of_match_table = ubwcp_dt_match,

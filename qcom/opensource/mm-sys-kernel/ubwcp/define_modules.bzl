@@ -1,4 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 
 
@@ -15,9 +16,10 @@ def define_modules(target, variant):
             "ubwcp_trace.h",
         ],
         hdrs=["include/uapi/ubwcp_ioctl.h", "include/kernel/ubwcp.h"],
-        deps = ["//msm-kernel:all_headers"],
+        deps = ["//msm-kernel:all_headers"] + soc_modules(),
         includes = ["include", "include/kernel"],
         kernel_build = "//msm-kernel:{}".format(tv),
+        config = "//msm-kernel:{}_config".format(tv),
         visibility = ["//visibility:public"]
     )
 
