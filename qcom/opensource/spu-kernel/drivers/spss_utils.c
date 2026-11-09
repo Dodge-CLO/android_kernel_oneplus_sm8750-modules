@@ -1311,9 +1311,14 @@ static const struct of_device_id spss_match_table[] = {
 	{ },
 };
 
+static void spss_remove_void(struct platform_device *pdev)
+{
+	spss_remove(pdev);
+}
+
 static struct platform_driver spss_driver = {
 	.probe = spss_probe,
-	.remove = spss_remove,
+	.remove = spss_remove_void,
 	.driver = {
 		.name = DEVICE_NAME,
 		.of_match_table = of_match_ptr(spss_match_table),

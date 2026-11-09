@@ -4124,9 +4124,14 @@ static const struct of_device_id spcom_match_table[] = {
 };
 MODULE_DEVICE_TABLE(of, spcom_match_table);
 
+static void spcom_remove_void(struct platform_device *pdev)
+{
+	spcom_remove(pdev);
+}
+
 static struct platform_driver spcom_driver = {
 	.probe = spcom_probe,
-	.remove = spcom_remove,
+	.remove = spcom_remove_void,
 	.driver = {
 			.name = DEVICE_NAME,
 			.of_match_table = of_match_ptr(spcom_match_table),
