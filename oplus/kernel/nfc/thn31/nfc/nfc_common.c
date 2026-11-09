@@ -5,7 +5,7 @@
 
 #include "nfc_common.h"
 #include <linux/of.h>
-#include "../../../../include/linux/pinctrl/qcom-pinctrl.h"
+#include <linux/pinctrl/qcom-pinctrl.h>
 
 /*********** PART0: Global Variables Area ***********/
 

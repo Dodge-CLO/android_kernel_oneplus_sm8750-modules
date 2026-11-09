@@ -209,7 +209,7 @@ static void remove_alloc_adjust_ctrl_proc(void)
 #ifdef CONFIG_ALLOC_ORDER_STAT
 DEFINE_STATIC_KEY_FALSE(kswapd_debug);
 static bool g_kswapd_debug = false;
-static atomic64_t alloc_stats[MAX_ORDER + 1];
+static atomic64_t alloc_stats[MAX_PAGE_ORDER + 1];
 
 static struct proc_dir_entry *kswapd_debug_entry;
 
@@ -218,7 +218,7 @@ static int kswapd_debug_show(struct seq_file *m, void *v)
 	int i;
 	if (g_kswapd_debug) {
 		seq_printf(m, "order\t count\n");
-		for (i = 0; i <= MAX_ORDER; i++)
+		for (i = 0; i <= MAX_PAGE_ORDER; i++)
 			seq_printf(m, "%d\t %lld\n", i, atomic64_read(&alloc_stats[i]));
 	} else {
 		seq_printf(m, "0\n");
@@ -289,20 +289,27 @@ static void alloc_order_stat(void *data, gfp_t gfp_mask, unsigned int order, uns
 	if ((gfp_mask & __GFP_KSWAPD_RECLAIM) == 0)
 		return;
 
-	if (order > MAX_ORDER)
+	if (order > MAX_PAGE_ORDER)
 		return;
 
 	atomic64_inc(&alloc_stats[order]);
 }
 
+static void alloc_order_stat_end(void *data, gfp_t *gfp_mask, unsigned int order,
+		unsigned long alloc_start, u64 stime, unsigned long did_some_progress,
+		unsigned long pages_reclaimed, int retry_loop_count)
+{
+	alloc_order_stat(data, *gfp_mask, order, jiffies - alloc_start);
+}
+
 static int register_alloc_pages_slowpath(void)
 {
-	return register_trace_android_vh_alloc_pages_slowpath(alloc_order_stat, NULL);
+	return register_trace_android_vh_alloc_pages_slowpath_end(alloc_order_stat_end, NULL);
 }
 
 static void unregister_alloc_pages_slowpath(void)
 {
-	unregister_trace_android_vh_alloc_pages_slowpath(alloc_order_stat, NULL);
+	unregister_trace_android_vh_alloc_pages_slowpath_end(alloc_order_stat_end, NULL);
 }
 
 static void create_kswapd_debug_proc(void)
@@ -342,8 +349,8 @@ static void remove_kswapd_debug_proc(void)
 
 #ifdef CONFIG_KSWAPS_LOAD_STAT
 #define NS_PER_MS 1000000
-static u64 kswapd_start_time[MAX_ORDER + 1];
-static u64 kswapd_runtime_sum[MAX_ORDER + 1];
+static u64 kswapd_start_time[MAX_PAGE_ORDER + 1];
+static u64 kswapd_runtime_sum[MAX_PAGE_ORDER + 1];
 static bool g_kswapd_load_stat_enabled;
 DEFINE_STATIC_KEY_FALSE(kswapd_load_stat_enable);
 static struct proc_dir_entry *kswapd_load_stat_entry;
@@ -353,7 +360,7 @@ static void kswapd_load_stat_start(void *data, int nid, int zid, int order)
 	if (!static_branch_unlikely(&kswapd_load_stat_enable))
 		return;
 
-	if (order > MAX_ORDER || order < 0)
+	if (order > MAX_PAGE_ORDER || order < 0)
 		return;
 
 	kswapd_start_time[order] = current->stime;
@@ -366,7 +373,7 @@ static void kswapd_load_stat_end(void *data, int nid,
 	if (!static_branch_unlikely(&kswapd_load_stat_enable))
 		return;
 
-	if (alloc_order > MAX_ORDER)
+	if (alloc_order > MAX_PAGE_ORDER)
 		return;
 
 	kswapd_runtime_sum[alloc_order] += current->stime -
@@ -399,7 +406,7 @@ static int kswapd_load_stat_show(struct seq_file *m, void *p)
 	int i;
 	if (g_kswapd_load_stat_enabled) {
 		seq_printf(m, "order\t runtime(ms)\n");
-		for (i = 0; i <= MAX_ORDER; i++)
+		for (i = 0; i <= MAX_PAGE_ORDER; i++)
 			seq_printf(m, "%d\t %llu\n", i, kswapd_runtime_sum[i] / NS_PER_MS);
 	} else {
 		seq_printf(m, "0\n");

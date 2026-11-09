@@ -755,7 +755,6 @@ static int nfc_device_close(struct inode *inode, struct file *file)
 
 static const struct file_operations nfc_fops = {
     .owner          = THIS_MODULE,
-    .llseek         = no_llseek,
     .open           = nfc_device_open,
     .release        = nfc_device_close,
     .read           = nfc_device_read,
