@@ -7,6 +7,7 @@
 #define pr_fmt(fmt)	"[drm:%s:%d] " fmt, __func__, __LINE__
 
 #include <linux/delay.h>
+#include <linux/vmalloc.h>
 #include <linux/spinlock.h>
 #include <linux/ktime.h>
 #include <linux/debugfs.h>

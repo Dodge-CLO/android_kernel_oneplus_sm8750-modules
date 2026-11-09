@@ -1213,9 +1213,14 @@ static const struct of_device_id dt_match[] = {
 	{}
 };
 
+static void msm_lease_remove_void(struct platform_device *pdev)
+{
+	msm_lease_remove(pdev);
+}
+
 static struct platform_driver msm_lease_platform_driver = {
 	.probe      = msm_lease_probe,
-	.remove     = msm_lease_remove,
+	.remove     = msm_lease_remove_void,
 	.driver     = {
 		.name   = "msm_lease_drm",
 		.of_match_table = dt_match,

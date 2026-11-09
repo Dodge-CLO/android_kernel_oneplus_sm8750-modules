@@ -7,6 +7,7 @@
  */
 
 #include "dsi_display.h"
+#include <linux/vmalloc.h>
 #include "dsi_iris_lightup.h"
 #include "pw_iris_log.h"
 

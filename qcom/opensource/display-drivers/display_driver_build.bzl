@@ -1,5 +1,6 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module", "ddk_submodule")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 
 def _register_module_to_map(module_map, name, path, config_option, srcs, config_srcs, deps, config_deps):
     processed_config_srcs = {}
@@ -95,7 +96,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
             name = rule_name,
             srcs = module_srcs,
             out = "{}.ko".format(module.name),
-            deps = headers + _get_kernel_build_module_deps(module, options, formatter),
+            deps = headers + _get_kernel_build_module_deps(module, options, formatter) + soc_modules(),
             local_defines = options.keys(),
         )
         all_module_rules.append(rule_name)
@@ -103,6 +104,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
     ddk_module(
         name = "{}_display_drivers".format(kernel_build),
         kernel_build = kernel_build_label,
+        config = "{}_config".format(kernel_build_label),
         deps = all_module_rules,
     )
     copy_to_dist_dir(

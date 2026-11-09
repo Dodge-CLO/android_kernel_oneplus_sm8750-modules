@@ -327,9 +327,14 @@ static int msm_hdcp_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void msm_hdcp_remove_void(struct platform_device *pdev)
+{
+	msm_hdcp_remove(pdev);
+}
+
 static struct platform_driver msm_hdcp_driver = {
 	.probe = msm_hdcp_probe,
-	.remove = msm_hdcp_remove,
+	.remove = msm_hdcp_remove_void,
 	.driver = {
 		.name = "msm_hdcp",
 		.of_match_table = msm_hdcp_dt_match,

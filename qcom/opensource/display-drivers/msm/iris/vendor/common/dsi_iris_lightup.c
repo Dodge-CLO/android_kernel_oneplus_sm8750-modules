@@ -7,6 +7,7 @@
  */
 //#include <drm/drm_mipi_dsi.h>
 #include <video/mipi_display.h>
+#include <linux/vmalloc.h>
 #include <dsi_drm.h>
 #include <sde_encoder_phys.h>
 #include "oplus_display_ext.h"
@@ -1515,9 +1516,14 @@ static const struct of_device_id iris_dt_match[] = {
 	{}
 };
 
+static void _iris_dev_remove_void(struct platform_device *pdev)
+{
+	_iris_dev_remove(pdev);
+}
+
 static struct platform_driver iris_driver = {
 	.probe = _iris_dev_probe,
-	.remove = _iris_dev_remove,
+	.remove = _iris_dev_remove_void,
 	.driver = {
 		.name = "pxlw-iris",
 		.of_match_table = iris_dt_match,

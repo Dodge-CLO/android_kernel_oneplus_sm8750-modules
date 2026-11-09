@@ -2453,9 +2453,14 @@ static const struct of_device_id dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, dt_match);
 
+static void msm_pdev_remove_void(struct platform_device *pdev)
+{
+	msm_pdev_remove(pdev);
+}
+
 static struct platform_driver msm_platform_driver = {
 	.probe      = msm_pdev_probe,
-	.remove     = msm_pdev_remove,
+	.remove     = msm_pdev_remove_void,
 	.shutdown   = msm_pdev_shutdown,
 	.driver     = {
 		.name   = "msm_drm",

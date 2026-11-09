@@ -269,9 +269,14 @@ static int dp_pll_driver_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void dp_pll_driver_remove_void(struct platform_device *pdev)
+{
+	dp_pll_driver_remove(pdev);
+}
+
 static struct platform_driver dp_pll_platform_driver = {
 	.probe      = dp_pll_driver_probe,
-	.remove     = dp_pll_driver_remove,
+	.remove     = dp_pll_driver_remove_void,
 	.driver     = {
 		.name   = "dp_pll",
 		.of_match_table = dp_pll_of_match,

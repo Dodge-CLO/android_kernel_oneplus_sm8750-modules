@@ -1364,9 +1364,14 @@ static const struct of_device_id dt_match[] = {
 	{},
 };
 
+static void sde_cesta_remove_void(struct platform_device *pdev)
+{
+	sde_cesta_remove(pdev);
+}
+
 static struct platform_driver sde_cesta_platform_driver = {
 	.probe      = sde_cesta_probe,
-	.remove     = sde_cesta_remove,
+	.remove     = sde_cesta_remove_void,
 	.driver     = {
 		.name   = "sde_cesta",
 		.of_match_table = dt_match,

@@ -18,6 +18,7 @@
  */
 
 #include <linux/qcom-dma-mapping.h>
+#include <linux/vmalloc.h>
 #include <linux/spinlock.h>
 #include <linux/shmem_fs.h>
 #include <linux/dma-buf.h>

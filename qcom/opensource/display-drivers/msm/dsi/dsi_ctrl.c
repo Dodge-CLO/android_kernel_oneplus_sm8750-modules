@@ -2444,9 +2444,14 @@ static int dsi_ctrl_dev_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void dsi_ctrl_dev_remove_void(struct platform_device *pdev)
+{
+	dsi_ctrl_dev_remove(pdev);
+}
+
 static struct platform_driver dsi_ctrl_driver = {
 	.probe = dsi_ctrl_dev_probe,
-	.remove = dsi_ctrl_dev_remove,
+	.remove = dsi_ctrl_dev_remove_void,
 	.driver = {
 		.name = "drm_dsi_ctrl",
 		.of_match_table = msm_dsi_of_match,

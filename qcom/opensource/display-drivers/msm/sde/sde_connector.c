@@ -13,6 +13,7 @@
 #include "sde_encoder.h"
 #include "msm_cooling_device.h"
 #include <linux/backlight.h>
+#include <linux/vmalloc.h>
 #include <linux/string.h>
 #include <linux/file.h>
 #include "dsi_drm.h"

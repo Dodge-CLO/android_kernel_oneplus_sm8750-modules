@@ -6444,9 +6444,14 @@ static const struct component_ops dsi_display_comp_ops = {
 	.unbind = dsi_display_unbind,
 };
 
+static void dsi_display_dev_remove_void(struct platform_device *pdev)
+{
+	dsi_display_dev_remove(pdev);
+}
+
 static struct platform_driver dsi_display_driver = {
 	.probe = dsi_display_dev_probe,
-	.remove = dsi_display_dev_remove,
+	.remove = dsi_display_dev_remove_void,
 	.driver = {
 		.name = "msm-dsi-display",
 		.of_match_table = dsi_display_dt_match,

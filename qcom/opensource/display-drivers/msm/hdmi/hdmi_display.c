@@ -1614,9 +1614,14 @@ static const struct dev_pm_ops hdmi_pm_ops = {
 	.complete = hdmi_pm_complete,
 };
 
+static void hdmi_display_remove_void(struct platform_device *pdev)
+{
+	hdmi_display_remove(pdev);
+}
+
 static struct platform_driver hdmi_display_driver = {
 	.probe  = hdmi_display_probe,
-	.remove = hdmi_display_remove,
+	.remove = hdmi_display_remove_void,
 	.driver = {
 		.name = "msm-hdmi-display",
 		.of_match_table = hdmi_dt_match,

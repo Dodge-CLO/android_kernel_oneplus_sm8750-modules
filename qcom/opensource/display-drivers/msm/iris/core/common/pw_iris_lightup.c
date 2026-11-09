@@ -4071,9 +4071,14 @@ static const struct of_device_id iris_dt_match[] = {
 	{}
 };
 
+static void _iris_dev_remove_void(struct platform_device *pdev)
+{
+	_iris_dev_remove(pdev);
+}
+
 static struct platform_driver iris_driver = {
 	.probe = _iris_dev_probe,
-	.remove = _iris_dev_remove,
+	.remove = _iris_dev_remove_void,
 	.driver = {
 		.name = "pxlw-iris",
 		.of_match_table = iris_dt_match,

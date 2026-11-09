@@ -1917,9 +1917,19 @@ static const struct of_device_id dt_match[] = {
 	{},
 };
 
+static void sde_rsc_remove_void(struct platform_device *pdev)
+{
+	sde_rsc_remove(pdev);
+}
+
+static void sde_rsc_rpmh_remove_void(struct platform_device *pdev)
+{
+	sde_rsc_rpmh_remove(pdev);
+}
+
 static struct platform_driver sde_rsc_platform_driver = {
 	.probe      = sde_rsc_probe,
-	.remove     = sde_rsc_remove,
+	.remove     = sde_rsc_remove_void,
 	.driver     = {
 		.name   = "sde_rsc",
 		.of_match_table = dt_match,
@@ -1934,7 +1944,7 @@ static const struct of_device_id sde_rsc_rpmh_match[] = {
 
 static struct platform_driver sde_rsc_rpmh_driver = {
 	.probe = sde_rsc_rpmh_probe,
-	.remove = sde_rsc_rpmh_remove,
+	.remove = sde_rsc_rpmh_remove_void,
 	.driver = {
 		.name = "sde_rsc_rpmh",
 		.of_match_table = sde_rsc_rpmh_match,

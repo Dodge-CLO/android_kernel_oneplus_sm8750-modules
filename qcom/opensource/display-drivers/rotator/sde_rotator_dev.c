@@ -3572,9 +3572,14 @@ static const struct dev_pm_ops sde_rotator_pm_ops = {
 };
 
 /* SDE Rotator platform driver definition */
+static void sde_rotator_remove_void(struct platform_device *pdev)
+{
+	sde_rotator_remove(pdev);
+}
+
 static struct platform_driver rotator_driver = {
 	.probe = sde_rotator_probe,
-	.remove = sde_rotator_remove,
+	.remove = sde_rotator_remove_void,
 	.suspend = sde_rotator_suspend,
 	.resume = sde_rotator_resume,
 	.driver = {
@@ -3606,7 +3611,7 @@ static int sde_rotator_remove(struct platform_device *pdev)
 /* SDE Rotator platform driver definition */
 static struct platform_driver rotator_driver = {
 	.probe = sde_rotator_probe,
-	.remove = sde_rotator_remove,
+	.remove = sde_rotator_remove_void,
 	.driver = {
 		.name = SDE_ROTATOR_DRV_NAME,
 		.of_match_table = sde_rotator_dt_match,

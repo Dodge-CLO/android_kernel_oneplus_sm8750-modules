@@ -230,9 +230,14 @@ end:
 #endif
 }
 
+static void hdmi_pll_driver_remove_void(struct platform_device *pdev)
+{
+	hdmi_pll_driver_remove(pdev);
+}
+
 static struct platform_driver hdmi_pll_platform_driver = {
 	.probe	= hdmi_pll_driver_probe,
-	.remove	= hdmi_pll_driver_remove,
+	.remove	= hdmi_pll_driver_remove_void,
 	.driver	= {
 		.name	= HDMI_PLL_DRIVER,
 		.of_match_table	= hdmi_pll_of_match,

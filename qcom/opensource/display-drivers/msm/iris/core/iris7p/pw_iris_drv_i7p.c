@@ -186,9 +186,14 @@ static int _iris_pdev_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void _iris_pdev_remove_void(struct platform_device *pdev)
+{
+	_iris_pdev_remove(pdev);
+}
+
 static struct platform_driver iris_driver = {
 	.probe = _iris_pdev_probe,
-	.remove = _iris_pdev_remove,
+	.remove = _iris_pdev_remove_void,
 	.driver = {
 		.name = "pxlw-iris-catalog-i7p",
 		.of_match_table = iris_dt_of_match,

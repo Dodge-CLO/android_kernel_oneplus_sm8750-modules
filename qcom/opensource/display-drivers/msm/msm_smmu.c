@@ -626,9 +626,14 @@ static int msm_smmu_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void msm_smmu_remove_void(struct platform_device *pdev)
+{
+	msm_smmu_remove(pdev);
+}
+
 static struct platform_driver msm_smmu_driver = {
 	.probe = msm_smmu_probe,
-	.remove = msm_smmu_remove,
+	.remove = msm_smmu_remove_void,
 	.driver = {
 		.name = "msmdrm_smmu",
 		.of_match_table = msm_smmu_dt_match,

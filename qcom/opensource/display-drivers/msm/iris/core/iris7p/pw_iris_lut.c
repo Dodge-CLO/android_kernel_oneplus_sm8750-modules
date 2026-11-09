@@ -63,7 +63,7 @@ int iris_parse_lut_cmds_i7p(uint32_t flag)
 
 load_calibrated:
 	// Load "iris7p_ccf1.fw".
-	strlcpy(ccf1_name, IRIS_CCF1_CALIBRATED_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
+	strscpy(ccf1_name, IRIS_CCF1_CALIBRATED_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
 	ret = iris_request_firmware(&ccf1_fw, ccf1_name);
 	if (!ret) {
 		firmware_state |= (1<<1);
@@ -82,7 +82,7 @@ load_calibrated:
 	}
 
 	// Load "iris7p_ccf2.fw".
-	strlcpy(ccf2_name, IRIS_CCF2_CALIBRATED_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
+	strscpy(ccf2_name, IRIS_CCF2_CALIBRATED_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
 	ret = iris_request_firmware(&ccf2_fw, ccf2_name);
 	if (!ret) {
 		firmware_state |= (1<<2);
@@ -101,7 +101,7 @@ load_calibrated:
 	}
 
 	// Load "iris7p_ccf3.fw".
-	strlcpy(ccf3_name, IRIS_CCF3_CALIBRATED_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
+	strscpy(ccf3_name, IRIS_CCF3_CALIBRATED_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
 	ret = iris_request_firmware(&ccf3_fw, ccf3_name);
 	if (!ret) {
 		//Temporary modify for lut load, will replace a determined value after usecase fixed
@@ -142,9 +142,9 @@ load_golden:
 
 	// Load golden ccf1.fw firmware.
 	if (pcfg->ccf1_name)
-		strlcpy(ccf1_name, pcfg->ccf1_name, MAX_FW_NAME_LEN);
+		strscpy(ccf1_name, pcfg->ccf1_name, MAX_FW_NAME_LEN);
 	else
-		strlcpy(ccf1_name, IRIS_CCF1_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
+		strscpy(ccf1_name, IRIS_CCF1_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
 	iris_release_firmware(&ccf1_fw);
 	ret = iris_request_firmware(&ccf1_fw, ccf1_name);
 	if (!ret) {
@@ -159,9 +159,9 @@ load_golden:
 
 	// Load golden ccf2.fw firmware.
 	if (pcfg->ccf2_name)
-		strlcpy(ccf2_name, pcfg->ccf2_name, MAX_FW_NAME_LEN);
+		strscpy(ccf2_name, pcfg->ccf2_name, MAX_FW_NAME_LEN);
 	else
-		strlcpy(ccf2_name, IRIS_CCF2_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
+		strscpy(ccf2_name, IRIS_CCF2_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
 	iris_release_firmware(&ccf2_fw);
 	ret = iris_request_firmware(&ccf2_fw, ccf2_name);
 	if (!ret) {
@@ -176,9 +176,9 @@ load_golden:
 
 	// Load golden ccf3.fw firmware.
 	if (pcfg->ccf3_name)
-		strlcpy(ccf3_name, pcfg->ccf3_name, MAX_FW_NAME_LEN);
+		strscpy(ccf3_name, pcfg->ccf3_name, MAX_FW_NAME_LEN);
 	else
-		strlcpy(ccf3_name, IRIS_CCF3_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
+		strscpy(ccf3_name, IRIS_CCF3_FIRMWARE_NAME_I7P, MAX_FW_NAME_LEN);
 	iris_release_firmware(&ccf3_fw);
 	ret = iris_request_firmware(&ccf3_fw, ccf3_name);
 	if (!ret) {

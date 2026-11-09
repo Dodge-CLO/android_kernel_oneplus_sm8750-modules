@@ -1655,9 +1655,14 @@ static const struct of_device_id dt_match[] = {
 	{},
 };
 
+static void sde_shd_remove_void(struct platform_device *pdev)
+{
+	sde_shd_remove(pdev);
+}
+
 static struct platform_driver sde_shd_driver = {
 	.probe = sde_shd_probe,
-	.remove = sde_shd_remove,
+	.remove = sde_shd_remove_void,
 	.driver = {
 		.name = "sde_shd",
 		.of_match_table = dt_match,

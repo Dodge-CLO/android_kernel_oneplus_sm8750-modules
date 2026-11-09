@@ -662,9 +662,14 @@ int sde_smmu_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void sde_smmu_remove_void(struct platform_device *pdev)
+{
+	sde_smmu_remove(pdev);
+}
+
 static struct platform_driver sde_smmu_driver = {
 	.probe = sde_smmu_probe,
-	.remove = sde_smmu_remove,
+	.remove = sde_smmu_remove_void,
 	.shutdown = NULL,
 	.driver = {
 		.name = "sde_smmu",
