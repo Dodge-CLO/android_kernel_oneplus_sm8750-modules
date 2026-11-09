@@ -2666,6 +2666,11 @@ static const struct platform_device_id ts_core_ids[] = {
 };
 MODULE_DEVICE_TABLE(platform, ts_core_ids);
 
+static void goodix_ts_remove_void(struct platform_device *pdev)
+{
+	goodix_ts_remove(pdev);
+}
+
 static struct platform_driver goodix_ts_driver = {
 	.driver = {
 		.name = GOODIX_CORE_DRIVER_NAME,
@@ -2675,7 +2680,7 @@ static struct platform_driver goodix_ts_driver = {
 #endif
 	},
 	.probe = goodix_ts_probe,
-	.remove = goodix_ts_remove,
+	.remove = goodix_ts_remove_void,
 	.id_table = ts_core_ids,
 };
 

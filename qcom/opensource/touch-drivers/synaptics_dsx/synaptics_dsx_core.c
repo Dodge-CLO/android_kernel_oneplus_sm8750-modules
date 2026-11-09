@@ -5041,6 +5041,11 @@ static const struct dev_pm_ops synaptics_rmi4_dev_pm_ops = {
 };
 #endif
 
+static void synaptics_rmi4_remove_void(struct platform_device *pdev)
+{
+	synaptics_rmi4_remove(pdev);
+}
+
 static struct platform_driver synaptics_rmi4_driver = {
 	.driver = {
 		.name = PLATFORM_DRIVER_NAME,
@@ -5050,7 +5055,7 @@ static struct platform_driver synaptics_rmi4_driver = {
 #endif
 	},
 	.probe = synaptics_rmi4_probe,
-	.remove = synaptics_rmi4_remove,
+	.remove = synaptics_rmi4_remove_void,
 };
 
 static int __init synaptics_rmi4_init(void)

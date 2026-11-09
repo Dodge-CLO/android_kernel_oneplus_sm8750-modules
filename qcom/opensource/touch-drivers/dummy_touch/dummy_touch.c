@@ -68,6 +68,11 @@ static const struct of_device_id  dummy_touch_id[] = {
 	{}
 };
 
+static void dummy_touch_remove_void(struct platform_device *pdev)
+{
+	dummy_touch_remove(pdev);
+}
+
 static struct platform_driver dummy_touch_driver = {
 
 	.driver = {
@@ -75,7 +80,7 @@ static struct platform_driver dummy_touch_driver = {
 		.of_match_table = dummy_touch_id,
 	},
 	.probe = dummy_touch_probe,
-	.remove = dummy_touch_remove,
+	.remove = dummy_touch_remove_void,
 };
 
 static int __init dummy_touch_init(void)

@@ -3791,6 +3791,11 @@ static const struct dev_pm_ops syna_tcm_dev_pm_ops = {
 };
 #endif
 
+static void syna_tcm_remove_void(struct platform_device *pdev)
+{
+	syna_tcm_remove(pdev);
+}
+
 static struct platform_driver syna_tcm_driver = {
 	.driver = {
 		.name = PLATFORM_DRIVER_NAME,
@@ -3800,7 +3805,7 @@ static struct platform_driver syna_tcm_driver = {
 #endif
 	},
 	.probe = syna_tcm_probe,
-	.remove = syna_tcm_remove,
+	.remove = syna_tcm_remove_void,
 };
 
 static int __init syna_tcm_module_init(void)
