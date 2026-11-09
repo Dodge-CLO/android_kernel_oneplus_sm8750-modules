@@ -32,6 +32,7 @@
 #include "qdf_str.h"
 #include "qdf_talloc.h"
 #include <linux/debugfs.h>
+#include <linux/vmalloc.h>
 #include <linux/seq_file.h>
 #include <linux/string.h>
 #include <qdf_list.h>

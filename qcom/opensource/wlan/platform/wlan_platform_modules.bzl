@@ -1,4 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("@rules_pkg//pkg:mappings.bzl", "pkg_files", "strip_prefix")
 load(":target_variants.bzl", "get_all_variants", "targets", "get_16k_mtv")
@@ -176,7 +177,7 @@ def _define_modules_for_target_variant(target, variant):
             },
             out = "cnss2.ko",
             kernel_build = kernel_build,
-            deps = deps,
+            deps = deps + soc_modules(["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo", "cmd-db", "memory_dump_v2", "mhi", "minidump", "pci-msm-drv", "pdr_interface", "pinctrl-msm", "qcom_aoss", "qcom_ipc_logging", "qcom_ramdump", "qmi_helpers", "rproc_qcom_common", "smem", "socinfo"]),
         )
 
     if icnss2_enabled:
@@ -212,7 +213,7 @@ def _define_modules_for_target_variant(target, variant):
                 ":{}_cnss_prealloc".format(tv),
                 ":{}_wlan_firmware_service".format(tv),
                 ":wlan-platform-headers",
-            ],
+            ] + soc_modules(["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo", "cmd-db", "memory_dump_v2", "mhi", "minidump", "pci-msm-drv", "pdr_interface", "pinctrl-msm", "qcom_aoss", "qcom_ipc_logging", "qcom_ramdump", "qmi_helpers", "rproc_qcom_common", "smem", "socinfo"]),
         )
     module = "cnss_genl"
     _define_platform_config_rule(module, target, variant)
@@ -232,7 +233,7 @@ def _define_modules_for_target_variant(target, variant):
         kernel_build = kernel_build,
         deps = deps + [
             ":wlan-platform-headers",
-        ],
+        ] + soc_modules(["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo", "cmd-db", "memory_dump_v2", "mhi", "minidump", "pci-msm-drv", "pdr_interface", "pinctrl-msm", "qcom_aoss", "qcom_ipc_logging", "qcom_ramdump", "qmi_helpers", "rproc_qcom_common", "smem", "socinfo"]),
     )
 
     module = "cnss_prealloc"
@@ -251,7 +252,7 @@ def _define_modules_for_target_variant(target, variant):
         kernel_build = kernel_build,
         deps = deps + [
             ":wlan-platform-headers",
-        ],
+        ] + soc_modules(["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo", "cmd-db", "memory_dump_v2", "mhi", "minidump", "pci-msm-drv", "pdr_interface", "pinctrl-msm", "qcom_aoss", "qcom_ipc_logging", "qcom_ramdump", "qmi_helpers", "rproc_qcom_common", "smem", "socinfo"]),
     )
 
     module = "cnss_utils"
@@ -283,7 +284,7 @@ def _define_modules_for_target_variant(target, variant):
         defconfig = defconfig,
         out = "cnss_utils.ko",
         kernel_build = kernel_build,
-        deps = cnss_utils_dep_list,
+        deps = cnss_utils_dep_list + soc_modules(["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo", "cmd-db", "memory_dump_v2", "mhi", "minidump", "pci-msm-drv", "pdr_interface", "pinctrl-msm", "qcom_aoss", "qcom_ipc_logging", "qcom_ramdump", "qmi_helpers", "rproc_qcom_common", "smem", "socinfo"]),
     )
 
     module = "cnss_utils"
@@ -304,7 +305,7 @@ def _define_modules_for_target_variant(target, variant):
         defconfig = defconfig,
         out = "wlan_firmware_service.ko",
         kernel_build = kernel_build,
-        deps = deps,
+        deps = deps + soc_modules(["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo", "cmd-db", "memory_dump_v2", "mhi", "minidump", "pci-msm-drv", "pdr_interface", "pinctrl-msm", "qcom_aoss", "qcom_ipc_logging", "qcom_ramdump", "qmi_helpers", "rproc_qcom_common", "smem", "socinfo"]),
     )
 
     module = "cnss_utils"
@@ -326,7 +327,7 @@ def _define_modules_for_target_variant(target, variant):
         defconfig = defconfig,
         out = "cnss_plat_ipc_qmi_svc.ko",
         kernel_build = kernel_build,
-        deps = deps,
+        deps = deps + soc_modules(["//vendor/oplus/kernel/boot:boot_mode", "//vendor/oplus/kernel/boot:oplus_bsp_boot_projectinfo", "cmd-db", "memory_dump_v2", "mhi", "minidump", "pci-msm-drv", "pdr_interface", "pinctrl-msm", "qcom_aoss", "qcom_ipc_logging", "qcom_ramdump", "qmi_helpers", "rproc_qcom_common", "smem", "socinfo"]),
     )
     tv = "{}_{}".format(target, variant)
 

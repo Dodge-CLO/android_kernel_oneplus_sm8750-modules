@@ -5,6 +5,7 @@
  */
 
 #include <linux/delay.h>
+#include <linux/vmalloc.h>
 #include <linux/devcoredump.h>
 #include <linux/elf.h>
 #include <linux/jiffies.h>
@@ -8292,9 +8293,14 @@ static void cnss_shutdown(struct platform_device *plat_dev)
 }
 #endif
 
+static void cnss_remove_void(struct platform_device *pdev)
+{
+	cnss_remove(pdev);
+}
+
 static struct platform_driver cnss_platform_driver = {
 	.probe  = cnss_probe,
-	.remove = cnss_remove,
+	.remove = cnss_remove_void,
 	.shutdown = cnss_shutdown,
 	.driver = {
 		.name = "cnss2",

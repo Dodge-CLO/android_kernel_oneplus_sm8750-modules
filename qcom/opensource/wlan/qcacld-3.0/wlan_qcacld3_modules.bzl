@@ -1,4 +1,5 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load(":target_variants.bzl", "get_all_variants")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("@rules_pkg//pkg:mappings.bzl", "pkg_files", "strip_prefix")
@@ -2469,7 +2470,7 @@ def _define_module_for_target_variant_chipset(target, variant, chipset):
         copts = copts,
         out = out,
         kernel_build = kernel_build,
-        deps = deps,
+        deps = deps + soc_modules(["qcom_ipc_logging", "qmi_helpers", "smem"]),
     )
 
 def define_dist(target, variant, chipsets):

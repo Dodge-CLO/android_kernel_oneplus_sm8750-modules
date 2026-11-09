@@ -1871,7 +1871,7 @@ int dp_ppeds_register_integrated_interrupts(struct dp_soc *soc,
 
 		qdf_dev_set_irq_status_flags(irq, IRQ_DISABLE_UNLAZY);
 
-		strlcpy(be_soc->irq_name[2], "pfrm_ppe_wbm_rel",
+		strscpy(be_soc->irq_name[2], "pfrm_ppe_wbm_rel",
 			DP_PPE_INTR_STRNG_LEN);
 
 		ret = pld_pfrm_request_irq(soc->osdev->dev, irq,
@@ -1891,7 +1891,7 @@ int dp_ppeds_register_integrated_interrupts(struct dp_soc *soc,
 
 		qdf_dev_set_irq_status_flags(irq, IRQ_DISABLE_UNLAZY);
 
-		strlcpy(be_soc->irq_name[0], "pfrm_reo2ppe",
+		strscpy(be_soc->irq_name[0], "pfrm_reo2ppe",
 			DP_PPE_INTR_STRNG_LEN);
 
 		ret = pld_pfrm_request_irq(soc->osdev->dev, irq,
@@ -1912,7 +1912,7 @@ int dp_ppeds_register_integrated_interrupts(struct dp_soc *soc,
 
 		qdf_dev_set_irq_status_flags(irq, IRQ_DISABLE_UNLAZY);
 
-		strlcpy(be_soc->irq_name[1], "pfrm_ppe2tcl",
+		strscpy(be_soc->irq_name[1], "pfrm_ppe2tcl",
 			DP_PPE_INTR_STRNG_LEN);
 
 		ret = pld_pfrm_request_irq(soc->osdev->dev, irq,

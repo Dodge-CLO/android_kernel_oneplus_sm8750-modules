@@ -7156,9 +7156,19 @@ static const struct dev_pm_ops icnss_pm_ops = {
 			   icnss_pm_runtime_idle)
 };
 
+static void icnss_remove_void(struct platform_device *pdev)
+{
+	icnss_remove(pdev);
+}
+
+static void icnss_direct_link_remove_void(struct platform_device *pdev)
+{
+	icnss_direct_link_remove(pdev);
+}
+
 static struct platform_driver icnss_driver = {
 	.probe  = icnss_probe,
-	.remove = icnss_remove,
+	.remove = icnss_remove_void,
 	.driver = {
 		.name = "icnss2",
 		.pm = &icnss_pm_ops,
@@ -7168,7 +7178,7 @@ static struct platform_driver icnss_driver = {
 
 static struct platform_driver icnss_direct_link_driver = {
 	.probe  = icnss_direct_link_probe,
-	.remove = icnss_direct_link_remove,
+	.remove = icnss_direct_link_remove_void,
 	.driver = {
 		.name = "icnss2_direct_link",
 		.of_match_table = icnss_direct_link_dt_match,
