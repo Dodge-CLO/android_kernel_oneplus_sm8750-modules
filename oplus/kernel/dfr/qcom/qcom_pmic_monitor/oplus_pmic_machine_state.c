@@ -379,13 +379,18 @@ static const struct of_device_id pmic_pon_log_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, pmic_pon_log_of_match);
 
+static void pmic_pon_log_remove_void(struct platform_device *pdev)
+{
+	pmic_pon_log_remove(pdev);
+}
+
 static struct platform_driver pmic_pon_log_driver = {
 	.driver = {
 		.name = "oplusi-pmic-monitor",
 		.of_match_table	= of_match_ptr(pmic_pon_log_of_match),
 	},
 	.probe = pmic_pon_log_probe,
-	.remove = pmic_pon_log_remove,
+	.remove = pmic_pon_log_remove_void,
 };
 
 int __init pmic_pon_log_driver_init(void)

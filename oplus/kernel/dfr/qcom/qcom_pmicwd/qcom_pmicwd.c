@@ -890,6 +890,11 @@ static const struct of_device_id pmicwd_match_table[] = {
 	{}
 };
 
+static void pmicwd_remove_void(struct platform_device *pdev)
+{
+	pmicwd_remove(pdev);
+}
+
 static struct platform_driver pmicwd_driver = {
 	.driver = {
 		.pm = &pmicwd_pm_ops,
@@ -897,7 +902,7 @@ static struct platform_driver pmicwd_driver = {
 		.of_match_table = pmicwd_match_table,
 	},
 	.probe = pmicwd_probe,
-	.remove = pmicwd_remove,
+	.remove = pmicwd_remove_void,
 };
 module_platform_driver(pmicwd_driver);
 

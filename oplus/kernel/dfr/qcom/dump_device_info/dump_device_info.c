@@ -293,7 +293,7 @@ fail_out:
 }
 
 
-static int __exit dump_device_info_remove(struct platform_device *pdev)
+static int dump_device_info_remove(struct platform_device *pdev)
 {
 	return -EBUSY;
 }
@@ -304,9 +304,14 @@ static const struct of_device_id dump_device_info_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, dump_device_info_of_match);
 
+static void dump_device_info_remove_void(struct platform_device *pdev)
+{
+	dump_device_info_remove(pdev);
+}
+
 static struct platform_driver dump_device_info_driver = {
 	.probe = dump_device_info_probe,
-	.remove = __exit_p(dump_device_info_remove),
+	.remove = dump_device_info_remove_void,
 	.driver = {
 		.name = "dump_device_info",
 		.owner = THIS_MODULE,

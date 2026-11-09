@@ -215,13 +215,18 @@ static const struct of_device_id pmic_ocp_state_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, pmic_ocp_state_of_match);
 
+static void pmic_ocp_state_remove_void(struct platform_device *pdev)
+{
+	pmic_ocp_state_remove(pdev);
+}
+
 static struct platform_driver pmic_ocp_state_driver = {
 	.driver = {
 		.name = "oplusi-ocp-state",
 		.of_match_table = of_match_ptr(pmic_ocp_state_of_match),
 	},
 	.probe = pmic_ocp_state_probe,
-	.remove = pmic_ocp_state_remove,
+	.remove = pmic_ocp_state_remove_void,
 };
 
 int __init pmic_ocp_state_driver_init(void)
