@@ -102,7 +102,7 @@ def define_target_variant_modules(target, variant, registry, modules, config_opt
             name = rule_name,
             srcs = module_srcs,
             out = "{}.ko".format(module.name),
-            deps = headers + _get_kernel_build_module_deps(module, options, formatter) + soc_modules(),
+            deps = headers + _get_kernel_build_module_deps(module, options, formatter) + soc_modules(["gh_dbl", "gh_rm_drv", "qcom-scm", "qcom_q6v5_pas", "rproc_qcom_common"]),
             local_defines = options.keys(),
         )
 
