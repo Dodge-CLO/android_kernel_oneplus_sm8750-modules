@@ -105,7 +105,7 @@ define_oplus_ddk_module(
         "v2/wireless_ic/oplus_hal_nu1669.c",
         "v2/wireless_ic/oplus_hal_sc96257.c",
     ],
-    includes = ['debug-kit', 'gauge_i2c_rst', 'test-kit', 'v2', 'v2/include', 'v2/ufcs/include'],
+    includes = ["test-kit", 'debug-kit', 'gauge_i2c_rst', 'test-kit', 'v2', 'v2/include', 'v2/ufcs/include'],
     local_defines = ["OPLUS_CHG_KO_BUILD", "CONFIG_OPLUS_ADSP_CHARGER=1", "CONFIG_OPLUS_AUDIO_SWITCH_GLINK=1", "CONFIG_OPLUS_CALL_MODE_SUPPORT=1", "CONFIG_OPLUS_CHG_ADSP_VOOCPHY=1", "CONFIG_OPLUS_CHG_AP_VOOCPHY=1", "CONFIG_OPLUS_CHG_DRM_PANEL_NOTIFY=1", "CONFIG_OPLUS_CHG_IC_DEBUG=1", "CONFIG_OPLUS_CHG_MMS_DEBUG=1", "CONFIG_OPLUS_CHG_TEST_KIT_MODULE=1", "CONFIG_OPLUS_CHG_V2_MODULE=1", "CONFIG_OPLUS_CHIP_SOC_NODE=1", "CONFIG_OPLUS_FEATURE_FEEDBACK_MODULE=1", "CONFIG_OPLUS_FEATURE_OLC_MODULE=1", "CONFIG_OPLUS_FPGA_NOTIFY_MODULE=1", "CONFIG_OPLUS_GAUGE_NFG8011B=1", "CONFIG_OPLUS_MAGCVR_NOTIFY_MODULE=1", "CONFIG_OPLUS_SHIP_MODE_SUPPORT=1", "CONFIG_OPLUS_SMART_CHARGER_SUPPORT=1", "CONFIG_OPLUS_UFCS_CLASS_MODULE=1"],
 )
 
@@ -125,15 +125,6 @@ define_oplus_ddk_module(
     ],
     includes = ['wireless_pen'],
     local_defines = ["CONFIG_OPLUS_CHG_DRM_PANEL_NOTIFY=1"],
-)
-
-define_oplus_ddk_module(
-    name = "test-kit",
-    srcs = glob(["test-kit/**/*.h"], allow_empty = True) + [
-        "test-kit/test-kit.c",
-    ],
-    includes = ['test-kit'],
-    local_defines = ["CONFIG_OPLUS_CHG_ADSP_VOOCPHY=1", "CONFIG_OPLUS_CHG_TEST_KIT_MODULE=1", "CONFIG_OPLUS_CHG_V2_MODULE=1"],
 )
 
 define_oplus_ddk_module(
@@ -159,5 +150,5 @@ define_oplus_ddk_module(
 
 ddk_copy_to_dist_dir(
     name = "oplus_charger",
-    module_list = ["oplus_chg_v2", "oplus_gauge_i2c_rst", "oplus_wireless_pen", "test-kit", "ufcs_class"],
+    module_list = ["oplus_chg_v2", "oplus_gauge_i2c_rst", "oplus_wireless_pen", "ufcs_class"],
 )

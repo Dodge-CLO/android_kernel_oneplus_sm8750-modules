@@ -16,12 +16,7 @@ def define_oplus_local_modules():
 
 
     if bazel_support_platform == "qcom" :
-        panel_event_notifier_ko_deps = select({
-            "//build/kernel/kleaf:socrepo_true": [
-                "//soc-repo:{}/drivers/soc/qcom/panel_event_notifier".format(kernel_build_variant),
-            ],
-            "//build/kernel/kleaf:socrepo_false": [],
-        })
+        panel_event_notifier_ko_deps = []  # comes from soc_modules() in define_oplus_ddk_module
         tp_others_ko_deps = select({
             "//build/kernel/kleaf:socrepo_true": [
                 "//vendor/oplus/kernel/touchpanel/touchpanel_notify:oplus_bsp_tp_notify",
