@@ -6,6 +6,7 @@
 #define pr_fmt(fmt) "[MPC7022]([%s][%d]): " fmt, __func__, __LINE__
 
 #ifdef CONFIG_OPLUS_CHARGER_MTK
+#include <linux/string.h>
 #include <linux/irq.h>
 #include <linux/miscdevice.h>
 #include <linux/uaccess.h>

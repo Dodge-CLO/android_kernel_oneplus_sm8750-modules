@@ -2,6 +2,7 @@
 /*
  * Copyright (C) 2020-2022 Oplus. All rights reserved.
  */
+#include <linux/platform_device.h>
 #include <linux/proc_fs.h>
 #include <linux/version.h>
 #include <linux/time.h>
