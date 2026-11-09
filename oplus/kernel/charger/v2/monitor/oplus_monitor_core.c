@@ -2319,6 +2319,11 @@ static const struct of_device_id oplus_monitor_match[] = {
 	{},
 };
 
+static void oplus_monitor_remove_void(struct platform_device *pdev)
+{
+	oplus_monitor_remove(pdev);
+}
+
 static struct platform_driver oplus_monitor_driver = {
 	.driver		= {
 		.name = "oplus-monitor",
@@ -2326,7 +2331,7 @@ static struct platform_driver oplus_monitor_driver = {
 		.of_match_table = of_match_ptr(oplus_monitor_match),
 	},
 	.probe		= oplus_monitor_probe,
-	.remove		= oplus_monitor_remove,
+	.remove		= oplus_monitor_remove_void,
 	.shutdown	= oplus_monitor_shutdown,
 };
 

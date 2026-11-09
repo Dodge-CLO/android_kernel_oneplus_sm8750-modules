@@ -6633,9 +6633,14 @@ static int battery_resume(struct platform_device *dev)
 	return 0;
 }
 
+static void NULL_void(struct platform_device *pdev)
+{
+	NULL(pdev);
+}
+
 static struct platform_driver battery_dts_driver_probe = {
 	.probe = battery_dts_probe,
-	.remove = NULL,
+	.remove = NULL_void,
 	.shutdown = NULL,
 	.suspend = NULL,
 	.resume = NULL,
@@ -6649,7 +6654,7 @@ static struct platform_driver battery_dts_driver_probe = {
 
 static struct platform_driver battery_driver_probe = {
 	.probe = battery_probe,
-	.remove = NULL,
+	.remove = NULL_void,
 	.shutdown = NULL,
 	.suspend = battery_suspend,
 	.resume = battery_resume,

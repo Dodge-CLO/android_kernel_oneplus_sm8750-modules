@@ -8879,9 +8879,14 @@ struct platform_device mtk_charger_device = {
 	.id = -1,
 };
 
+static void mtk_charger_remove_void(struct platform_device *pdev)
+{
+	mtk_charger_remove(pdev);
+}
+
 static struct platform_driver mtk_charger_driver = {
 	.probe = mtk_charger_probe,
-	.remove = mtk_charger_remove,
+	.remove = mtk_charger_remove_void,
 	.shutdown = mtk_charger_shutdown,
 	.driver = {
 		   .name = "charger",

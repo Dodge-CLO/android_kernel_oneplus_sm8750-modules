@@ -33,7 +33,8 @@ struct audio_switch {
 static struct audio_switch g_audio_switch;
 
 #if IS_ENABLED(CONFIG_OPLUS_AUDIO_SWITCH_GLINK)
-static RAW_NOTIFIER_HEAD(chg_glink_notifier);
+/* The notifier head lives in wcd_usbss_i2c on 6.12 */
+int chg_glink_notifier_call_chain(unsigned long val, void *v);
 #endif
 
 #if IS_ENABLED(CONFIG_SND_SOC_OPLUS_TYPEC_SWITCH)
@@ -98,7 +99,7 @@ static int oplus_set_audio_switch_status(int state)
 
 #if IS_ENABLED(CONFIG_OPLUS_AUDIO_SWITCH_GLINK)
 	switch_cnt = g_audio_switch.audio_switch_cnt;
-	ret = raw_notifier_call_chain(&chg_glink_notifier, state, NULL);
+	ret = chg_glink_notifier_call_chain(state, NULL);
 	if (ret)
 		oplus_set_audio_switch_callback(state);
 #else
@@ -143,7 +144,7 @@ static int oplus_get_audio_switch_status(void)
 
 #if IS_ENABLED(CONFIG_OPLUS_AUDIO_SWITCH_GLINK)
 	switch_cnt = g_audio_switch.audio_switch_ack_cnt;
-	ret = raw_notifier_call_chain(&chg_glink_notifier, TYPEC_AUDIO_SWITCH_STATE_AUDIO, NULL);
+	ret = chg_glink_notifier_call_chain(TYPEC_AUDIO_SWITCH_STATE_AUDIO, NULL);
 	if (ret != TYPEC_AUDIO_SWITCH_STATE_INVALID_PARAM)
 		oplus_get_audio_switch_callback(ret);
 #else
@@ -189,7 +190,7 @@ __maybe_unused static int oplus_check_audio_switch_ready(void)
 
 #if IS_ENABLED(CONFIG_OPLUS_AUDIO_SWITCH_GLINK)
 	switch_cnt = g_audio_switch.audio_switch_ack_cnt;
-	ret = raw_notifier_call_chain(&chg_glink_notifier, TYPEC_AUDIO_SWITCH_STATE_AUDIO, NULL);
+	ret = chg_glink_notifier_call_chain(TYPEC_AUDIO_SWITCH_STATE_AUDIO, NULL);
 	if (ret != TYPEC_AUDIO_SWITCH_STATE_INVALID_PARAM)
 		oplus_get_audio_switch_callback(ret);
 #else

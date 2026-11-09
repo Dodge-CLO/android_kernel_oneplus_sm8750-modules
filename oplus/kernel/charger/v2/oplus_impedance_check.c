@@ -446,6 +446,11 @@ static const struct of_device_id oplus_imp_check_match[] = {
 	{},
 };
 
+static void oplus_imp_check_remove_void(struct platform_device *pdev)
+{
+	oplus_imp_check_remove(pdev);
+}
+
 static struct platform_driver oplus_imp_check_driver = {
 	.driver		= {
 		.name = "oplus-impedance_check",
@@ -453,7 +458,7 @@ static struct platform_driver oplus_imp_check_driver = {
 		.of_match_table = of_match_ptr(oplus_imp_check_match),
 	},
 	.probe		= oplus_imp_check_probe,
-	.remove		= oplus_imp_check_remove,
+	.remove		= oplus_imp_check_remove_void,
 };
 
 static __init int oplus_imp_check_init(void)

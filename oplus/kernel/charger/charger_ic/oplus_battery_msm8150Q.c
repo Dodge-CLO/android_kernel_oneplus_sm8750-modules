@@ -15178,6 +15178,11 @@ static const struct of_device_id match_table[] = {
 	{ },
 };
 
+static void smb5_remove_void(struct platform_device *pdev)
+{
+	smb5_remove(pdev);
+}
+
 static struct platform_driver smb5_driver = {
 	.driver		= {
 		.name		= "qcom,qpnp-smb5",
@@ -15188,7 +15193,7 @@ static struct platform_driver smb5_driver = {
 #endif
 	},
 	.probe		= smb5_probe,
-	.remove		= smb5_remove,
+	.remove		= smb5_remove_void,
 	.shutdown	= smb5_shutdown,
 };
 module_platform_driver(smb5_driver);

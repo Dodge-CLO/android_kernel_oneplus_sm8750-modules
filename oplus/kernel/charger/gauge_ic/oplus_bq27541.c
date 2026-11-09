@@ -20,7 +20,7 @@
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 #include <linux/unaligned.h>
 #else
-#include <asm/unaligned.h>
+#include <linux/unaligned.h>
 #endif
 #include <linux/module.h>
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 10, 0))
@@ -4733,7 +4733,7 @@ retry:
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 		strscpy(chip->battinfo.bat_serial_num, (char*)batt_sn, OPLUS_BATT_SERIAL_NUM_SIZE);
 #else
-		strlcpy(chip->battinfo.bat_serial_num, (char*)batt_sn, OPLUS_BATT_SERIAL_NUM_SIZE);
+		strscpy(chip->battinfo.bat_serial_num, (char*)batt_sn, OPLUS_BATT_SERIAL_NUM_SIZE);
 #endif
 	} else {
 		chg_err("get sn failed\n");
@@ -4750,7 +4750,8 @@ int oplus_bq27541_get_battinfo_sn(char buf[], int len)
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 	bsnlen = strscpy(buf, chip->battinfo.bat_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #else
-	bsnlen = strlcpy(buf, chip->battinfo.bat_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
+	bsnlen = strlen(chip->battinfo.bat_serial_num);
+	strscpy(buf, chip->battinfo.bat_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #endif
 
 	return bsnlen;

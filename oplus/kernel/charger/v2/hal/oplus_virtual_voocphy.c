@@ -1231,6 +1231,11 @@ static const struct of_device_id oplus_virtual_vphy_match[] = {
 	{},
 };
 
+static void oplus_virtual_vphy_remove_void(struct platform_device *pdev)
+{
+	oplus_virtual_vphy_remove(pdev);
+}
+
 static struct platform_driver oplus_virtual_vphy_driver = {
 	.driver		= {
 		.name = "oplus-virtual_vphy",
@@ -1238,7 +1243,7 @@ static struct platform_driver oplus_virtual_vphy_driver = {
 		.of_match_table = of_match_ptr(oplus_virtual_vphy_match),
 	},
 	.probe		= oplus_virtual_vphy_probe,
-	.remove		= oplus_virtual_vphy_remove,
+	.remove		= oplus_virtual_vphy_remove_void,
 };
 
 static __init int oplus_virtual_vphy_init(void)

@@ -3157,13 +3157,18 @@ static void discrete_charger_shutdown(struct platform_device *pdev)
 	}
 }
 
+static void discrete_charger_remove_void(struct platform_device *pdev)
+{
+	discrete_charger_remove(pdev);
+}
+
 static struct platform_driver discrete_charger_driver = {
 	.driver		= {
 		.name		= "qcom,discrete-charger",
 		.of_match_table	= match_table,
 	},
 	.probe		= discrete_charger_probe,
-	.remove		= discrete_charger_remove,
+	.remove		= discrete_charger_remove_void,
 	.shutdown	= discrete_charger_shutdown,
 };
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0))

@@ -1323,13 +1323,18 @@ static const struct of_device_id rt_pd_manager_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, rt_pd_manager_of_match);
 
+static void rt_pd_manager_remove_void(struct platform_device *pdev)
+{
+	rt_pd_manager_remove(pdev);
+}
+
 static struct platform_driver rt_pd_manager_driver = {
 	.driver = {
 		.name = "rt-pd-manager",
 		.of_match_table = of_match_ptr(rt_pd_manager_of_match),
 	},
 	.probe = rt_pd_manager_probe,
-	.remove = rt_pd_manager_remove,
+	.remove = rt_pd_manager_remove_void,
 };
 
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0))

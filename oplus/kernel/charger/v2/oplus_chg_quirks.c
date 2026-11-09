@@ -597,6 +597,11 @@ static const struct of_device_id oplus_chg_quirks_match[] = {
 	{},
 };
 
+static void oplus_chg_quirks_remove_void(struct platform_device *pdev)
+{
+	oplus_chg_quirks_remove(pdev);
+}
+
 static struct platform_driver oplus_chg_quirks_driver = {
 	.driver		= {
 		.name = "oplus-chg_quirks",
@@ -604,7 +609,7 @@ static struct platform_driver oplus_chg_quirks_driver = {
 		.of_match_table = of_match_ptr(oplus_chg_quirks_match),
 	},
 	.probe		= oplus_chg_quirks_probe,
-	.remove		= oplus_chg_quirks_remove,
+	.remove		= oplus_chg_quirks_remove_void,
 };
 static int quirks_retention_register(void);
 /* never return an error value */

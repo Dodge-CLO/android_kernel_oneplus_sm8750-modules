@@ -22,7 +22,7 @@
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 #include <linux/unaligned.h>
 #else
-#include <asm/unaligned.h>
+#include <linux/unaligned.h>
 #endif
 #include <linux/module.h>
 #include <linux/power_supply.h>
@@ -1390,13 +1390,18 @@ static const struct of_device_id mt6375_gauge_match[] = {
 	{},
 };
 
+static void mt6375_guage_driver_remove_void(struct platform_device *pdev)
+{
+	mt6375_guage_driver_remove(pdev);
+}
+
 static struct platform_driver mt6375_gauge_driver = {
 	.driver = {
 		.name = "oplus_mt6375_gauge",
 		.of_match_table = mt6375_gauge_match,
 	},
 	.probe = mt6375_guage_driver_probe,
-	.remove = mt6375_guage_driver_remove,
+	.remove = mt6375_guage_driver_remove_void,
 };
 
 static __init int oplus_mt6375_gauge_driver_init(void)

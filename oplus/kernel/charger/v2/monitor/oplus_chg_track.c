@@ -1933,7 +1933,7 @@ int oplus_chg_track_olc_config_set(const char *buf)
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 	strscpy(config_buf, buf, OLC_CONFIG_SIZE);
 #else
-	strlcpy(config_buf, buf, OLC_CONFIG_SIZE);
+	strscpy(config_buf, buf, OLC_CONFIG_SIZE);
 #endif
 	tmpbuf = config_buf;
 

@@ -526,6 +526,11 @@ static const struct of_device_id oplus_virtual_level_shift_match[] = {
 	{},
 };
 
+static void oplus_virtual_level_shift_remove_void(struct platform_device *pdev)
+{
+	oplus_virtual_level_shift_remove(pdev);
+}
+
 static struct platform_driver oplus_virtual_level_shift_driver = {
 	.driver		= {
 		.name = "oplus-virtual_level_shift",
@@ -533,7 +538,7 @@ static struct platform_driver oplus_virtual_level_shift_driver = {
 		.of_match_table = of_match_ptr(oplus_virtual_level_shift_match),
 	},
 	.probe		= oplus_virtual_level_shift_probe,
-	.remove		= oplus_virtual_level_shift_remove,
+	.remove		= oplus_virtual_level_shift_remove_void,
 	.shutdown	= oplus_virtual_level_shift_shutdown,
 };
 

@@ -1041,7 +1041,7 @@ static int aw35616_tcpcdev_init(struct aw35616_chip *chip, struct device *dev)
 	if (!desc->name)
 		return -ENOMEM;
 
-	strlcpy((char *)desc->name, name, len+1);
+	strscpy((char *)desc->name, name, len+1);
 
 	chip->tcpc_desc = desc;
 

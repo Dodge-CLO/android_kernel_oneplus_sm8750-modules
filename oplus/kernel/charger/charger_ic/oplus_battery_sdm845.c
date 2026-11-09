@@ -11048,6 +11048,11 @@ static const struct of_device_id match_table[] = {
 	{ },
 };
 
+static void smb2_remove_void(struct platform_device *pdev)
+{
+	smb2_remove(pdev);
+}
+
 static struct platform_driver smb2_driver = {
 	.driver		= {
 		.name		= "qcom,qpnp-smb2",
@@ -11058,7 +11063,7 @@ static struct platform_driver smb2_driver = {
 #endif
 	},
 	.probe		= smb2_probe,
-	.remove		= smb2_remove,
+	.remove		= smb2_remove_void,
 	.shutdown	= smb2_shutdown,
 };
 module_platform_driver(smb2_driver);

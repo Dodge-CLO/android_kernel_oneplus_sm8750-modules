@@ -2458,6 +2458,11 @@ static const struct of_device_id oplus_chg_parallel_match[] = {
 	{},
 };
 
+static void oplus_chg_parallel_remove_void(struct platform_device *pdev)
+{
+	oplus_chg_parallel_remove(pdev);
+}
+
 static struct platform_driver oplus_chg_parallel_driver = {
 	.driver		= {
 		.name = "oplus-chg_switching",
@@ -2465,7 +2470,7 @@ static struct platform_driver oplus_chg_parallel_driver = {
 		.of_match_table = of_match_ptr(oplus_chg_parallel_match),
 	},
 	.probe		= oplus_chg_parallel_probe,
-	.remove		= oplus_chg_parallel_remove,
+	.remove		= oplus_chg_parallel_remove_void,
 };
 
 static __init int oplus_chg_parallel_init(void)

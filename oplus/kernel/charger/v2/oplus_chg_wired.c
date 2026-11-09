@@ -3006,6 +3006,11 @@ static const struct of_device_id oplus_wired_match[] = {
 	{},
 };
 
+static void oplus_wired_remove_void(struct platform_device *pdev)
+{
+	oplus_wired_remove(pdev);
+}
+
 static struct platform_driver oplus_wired_driver = {
 	.driver		= {
 		.name = "oplus-wired",
@@ -3013,7 +3018,7 @@ static struct platform_driver oplus_wired_driver = {
 		.of_match_table = of_match_ptr(oplus_wired_match),
 	},
 	.probe		= oplus_wired_probe,
-	.remove		= oplus_wired_remove,
+	.remove		= oplus_wired_remove_void,
 	.shutdown   = oplus_wired_shutdown,
 };
 

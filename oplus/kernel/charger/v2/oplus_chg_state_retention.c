@@ -862,6 +862,11 @@ static const struct of_device_id oplus_retention_charge_match[] = {
 	{},
 };
 
+static void oplus_retention_charge_remove_void(struct platform_device *pdev)
+{
+	oplus_retention_charge_remove(pdev);
+}
+
 static struct platform_driver oplus_retention_charge_driver = {
 	.driver		= {
 		.name = "oplus-retention_charge",
@@ -869,7 +874,7 @@ static struct platform_driver oplus_retention_charge_driver = {
 		.of_match_table = of_match_ptr(oplus_retention_charge_match),
 	},
 	.probe		= oplus_chg_state_retention_probe,
-	.remove		= oplus_retention_charge_remove,
+	.remove		= oplus_retention_charge_remove_void,
 };
 
 

@@ -2499,6 +2499,11 @@ static const struct of_device_id p9415_match[] = {
 	{},
 };
 
+static void p9415_driver_remove_void(struct platform_device *pdev)
+{
+	p9415_driver_remove(pdev);
+}
+
 static struct platform_driver p9415_driver = {
 	.driver = {
 		.name = "p9415-charger",
@@ -2509,7 +2514,7 @@ static struct platform_driver p9415_driver = {
 #endif
 	},
 	.probe = p9415_driver_probe,
-	.remove = p9415_driver_remove,
+	.remove = p9415_driver_remove_void,
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 4, 0))
 	.resume = p9415_resume,
 	.suspend = p9415_suspend,

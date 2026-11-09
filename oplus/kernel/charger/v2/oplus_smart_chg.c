@@ -1493,6 +1493,11 @@ static const struct of_device_id oplus_smart_charge_match[] = {
 	{},
 };
 
+static void oplus_smart_charge_remove_void(struct platform_device *pdev)
+{
+	oplus_smart_charge_remove(pdev);
+}
+
 static struct platform_driver oplus_smart_charge_driver = {
 	.driver		= {
 		.name = "oplus-smart_charge",
@@ -1500,7 +1505,7 @@ static struct platform_driver oplus_smart_charge_driver = {
 		.of_match_table = of_match_ptr(oplus_smart_charge_match),
 	},
 	.probe		= oplus_smart_charge_probe,
-	.remove		= oplus_smart_charge_remove,
+	.remove		= oplus_smart_charge_remove_void,
 };
 
 /* never return an error value */

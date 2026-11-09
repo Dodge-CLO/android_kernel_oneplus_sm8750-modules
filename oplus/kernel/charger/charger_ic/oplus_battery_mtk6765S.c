@@ -5234,9 +5234,14 @@ struct platform_device oplus_charger_device = {
 	.id = -1,
 };
 
+static void oplus_charger_remove_void(struct platform_device *pdev)
+{
+	oplus_charger_remove(pdev);
+}
+
 static struct platform_driver oplus_charger_driver = {
 	.probe = oplus_charger_probe,
-	.remove = oplus_charger_remove,
+	.remove = oplus_charger_remove_void,
 	.shutdown = oplus_charger_shutdown,
 	.driver = {
 		   .name = "charger",

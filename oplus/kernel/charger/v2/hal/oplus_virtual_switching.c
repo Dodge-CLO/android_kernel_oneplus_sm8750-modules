@@ -379,6 +379,11 @@ static const struct of_device_id oplus_virtual_switching_match[] = {
 	{},
 };
 
+static void oplus_virtual_switching_remove_void(struct platform_device *pdev)
+{
+	oplus_virtual_switching_remove(pdev);
+}
+
 static struct platform_driver oplus_virtual_switching_driver = {
 	.driver		= {
 		.name = "oplus-virtual_switching",
@@ -386,7 +391,7 @@ static struct platform_driver oplus_virtual_switching_driver = {
 		.of_match_table = of_match_ptr(oplus_virtual_switching_match),
 	},
 	.probe		= oplus_virtual_switching_probe,
-	.remove		= oplus_virtual_switching_remove,
+	.remove		= oplus_virtual_switching_remove_void,
 	.shutdown	= oplus_virtual_switching_shutdown,
 };
 

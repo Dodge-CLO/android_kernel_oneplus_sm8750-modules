@@ -568,13 +568,18 @@ static const struct of_device_id mt6375_match_table[] = {
 	{},
 };
 
+static void mt6375_remove_void(struct platform_device *pdev)
+{
+	mt6375_remove(pdev);
+}
+
 static struct platform_driver mt6375_debug_driver = {
 	.driver = {
 		.name = "oplus_mt6375_debug",
 		.of_match_table = mt6375_match_table,
 	},
 	.probe = mt6375_probe,
-	.remove = mt6375_remove,
+	.remove = mt6375_remove_void,
 };
 
 int mt6375_driver_init(void)

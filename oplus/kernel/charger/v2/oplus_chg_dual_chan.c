@@ -1218,6 +1218,11 @@ static const struct of_device_id oplus_dual_chan_match[] = {
 	{},
 };
 
+static void oplus_dual_chan_remove_void(struct platform_device *pdev)
+{
+	oplus_dual_chan_remove(pdev);
+}
+
 static struct platform_driver oplus_dual_chan_driver = {
 	.driver		= {
 		.name = "oplus-dual_chan",
@@ -1225,7 +1230,7 @@ static struct platform_driver oplus_dual_chan_driver = {
 		.of_match_table = of_match_ptr(oplus_dual_chan_match),
 	},
 	.probe		= oplus_dual_chan_probe,
-	.remove		= oplus_dual_chan_remove,
+	.remove		= oplus_dual_chan_remove_void,
 };
 
 static __init int oplus_dual_chan_init(void)

@@ -6381,6 +6381,11 @@ static const struct of_device_id oplus_mms_gauge_match[] = {
 	{},
 };
 
+static void oplus_mms_gauge_remove_void(struct platform_device *pdev)
+{
+	oplus_mms_gauge_remove(pdev);
+}
+
 static struct platform_driver oplus_mms_gauge_driver = {
 	.driver		= {
 		.name = "oplus-mms_gauge",
@@ -6388,7 +6393,7 @@ static struct platform_driver oplus_mms_gauge_driver = {
 		.of_match_table = of_match_ptr(oplus_mms_gauge_match),
 	},
 	.probe		= oplus_mms_gauge_probe,
-	.remove		= oplus_mms_gauge_remove,
+	.remove		= oplus_mms_gauge_remove_void,
 };
 
 static __init int oplus_mms_gauge_init(void)

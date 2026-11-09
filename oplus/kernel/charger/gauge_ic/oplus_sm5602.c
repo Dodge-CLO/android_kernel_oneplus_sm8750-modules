@@ -16,7 +16,7 @@
 #include <linux/i2c.h>
 #include <linux/slab.h>
 #include <linux/acpi.h>
-#include <asm/unaligned.h>
+#include <linux/unaligned.h>
 #include <linux/uaccess.h>
 #include <linux/interrupt.h>
 #include <linux/of_gpio.h>

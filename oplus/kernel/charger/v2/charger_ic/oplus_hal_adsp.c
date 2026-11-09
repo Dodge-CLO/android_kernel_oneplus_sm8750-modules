@@ -10873,7 +10873,8 @@ static int oplus_get_battinfo_sn(struct oplus_chg_ic_dev *ic_dev, char buf[], in
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 	bsnlen = strscpy(buf, bcdev->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #else
-	bsnlen = strlcpy(buf, bcdev->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
+	bsnlen = strlen(bcdev->battinfo.batt_serial_num);
+	strscpy(buf, bcdev->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #endif
 
 	return bsnlen;
@@ -14007,6 +14008,11 @@ static const struct of_device_id battery_chg_match_table[] = {
 	{},
 };
 
+static void battery_chg_remove_void(struct platform_device *pdev)
+{
+	battery_chg_remove(pdev);
+}
+
 static struct platform_driver battery_chg_driver = {
 	.driver = {
 		.name = "qti_battery_charger",
@@ -14016,7 +14022,7 @@ static struct platform_driver battery_chg_driver = {
 #endif
 	},
 	.probe = battery_chg_probe,
-	.remove = battery_chg_remove,
+	.remove = battery_chg_remove_void,
 #ifdef OPLUS_FEATURE_CHG_BASIC
 	.shutdown = battery_chg_shutdown,
 #endif

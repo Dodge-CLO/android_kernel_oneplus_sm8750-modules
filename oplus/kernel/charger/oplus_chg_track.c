@@ -1671,7 +1671,7 @@ int oplus_chg_olc_config_set(const char *buf)
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 	strscpy(config_buf, buf, OLC_CONFIG_SIZE);
 #else
-	strlcpy(config_buf, buf, OLC_CONFIG_SIZE);
+	strscpy(config_buf, buf, OLC_CONFIG_SIZE);
 #endif
 	tmpbuf = config_buf;
 
@@ -7938,6 +7938,11 @@ static const struct of_device_id oplus_chg_track_match[] = {
 	{},
 };
 
+static void oplus_chg_track_driver_remove_void(struct platform_device *pdev)
+{
+	oplus_chg_track_driver_remove(pdev);
+}
+
 static struct platform_driver oplus_chg_track_driver = {
 	.driver =
 		{
@@ -7946,7 +7951,7 @@ static struct platform_driver oplus_chg_track_driver = {
 			.of_match_table = of_match_ptr(oplus_chg_track_match),
 		},
 	.probe = oplus_chg_track_driver_probe,
-	.remove = oplus_chg_track_driver_remove,
+	.remove = oplus_chg_track_driver_remove_void,
 };
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0))

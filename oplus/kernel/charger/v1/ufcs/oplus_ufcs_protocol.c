@@ -3069,6 +3069,11 @@ static const struct of_device_id oplus_ufcs_protocol_match[] = {
 	{},
 };
 
+static void oplus_ufcs_protocol_driver_remove_void(struct platform_device *pdev)
+{
+	oplus_ufcs_protocol_driver_remove(pdev);
+}
+
 static struct platform_driver oplus_ufcs_protocol_driver = {
 	.driver =
 		{
@@ -3077,7 +3082,7 @@ static struct platform_driver oplus_ufcs_protocol_driver = {
 			.of_match_table = oplus_ufcs_protocol_match,
 		},
 	.probe = oplus_ufcs_protocol_driver_probe,
-	.remove = oplus_ufcs_protocol_driver_remove,
+	.remove = oplus_ufcs_protocol_driver_remove_void,
 };
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0))
 static int __init oplus_ufcs_protocol_driver_init(void)

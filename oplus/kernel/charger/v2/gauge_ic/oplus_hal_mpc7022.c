@@ -14,7 +14,7 @@
 #include <linux/kobject.h>
 #include <linux/platform_device.h>
 #include <asm/atomic.h>
-#include <asm/unaligned.h>
+#include <linux/unaligned.h>
 #include <linux/init.h>
 #ifdef MODULE
 #include <asm/setup.h>
@@ -2769,9 +2769,11 @@ static int oplus_mpc7022_get_batt_sn(
 
 	chg_info("batt_sn(%s):%s\n", ic_dev->name, chip->battinfo.batt_serial_num);
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
-	strscpy = strlcpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
+	strscpy = strlen(chip->battinfo.batt_serial_num);
+	strscpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #else
-	bsnlen = strlcpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
+	bsnlen = strlen(chip->battinfo.batt_serial_num);
+	strscpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #endif
 
 	return bsnlen;

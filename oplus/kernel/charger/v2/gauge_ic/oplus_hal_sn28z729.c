@@ -5,7 +5,7 @@
 
 #ifdef CONFIG_OPLUS_CHARGER_MTK
 #include <asm/atomic.h>
-#include <asm/unaligned.h>
+#include <linux/unaligned.h>
 #include <linux/init.h>
 #include <linux/input.h>
 #include <linux/irq.h>
@@ -3367,7 +3367,8 @@ static int oplus_sn28z729_get_batt_sn(struct oplus_chg_ic_dev *ic_dev, char buf[
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 	bsnlen = strscpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #else
-	bsnlen = strlcpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
+	bsnlen = strlen(chip->battinfo.batt_serial_num);
+	strscpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #endif
 
 	return bsnlen;

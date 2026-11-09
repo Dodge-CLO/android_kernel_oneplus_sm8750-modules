@@ -203,13 +203,18 @@ static const struct of_device_id wireless_pen_match_table[] = {
 	{},
 };
 
+static void wireless_pen_glink_remove_void(struct platform_device *pdev)
+{
+	wireless_pen_glink_remove(pdev);
+}
+
 static struct platform_driver wireless_pen_glink_driver = {
 	.driver = {
 		.name = "wireless_pen_glink",
 		.of_match_table = wireless_pen_match_table,
 	},
 	.probe = wireless_pen_glink_probe,
-	.remove = wireless_pen_glink_remove,
+	.remove = wireless_pen_glink_remove_void,
 };
 
 void wireless_pen_glink_init(void)

@@ -6597,6 +6597,11 @@ static const struct of_device_id oplus_mms_wired_match[] = {
 	{},
 };
 
+static void oplus_mms_wired_remove_void(struct platform_device *pdev)
+{
+	oplus_mms_wired_remove(pdev);
+}
+
 static struct platform_driver oplus_mms_wired_driver = {
 	.driver		= {
 		.name = "oplus-mms_wired",
@@ -6604,7 +6609,7 @@ static struct platform_driver oplus_mms_wired_driver = {
 		.of_match_table = of_match_ptr(oplus_mms_wired_match),
 	},
 	.probe		= oplus_mms_wired_probe,
-	.remove		= oplus_mms_wired_remove,
+	.remove		= oplus_mms_wired_remove_void,
 	.shutdown	= oplus_mms_wired_shutdown,
 };
 

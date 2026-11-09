@@ -1840,6 +1840,11 @@ static const struct of_device_id oplus_virtual_rx_match[] = {
 	{},
 };
 
+static void oplus_virtual_rx_remove_void(struct platform_device *pdev)
+{
+	oplus_virtual_rx_remove(pdev);
+}
+
 static struct platform_driver oplus_virtual_rx_driver = {
 	.driver		= {
 		.name = "oplus-virtual_rx",
@@ -1847,7 +1852,7 @@ static struct platform_driver oplus_virtual_rx_driver = {
 		.of_match_table = of_match_ptr(oplus_virtual_rx_match),
 	},
 	.probe		= oplus_virtual_rx_probe,
-	.remove		= oplus_virtual_rx_remove,
+	.remove		= oplus_virtual_rx_remove_void,
 };
 
 static __init int oplus_virtual_rx_init(void)

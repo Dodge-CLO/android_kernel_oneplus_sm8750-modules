@@ -6238,6 +6238,11 @@ static const struct of_device_id oplus_pps_match[] = {
 	{},
 };
 
+static void oplus_pps_remove_void(struct platform_device *pdev)
+{
+	oplus_pps_remove(pdev);
+}
+
 static struct platform_driver oplus_pps_driver = {
 	.driver		= {
 		.name = "oplus-pps_charge",
@@ -6245,7 +6250,7 @@ static struct platform_driver oplus_pps_driver = {
 		.of_match_table = of_match_ptr(oplus_pps_match),
 	},
 	.probe		= oplus_pps_probe,
-	.remove		= oplus_pps_remove,
+	.remove		= oplus_pps_remove_void,
 	.shutdown	= oplus_pps_shutdown,
 };
 

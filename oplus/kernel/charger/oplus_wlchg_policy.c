@@ -6588,6 +6588,11 @@ static const struct of_device_id wlchg_match[] = {
 	{},
 };
 
+static void wlchg_driver_remove_void(struct platform_device *pdev)
+{
+	wlchg_driver_remove(pdev);
+}
+
 static struct platform_driver wlchg_driver = {
 	.driver = {
 		.name = "wireless-charger",
@@ -6595,7 +6600,7 @@ static struct platform_driver wlchg_driver = {
 		.of_match_table = of_match_ptr(wlchg_match),
 	},
 	.probe = wlchg_driver_probe,
-	.remove = wlchg_driver_remove,
+	.remove = wlchg_driver_remove_void,
 };
 
 module_platform_driver(wlchg_driver);

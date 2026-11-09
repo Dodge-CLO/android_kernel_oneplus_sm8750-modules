@@ -2127,13 +2127,18 @@ static const struct of_device_id oplus_pd_manager_of_match[] = {
 };
 MODULE_DEVICE_TABLE(of, oplus_pd_manager_of_match);
 
+static void oplus_pd_manager_remove_void(struct platform_device *pdev)
+{
+	oplus_pd_manager_remove(pdev);
+}
+
 static struct platform_driver oplus_pd_manager_driver = {
 	.driver = {
 		.name = "oplus-pd_manager",
 		.of_match_table = of_match_ptr(oplus_pd_manager_of_match),
 	},
 	.probe = oplus_pd_manager_probe,
-	.remove = oplus_pd_manager_remove,
+	.remove = oplus_pd_manager_remove_void,
 };
 
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0))

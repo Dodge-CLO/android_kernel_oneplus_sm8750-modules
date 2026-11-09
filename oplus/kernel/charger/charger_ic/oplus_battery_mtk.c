@@ -1064,9 +1064,14 @@ static const struct of_device_id mt_battery_of_match[] = {
 MODULE_DEVICE_TABLE(of, mt_battery_of_match);
 #endif
 
+static void battery_remove_void(struct platform_device *pdev)
+{
+	battery_remove(pdev);
+}
+
 static struct platform_driver battery_driver = {
 	.probe = battery_probe,
-	.remove = battery_remove,
+	.remove = battery_remove_void,
 	.shutdown = battery_shutdown,
 	.driver = {
 		.name = "battery",

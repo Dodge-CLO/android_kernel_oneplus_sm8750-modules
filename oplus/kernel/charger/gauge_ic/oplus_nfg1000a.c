@@ -28,7 +28,7 @@
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 #include <linux/unaligned.h>
 #else
-#include <asm/unaligned.h>
+#include <linux/unaligned.h>
 #endif
 
 int nfg1000a_get_calib_time(struct chip_bq27541 *chip, int *dod_time, int *qmax_time)

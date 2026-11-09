@@ -232,6 +232,11 @@ static const struct of_device_id oplus_battery_log_match[] = {
 	{},
 };
 
+static void oplus_battery_log_remove_void(struct platform_device *pdev)
+{
+	oplus_battery_log_remove(pdev);
+}
+
 static struct platform_driver oplus_battery_log_driver = {
 	.driver		= {
 		.name = "oplus-battery_log",
@@ -239,7 +244,7 @@ static struct platform_driver oplus_battery_log_driver = {
 		.of_match_table = of_match_ptr(oplus_battery_log_match),
 	},
 	.probe		= oplus_battery_log_probe,
-	.remove		= oplus_battery_log_remove,
+	.remove		= oplus_battery_log_remove_void,
 };
 
 /* never return an error value */

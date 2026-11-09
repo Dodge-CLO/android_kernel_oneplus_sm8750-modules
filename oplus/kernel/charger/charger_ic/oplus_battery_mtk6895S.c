@@ -25,6 +25,7 @@
 #include <linux/init.h>		/* For init/exit macros */
 #include <linux/module.h>	/* For MODULE_ marcros  */
 #include <linux/fs.h>
+#include <linux/vmalloc.h>
 #include <linux/device.h>
 #include <linux/interrupt.h>
 #include <linux/spinlock.h>
@@ -8643,9 +8644,14 @@ struct platform_device mtk_charger_device = {
 	.id = -1,
 };
 
+static void mtk_charger_remove_void(struct platform_device *pdev)
+{
+	mtk_charger_remove(pdev);
+}
+
 static struct platform_driver mtk_charger_driver = {
 	.probe = mtk_charger_probe,
-	.remove = mtk_charger_remove,
+	.remove = mtk_charger_remove_void,
 	.shutdown = mtk_charger_shutdown,
 	.driver = {
 		   .name = "charger",

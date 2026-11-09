@@ -6624,6 +6624,11 @@ static const struct of_device_id oplus_vooc_match[] = {
 	{},
 };
 
+static void oplus_vooc_remove_void(struct platform_device *pdev)
+{
+	oplus_vooc_remove(pdev);
+}
+
 static struct platform_driver oplus_vooc_driver = {
 	.driver		= {
 		.name = "oplus-vooc",
@@ -6631,7 +6636,7 @@ static struct platform_driver oplus_vooc_driver = {
 		.of_match_table = of_match_ptr(oplus_vooc_match),
 	},
 	.probe		= oplus_vooc_probe,
-	.remove		= oplus_vooc_remove,
+	.remove		= oplus_vooc_remove_void,
 	.shutdown	= oplus_vooc_shutdown,
 };
 

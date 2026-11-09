@@ -1659,6 +1659,11 @@ static const struct of_device_id oplus_cpa_match[] = {
 	{},
 };
 
+static void oplus_cpa_remove_void(struct platform_device *pdev)
+{
+	oplus_cpa_remove(pdev);
+}
+
 static struct platform_driver oplus_cpa_driver = {
 	.driver		= {
 		.name = "oplus-cpa",
@@ -1666,7 +1671,7 @@ static struct platform_driver oplus_cpa_driver = {
 		.of_match_table = of_match_ptr(oplus_cpa_match),
 	},
 	.probe		= oplus_cpa_probe,
-	.remove		= oplus_cpa_remove,
+	.remove		= oplus_cpa_remove_void,
 };
 
 /* never return an error value */

@@ -3684,6 +3684,11 @@ static const struct of_device_id oplus_chg_batt_bal_match[] = {
 	{},
 };
 
+static void oplus_chg_batt_bal_remove_void(struct platform_device *pdev)
+{
+	oplus_chg_batt_bal_remove(pdev);
+}
+
 static struct platform_driver oplus_chg_batt_bal_driver = {
 	.driver		= {
 		.name = "oplus-batt_bal",
@@ -3692,7 +3697,7 @@ static struct platform_driver oplus_chg_batt_bal_driver = {
 		.pm = &bal_pm_ops,
 	},
 	.probe		= oplus_chg_batt_bal_probe,
-	.remove		= oplus_chg_batt_bal_remove,
+	.remove		= oplus_chg_batt_bal_remove_void,
 };
 
 static __init int oplus_chg_batt_bal_init(void)

@@ -18,7 +18,7 @@
 #include <linux/kobject.h>
 #include <linux/platform_device.h>
 #include <asm/atomic.h>
-#include <asm/unaligned.h>
+#include <linux/unaligned.h>
 #include <linux/module.h>
 #include <linux/power_supply.h>
 #include <linux/gpio.h>
@@ -1312,7 +1312,7 @@ RETRY:
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 		strscpy(chip->battinfo.batt_serial_num, (char*)batt_sn, OPLUS_BATT_SERIAL_NUM_SIZE);
 #else
-		strlcpy(chip->battinfo.batt_serial_num, (char*)batt_sn, OPLUS_BATT_SERIAL_NUM_SIZE);
+		strscpy(chip->battinfo.batt_serial_num, (char*)batt_sn, OPLUS_BATT_SERIAL_NUM_SIZE);
 #endif
 		chg_info("chip->battinfo.batt_serial_num %s", chip->battinfo.batt_serial_num);
 	} else {
@@ -1663,7 +1663,8 @@ static int oplus_get_battinfo_sn(struct oplus_chg_ic_dev *ic_dev, char buf[], in
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0))
 	bsnlen = strscpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #else
-	bsnlen = strlcpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
+	bsnlen = strlen(chip->battinfo.batt_serial_num);
+	strscpy(buf, chip->battinfo.batt_serial_num, OPLUS_BATT_SERIAL_NUM_SIZE);
 #endif
 
 	return bsnlen;

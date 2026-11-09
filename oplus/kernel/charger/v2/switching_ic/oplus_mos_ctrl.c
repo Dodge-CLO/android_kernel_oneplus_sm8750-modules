@@ -297,13 +297,18 @@ static const struct of_device_id oplus_mos_match_table[] = {
 	{},
 };
 
+static void oplus_mos_ctrl_remove_void(struct platform_device *pdev)
+{
+	oplus_mos_ctrl_remove(pdev);
+}
+
 static struct platform_driver oplus_mos_ctrl_driver = {
 	.driver = {
 		.name = "oplus_mos_ctrl",
 		.of_match_table = oplus_mos_match_table,
 	},
 	.probe = oplus_mos_ctrl_probe,
-	.remove = oplus_mos_ctrl_remove,
+	.remove = oplus_mos_ctrl_remove_void,
 	.shutdown = oplus_mos_ctrl_shutdown,
 };
 
