@@ -1325,7 +1325,7 @@ static void bolero_add_child_devices(struct work_struct *work)
 				__func__);
 		}
 
-		strlcpy(plat_dev_name, node->name,
+		strscpy(plat_dev_name, node->name,
 				(BOLERO_CDC_STRING_LEN - 1));
 
 		pdev = platform_device_alloc(plat_dev_name, -1);
@@ -1581,6 +1581,11 @@ static const struct of_device_id bolero_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, bolero_dt_match);
 
+static void bolero_remove_void(struct platform_device *pdev)
+{
+	bolero_remove(pdev);
+}
+
 static struct platform_driver bolero_drv = {
 	.driver = {
 		.name = "bolero-codec",
@@ -1589,7 +1594,7 @@ static struct platform_driver bolero_drv = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = bolero_probe,
-	.remove = bolero_remove,
+	.remove = bolero_remove_void,
 };
 
 static int bolero_drv_init(void)

@@ -57,7 +57,7 @@ static const DECLARE_TLV_DB_SCALE(digital_gain, 0, 1, 0);
 static int lpass_cdc_tx_macro_hw_params(struct snd_pcm_substream *substream,
 			       struct snd_pcm_hw_params *params,
 			       struct snd_soc_dai *dai);
-static int lpass_cdc_tx_macro_get_channel_map(struct snd_soc_dai *dai,
+static int lpass_cdc_tx_macro_get_channel_map(const struct snd_soc_dai *dai,
 				unsigned int *tx_num, unsigned int *tx_slot,
 				unsigned int *rx_num, unsigned int *rx_slot);
 
@@ -1299,7 +1299,7 @@ static int lpass_cdc_tx_macro_hw_params(struct snd_pcm_substream *substream,
 	return 0;
 }
 
-static int lpass_cdc_tx_macro_get_channel_map(struct snd_soc_dai *dai,
+static int lpass_cdc_tx_macro_get_channel_map(const struct snd_soc_dai *dai,
 				unsigned int *tx_num, unsigned int *tx_slot,
 				unsigned int *rx_num, unsigned int *rx_slot)
 {
@@ -2343,6 +2343,11 @@ static const struct dev_pm_ops lpass_cdc_dev_pm_ops = {
 	)
 };
 
+static void lpass_cdc_tx_macro_remove_void(struct platform_device *pdev)
+{
+	lpass_cdc_tx_macro_remove(pdev);
+}
+
 static struct platform_driver lpass_cdc_tx_macro_driver = {
 	.driver = {
 		.name = "lpass_cdc_tx_macro",
@@ -2352,7 +2357,7 @@ static struct platform_driver lpass_cdc_tx_macro_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = lpass_cdc_tx_macro_probe,
-	.remove = lpass_cdc_tx_macro_remove,
+	.remove = lpass_cdc_tx_macro_remove_void,
 };
 
 module_platform_driver(lpass_cdc_tx_macro_driver);

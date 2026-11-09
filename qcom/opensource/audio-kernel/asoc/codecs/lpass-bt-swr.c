@@ -623,6 +623,11 @@ static const struct dev_pm_ops lpass_bt_swr_pm_ops = {
 	)
 };
 
+static void lpass_bt_swr_remove_void(struct platform_device *pdev)
+{
+	lpass_bt_swr_remove(pdev);
+}
+
 static struct platform_driver lpass_bt_swr_drv = {
 	.driver = {
 		.name = "lpass-bt-swr",
@@ -631,7 +636,7 @@ static struct platform_driver lpass_bt_swr_drv = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = lpass_bt_swr_probe,
-	.remove = lpass_bt_swr_remove,
+	.remove = lpass_bt_swr_remove_void,
 };
 
 static int lpass_bt_swr_drv_init(void)

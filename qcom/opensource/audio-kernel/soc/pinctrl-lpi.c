@@ -1014,6 +1014,11 @@ static const struct dev_pm_ops lpi_pinctrl_dev_pm_ops = {
 	)
 };
 
+static void lpi_pinctrl_remove_void(struct platform_device *pdev)
+{
+	lpi_pinctrl_remove(pdev);
+}
+
 static struct platform_driver lpi_pinctrl_driver = {
 	.driver = {
 		   .name = "qcom-lpi-pinctrl",
@@ -1022,7 +1027,7 @@ static struct platform_driver lpi_pinctrl_driver = {
 		   .suppress_bind_attrs = true,
 	},
 	.probe = lpi_pinctrl_probe,
-	.remove = lpi_pinctrl_remove,
+	.remove = lpi_pinctrl_remove_void,
 };
 
 module_platform_driver(lpi_pinctrl_driver);

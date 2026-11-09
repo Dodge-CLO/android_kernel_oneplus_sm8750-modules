@@ -5038,9 +5038,14 @@ static const struct dev_pm_ops wcd9378_dev_pm_ops = {
 };
 #endif
 
+static void wcd9378_remove_void(struct platform_device *pdev)
+{
+	wcd9378_remove(pdev);
+}
+
 static struct platform_driver wcd9378_codec_driver = {
 	.probe = wcd9378_probe,
-	.remove = wcd9378_remove,
+	.remove = wcd9378_remove_void,
 	.driver = {
 		.name = "wcd9378_codec",
 		.of_match_table = of_match_ptr(wcd9378_dt_match),

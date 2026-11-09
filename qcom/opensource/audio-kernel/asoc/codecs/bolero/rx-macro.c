@@ -356,7 +356,7 @@ static int rx_macro_core_vote(void *handle, bool enable);
 static int rx_macro_hw_params(struct snd_pcm_substream *substream,
 			       struct snd_pcm_hw_params *params,
 			       struct snd_soc_dai *dai);
-static int rx_macro_get_channel_map(struct snd_soc_dai *dai,
+static int rx_macro_get_channel_map(const struct snd_soc_dai *dai,
 				unsigned int *tx_num, unsigned int *tx_slot,
 				unsigned int *rx_num, unsigned int *rx_slot);
 static int rx_macro_mute_stream(struct snd_soc_dai *dai, int mute, int stream);
@@ -1118,7 +1118,7 @@ static int rx_macro_hw_params(struct snd_pcm_substream *substream,
 	return 0;
 }
 
-static int rx_macro_get_channel_map(struct snd_soc_dai *dai,
+static int rx_macro_get_channel_map(const struct snd_soc_dai *dai,
 				unsigned int *tx_num, unsigned int *tx_slot,
 				unsigned int *rx_num, unsigned int *rx_slot)
 {
@@ -4027,10 +4027,10 @@ static void rx_macro_add_child_devices(struct work_struct *work)
 			rx_swr_master_node = true;
 
 		if(rx_swr_master_node)
-			strlcpy(plat_dev_name, "rx_swr_ctrl",
+			strscpy(plat_dev_name, "rx_swr_ctrl",
 				(RX_SWR_STRING_LEN - 1));
 		else
-			strlcpy(plat_dev_name, node->name,
+			strscpy(plat_dev_name, node->name,
 				(RX_SWR_STRING_LEN - 1));
 
 		pdev = platform_device_alloc(plat_dev_name, -1);
@@ -4292,6 +4292,11 @@ static const struct dev_pm_ops bolero_dev_pm_ops = {
 	)
 };
 
+static void rx_macro_remove_void(struct platform_device *pdev)
+{
+	rx_macro_remove(pdev);
+}
+
 static struct platform_driver rx_macro_driver = {
 	.driver = {
 		.name = "rx_macro",
@@ -4301,7 +4306,7 @@ static struct platform_driver rx_macro_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = rx_macro_probe,
-	.remove = rx_macro_remove,
+	.remove = rx_macro_remove_void,
 };
 
 module_platform_driver(rx_macro_driver);

@@ -871,9 +871,14 @@ static const struct of_device_id of_match[] = {
 	{ }
 };
 
+static void wcd9xxx_irq_remove_void(struct platform_device *pdev)
+{
+	wcd9xxx_irq_remove(pdev);
+}
+
 static struct platform_driver wcd9xxx_irq_driver = {
 	.probe = wcd9xxx_irq_probe,
-	.remove = wcd9xxx_irq_remove,
+	.remove = wcd9xxx_irq_remove_void,
 	.driver = {
 		.name = "wcd9xxx_intc",
 		.owner = THIS_MODULE,

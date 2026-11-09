@@ -874,9 +874,14 @@ static const struct of_device_id audio_pkt_platform_match_table[] = {
 MODULE_DEVICE_TABLE(of, audio_pkt_platform_match_table);
 
 
+static void audio_pkt_platform_driver_remove_void(struct platform_device *pdev)
+{
+	audio_pkt_platform_driver_remove(pdev);
+}
+
 static struct platform_driver audio_pkt_core_platform_driver = {
 	.probe          = audio_pkt_platform_driver_probe,
-	.remove         = audio_pkt_platform_driver_remove,
+	.remove         = audio_pkt_platform_driver_remove_void,
 	.driver         = {
 		.name = MODULE_NAME,
 		.of_match_table = of_match_ptr(audio_pkt_platform_match_table),

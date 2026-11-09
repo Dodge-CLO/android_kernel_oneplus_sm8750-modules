@@ -412,6 +412,11 @@ static const struct of_device_id wcd_pinctrl_of_match[] = {
 
 MODULE_DEVICE_TABLE(of, wcd_pinctrl_of_match);
 
+static void wcd_pinctrl_remove_void(struct platform_device *pdev)
+{
+	wcd_pinctrl_remove(pdev);
+}
+
 static struct platform_driver wcd_pinctrl_driver = {
 	.driver = {
 		   .name = "qcom-wcd-pinctrl",
@@ -419,7 +424,7 @@ static struct platform_driver wcd_pinctrl_driver = {
 		   .suppress_bind_attrs = true,
 	},
 	.probe = wcd_pinctrl_probe,
-	.remove = wcd_pinctrl_remove,
+	.remove = wcd_pinctrl_remove_void,
 };
 
 module_platform_driver(wcd_pinctrl_driver);

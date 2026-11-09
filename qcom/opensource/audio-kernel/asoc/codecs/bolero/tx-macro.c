@@ -59,7 +59,7 @@ static const DECLARE_TLV_DB_SCALE(digital_gain, 0, 1, 0);
 static int tx_macro_hw_params(struct snd_pcm_substream *substream,
 			       struct snd_pcm_hw_params *params,
 			       struct snd_soc_dai *dai);
-static int tx_macro_get_channel_map(struct snd_soc_dai *dai,
+static int tx_macro_get_channel_map(const struct snd_soc_dai *dai,
 				unsigned int *tx_num, unsigned int *tx_slot,
 				unsigned int *rx_num, unsigned int *rx_slot);
 
@@ -1428,7 +1428,7 @@ static int tx_macro_hw_params(struct snd_pcm_substream *substream,
 	return 0;
 }
 
-static int tx_macro_get_channel_map(struct snd_soc_dai *dai,
+static int tx_macro_get_channel_map(const struct snd_soc_dai *dai,
 				unsigned int *tx_num, unsigned int *tx_slot,
 				unsigned int *rx_num, unsigned int *rx_slot)
 {
@@ -3503,10 +3503,10 @@ static void tx_macro_add_child_devices(struct work_struct *work)
 			tx_swr_master_node = true;
 
 		if (tx_swr_master_node)
-			strlcpy(plat_dev_name, "tx_swr_ctrl",
+			strscpy(plat_dev_name, "tx_swr_ctrl",
 				(TX_MACRO_SWR_STRING_LEN - 1));
 		else
-			strlcpy(plat_dev_name, node->name,
+			strscpy(plat_dev_name, node->name,
 				(TX_MACRO_SWR_STRING_LEN - 1));
 
 		pdev = platform_device_alloc(plat_dev_name, -1);
@@ -3789,6 +3789,11 @@ static const struct dev_pm_ops bolero_dev_pm_ops = {
 	)
 };
 
+static void tx_macro_remove_void(struct platform_device *pdev)
+{
+	tx_macro_remove(pdev);
+}
+
 static struct platform_driver tx_macro_driver = {
 	.driver = {
 		.name = "tx_macro",
@@ -3798,7 +3803,7 @@ static struct platform_driver tx_macro_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = tx_macro_probe,
-	.remove = tx_macro_remove,
+	.remove = tx_macro_remove_void,
 };
 
 module_platform_driver(tx_macro_driver);

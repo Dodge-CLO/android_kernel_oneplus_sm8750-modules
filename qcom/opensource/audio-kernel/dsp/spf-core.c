@@ -409,9 +409,14 @@ static const struct of_device_id spf_core_of_match[]  = {
 	{},
 };
 
+static void spf_core_platform_driver_remove_void(struct platform_device *pdev)
+{
+	spf_core_platform_driver_remove(pdev);
+}
+
 static struct platform_driver spf_core_driver = {
 	.probe = spf_core_platform_driver_probe,
-	.remove = spf_core_platform_driver_remove,
+	.remove = spf_core_platform_driver_remove_void,
 	.driver = {
 		.name = "spf-core-platform",
 		.owner = THIS_MODULE,

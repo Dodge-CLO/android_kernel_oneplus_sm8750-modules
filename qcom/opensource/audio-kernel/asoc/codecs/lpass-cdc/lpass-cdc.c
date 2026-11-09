@@ -1644,6 +1644,11 @@ static const struct of_device_id lpass_cdc_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, lpass_cdc_dt_match);
 
+static void lpass_cdc_remove_void(struct platform_device *pdev)
+{
+	lpass_cdc_remove(pdev);
+}
+
 static struct platform_driver lpass_cdc_drv = {
 	.driver = {
 		.name = "lpass-cdc",
@@ -1652,7 +1657,7 @@ static struct platform_driver lpass_cdc_drv = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = lpass_cdc_probe,
-	.remove = lpass_cdc_remove,
+	.remove = lpass_cdc_remove_void,
 };
 
 static int lpass_cdc_drv_init(void)

@@ -1,5 +1,6 @@
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 
 def _create_module_conditional_src_map(conditional_srcs):
     processed_conditional_srcs = {}
@@ -69,9 +70,10 @@ def _define_target_modules(target, variant, registry, modules, product = None, c
         ddk_module(
             name = rule_name,
             kernel_build = "//msm-kernel:{}_{}".format(target, variant),
+            config = "//msm-kernel:{}_{}_config".format(target, variant),
             srcs = srcs,
             out = "{}.ko".format(module.name),
-            deps = deps,
+            deps = deps + soc_modules(["fsa4480_i2c", "pdr_interface", "pinctrl-msm", "qcom-scm", "qcom_ipc_logging", "qti-regmap-debugfs", "qti_battery_charger", "rproc_qcom_common", "socinfo", "wcd_usbss_i2c"]),
             local_defines = options.keys(),
         )
 

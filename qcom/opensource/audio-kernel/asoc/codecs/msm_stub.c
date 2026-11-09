@@ -69,6 +69,11 @@ static const struct of_device_id msm_stub_codec_dt_match[] = {
 	{}
 };
 
+static void msm_stub_dev_remove_void(struct platform_device *pdev)
+{
+	msm_stub_dev_remove(pdev);
+}
+
 static struct platform_driver msm_stub_driver = {
 	.driver = {
 		.name = "msm-stub-codec",
@@ -77,7 +82,7 @@ static struct platform_driver msm_stub_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = msm_stub_dev_probe,
-	.remove = msm_stub_dev_remove,
+	.remove = msm_stub_dev_remove_void,
 };
 
 static int __init msm_stub_init(void)

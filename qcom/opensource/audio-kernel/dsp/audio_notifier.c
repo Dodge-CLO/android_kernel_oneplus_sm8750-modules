@@ -699,6 +699,11 @@ static const struct of_device_id adsp_notify_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, adsp_notify_dt_match);
 
+static void audio_notify_remove_void(struct platform_device *pdev)
+{
+	audio_notify_remove(pdev);
+}
+
 static struct platform_driver adsp_notify_driver = {
 	.driver = {
 		.name = "adsp-notify",
@@ -707,7 +712,7 @@ static struct platform_driver adsp_notify_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = audio_notify_probe,
-	.remove = audio_notify_remove,
+	.remove = audio_notify_remove_void,
 };
 
 static int __init audio_notifier_init(void)

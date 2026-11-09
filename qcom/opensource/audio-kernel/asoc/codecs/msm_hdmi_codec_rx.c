@@ -941,6 +941,11 @@ static const struct of_device_id msm_ext_disp_audio_codec_rx_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, msm_ext_disp_audio_codec_rx_dt_match);
 
+static void msm_ext_disp_audio_codec_rx_plat_remove_void(struct platform_device *pdev)
+{
+	msm_ext_disp_audio_codec_rx_plat_remove(pdev);
+}
+
 static struct platform_driver msm_ext_disp_audio_codec_rx_driver = {
 	.driver = {
 		.name = "msm-ext-disp-audio-codec-rx",
@@ -949,7 +954,7 @@ static struct platform_driver msm_ext_disp_audio_codec_rx_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = msm_ext_disp_audio_codec_rx_plat_probe,
-	.remove = msm_ext_disp_audio_codec_rx_plat_remove,
+	.remove = msm_ext_disp_audio_codec_rx_plat_remove_void,
 };
 
 static int __init msm_ext_disp_audio_codec_rx_init(void)

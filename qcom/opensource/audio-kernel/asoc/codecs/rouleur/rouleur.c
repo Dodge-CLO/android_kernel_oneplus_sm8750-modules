@@ -2806,9 +2806,14 @@ static const struct dev_pm_ops rouleur_dev_pm_ops = {
 };
 #endif
 
+static void rouleur_remove_void(struct platform_device *pdev)
+{
+	rouleur_remove(pdev);
+}
+
 static struct platform_driver rouleur_codec_driver = {
 	.probe = rouleur_probe,
-	.remove = rouleur_remove,
+	.remove = rouleur_remove_void,
 	.driver = {
 		.name = "rouleur_codec",
 		.owner = THIS_MODULE,

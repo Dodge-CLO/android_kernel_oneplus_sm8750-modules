@@ -1301,6 +1301,11 @@ static const struct of_device_id wdsp_mgr_dt_match[] = {
 	{ }
 };
 
+static void wdsp_mgr_remove_void(struct platform_device *pdev)
+{
+	wdsp_mgr_remove(pdev);
+}
+
 static struct platform_driver wdsp_mgr_driver = {
 	.driver = {
 		.name = "wcd-dsp-mgr",
@@ -1309,7 +1314,7 @@ static struct platform_driver wdsp_mgr_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = wdsp_mgr_probe,
-	.remove = wdsp_mgr_remove,
+	.remove = wdsp_mgr_remove_void,
 };
 
 int wcd_dsp_mgr_init(void)

@@ -4740,9 +4740,14 @@ static const struct dev_pm_ops wcd938x_dev_pm_ops = {
 };
 #endif
 
+static void wcd938x_remove_void(struct platform_device *pdev)
+{
+	wcd938x_remove(pdev);
+}
+
 static struct platform_driver wcd938x_codec_driver = {
 	.probe = wcd938x_probe,
-	.remove = wcd938x_remove,
+	.remove = wcd938x_remove_void,
 	.driver = {
 		.name = "wcd938x_codec",
 		.owner = THIS_MODULE,

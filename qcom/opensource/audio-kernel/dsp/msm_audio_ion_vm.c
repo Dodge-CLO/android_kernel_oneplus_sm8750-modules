@@ -989,6 +989,11 @@ static int msm_audio_ion_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void msm_audio_ion_remove_void(struct platform_device *pdev)
+{
+	msm_audio_ion_remove(pdev);
+}
+
 static struct platform_driver msm_audio_ion_driver = {
 	.driver = {
 		.name = "msm-audio-ion",
@@ -996,7 +1001,7 @@ static struct platform_driver msm_audio_ion_driver = {
 		.of_match_table = msm_audio_ion_dt_match,
 	},
 	.probe = msm_audio_ion_probe,
-	.remove = msm_audio_ion_remove,
+	.remove = msm_audio_ion_remove_void,
 };
 
 int __init msm_audio_ion_init(void)

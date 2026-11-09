@@ -8452,7 +8452,7 @@ static const struct snd_soc_dapm_widget tavil_dapm_widgets[] = {
 	SND_SOC_DAPM_OUTPUT("WDMA3_OUT"),
 };
 
-static int tavil_get_channel_map(struct snd_soc_dai *dai,
+static int tavil_get_channel_map(const struct snd_soc_dai *dai,
 				 unsigned int *tx_num, unsigned int *tx_slot,
 				 unsigned int *rx_num, unsigned int *rx_slot)
 {
@@ -8525,8 +8525,8 @@ static int tavil_get_channel_map(struct snd_soc_dai *dai,
 }
 
 static int tavil_set_channel_map(struct snd_soc_dai *dai,
-				 unsigned int tx_num, unsigned int *tx_slot,
-				 unsigned int rx_num, unsigned int *rx_slot)
+				 unsigned int tx_num, const unsigned int *tx_slot,
+				 unsigned int rx_num, const unsigned int *rx_slot)
 {
 	struct tavil_priv *tavil;
 	struct wcd9xxx *core;
@@ -11077,11 +11077,11 @@ static void tavil_add_child_devices(struct work_struct *work)
 
 		/* Parse other child device nodes and add platform device */
 		if (!strcmp(node->name, "swr_master"))
-			strlcpy(plat_dev_name, "tavil_swr_ctrl",
+			strscpy(plat_dev_name, "tavil_swr_ctrl",
 				(WCD934X_STRING_LEN - 1));
 		else if (strnstr(node->name, "msm_cdc_pinctrl",
 				 strlen("msm_cdc_pinctrl")) != NULL)
-			strlcpy(plat_dev_name, node->name,
+			strscpy(plat_dev_name, node->name,
 				(WCD934X_STRING_LEN - 1));
 		else
 			continue;
@@ -11478,9 +11478,14 @@ static int tavil_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void tavil_remove_void(struct platform_device *pdev)
+{
+	tavil_remove(pdev);
+}
+
 static struct platform_driver tavil_codec_driver = {
 	.probe = tavil_probe,
-	.remove = tavil_remove,
+	.remove = tavil_remove_void,
 	.driver = {
 		.name = "tavil_codec",
 		.owner = THIS_MODULE,

@@ -975,6 +975,11 @@ static const struct of_device_id wcd_spi_ac_of_match[] = {
 
 MODULE_DEVICE_TABLE(of, wcd_spi_ac_of_match);
 
+static void wcd_spi_ac_remove_void(struct platform_device *pdev)
+{
+	wcd_spi_ac_remove(pdev);
+}
+
 static struct platform_driver wcd_spi_ac_driver = {
 	.driver = {
 		.name = "qcom,wcd-spi-ac",
@@ -982,7 +987,7 @@ static struct platform_driver wcd_spi_ac_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = wcd_spi_ac_probe,
-	.remove = wcd_spi_ac_remove,
+	.remove = wcd_spi_ac_remove_void,
 };
 
 module_platform_driver(wcd_spi_ac_driver);

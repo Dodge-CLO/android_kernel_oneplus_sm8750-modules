@@ -113,9 +113,14 @@ static int pm2250_spmi_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void pm2250_spmi_remove_void(struct platform_device *pdev)
+{
+	pm2250_spmi_remove(pdev);
+}
+
 static struct platform_driver pm2250_spmi_driver = {
 	.probe		= pm2250_spmi_probe,
-	.remove		= pm2250_spmi_remove,
+	.remove		= pm2250_spmi_remove_void,
 	.driver	= {
 		.name		= "pm2250-spmi",
 		.of_match_table	= pm2250_id_table,

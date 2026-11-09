@@ -774,6 +774,11 @@ static int msm_asoc_machine_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void msm_asoc_machine_remove_void(struct platform_device *pdev)
+{
+	msm_asoc_machine_remove(pdev);
+}
+
 static struct platform_driver gvm_asoc_machine_driver = {
 	.driver = {
 		.name = DRV_NAME,
@@ -781,7 +786,7 @@ static struct platform_driver gvm_asoc_machine_driver = {
 		.of_match_table = gvm_asoc_machine_of_match,
 	},
 	.probe = msm_asoc_machine_probe,
-	.remove = msm_asoc_machine_remove,
+	.remove = msm_asoc_machine_remove_void,
 };
 
 int __init gvm_auto_spf_init(void)

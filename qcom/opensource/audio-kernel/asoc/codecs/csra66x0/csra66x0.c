@@ -916,11 +916,11 @@ static int csra66x0_soc_probe(struct snd_soc_component *component)
 		/* master slave config */
 		csra66x0_msconfig(csra66x0);
 		if (dapm->component) {
-			strlcpy(name, dapm->component->name_prefix,
+			strscpy(name, dapm->component->name_prefix,
 					sizeof(name));
 			strlcat(name, " IN", sizeof(name));
 			snd_soc_dapm_ignore_suspend(dapm, name);
-			strlcpy(name, dapm->component->name_prefix,
+			strscpy(name, dapm->component->name_prefix,
 					sizeof(name));
 			strlcat(name, " SPKR", sizeof(name));
 			snd_soc_dapm_ignore_suspend(dapm, name);
@@ -1044,7 +1044,9 @@ static ssize_t csra66x0_sysfs_write2reg_addr_value(struct device *dev,
 	if (count > sizeof(lbuf) - 1)
 		return -EINVAL;
 
-	ret = strlcpy(lbuf, buf, count);
+	ret = strlen(buf);
+
+	strscpy(lbuf, buf, count);
 	if (ret != count) {
 		dev_err(component->dev, "%s: copy input from user space failed. ret=%d\n",
 			__func__, ret);
@@ -1100,7 +1102,9 @@ static ssize_t csra66x0_sysfs_read2reg_addr_set(struct device *dev,
 	if (count > sizeof(lbuf) - 1)
 		return -EINVAL;
 
-	ret = strlcpy(lbuf, buf, count);
+	ret = strlen(buf);
+
+	strscpy(lbuf, buf, count);
 	if (ret != count) {
 		dev_err(dev, "%s: copy input from user space failed. ret=%d\n",
 			__func__, ret);

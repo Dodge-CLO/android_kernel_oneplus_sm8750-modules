@@ -744,6 +744,11 @@ static const struct of_device_id bolero_clk_rsc_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, bolero_clk_rsc_dt_match);
 
+static void bolero_clk_rsc_remove_void(struct platform_device *pdev)
+{
+	bolero_clk_rsc_remove(pdev);
+}
+
 static struct platform_driver bolero_clk_rsc_mgr = {
 	.driver = {
 		.name = "bolero-clk-rsc-mngr",
@@ -752,7 +757,7 @@ static struct platform_driver bolero_clk_rsc_mgr = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = bolero_clk_rsc_probe,
-	.remove = bolero_clk_rsc_remove,
+	.remove = bolero_clk_rsc_remove_void,
 };
 
 int bolero_clk_rsc_mgr_init(void)

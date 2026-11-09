@@ -372,6 +372,11 @@ static const struct of_device_id msm_cdc_pinctrl_match[] = {
 	{}
 };
 
+static void msm_cdc_pinctrl_remove_void(struct platform_device *pdev)
+{
+	msm_cdc_pinctrl_remove(pdev);
+}
+
 static struct platform_driver msm_cdc_pinctrl_driver = {
 	.driver = {
 		.name = "msm-cdc-pinctrl",
@@ -380,7 +385,7 @@ static struct platform_driver msm_cdc_pinctrl_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = msm_cdc_pinctrl_probe,
-	.remove = msm_cdc_pinctrl_remove,
+	.remove = msm_cdc_pinctrl_remove_void,
 };
 
 int msm_cdc_pinctrl_drv_init(void)

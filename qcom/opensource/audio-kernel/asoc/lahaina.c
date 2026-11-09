@@ -1500,6 +1500,11 @@ static int msm_asoc_machine_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void msm_asoc_machine_remove_void(struct platform_device *pdev)
+{
+	msm_asoc_machine_remove(pdev);
+}
+
 static struct platform_driver lahaina_asoc_machine_driver = {
 	.driver = {
 		.name = DRV_NAME,
@@ -1509,7 +1514,7 @@ static struct platform_driver lahaina_asoc_machine_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = msm_asoc_machine_probe,
-	.remove = msm_asoc_machine_remove,
+	.remove = msm_asoc_machine_remove_void,
 };
 module_platform_driver(lahaina_asoc_machine_driver);
 

@@ -11489,7 +11489,7 @@ static const struct snd_soc_dapm_widget tasha_dapm_widgets[] = {
 			    &anc_spkr_pa_switch),
 };
 
-static int tasha_get_channel_map(struct snd_soc_dai *dai,
+static int tasha_get_channel_map(const struct snd_soc_dai *dai,
 				 unsigned int *tx_num, unsigned int *tx_slot,
 				 unsigned int *rx_num, unsigned int *rx_slot)
 {
@@ -11547,8 +11547,8 @@ static int tasha_get_channel_map(struct snd_soc_dai *dai,
 }
 
 static int tasha_set_channel_map(struct snd_soc_dai *dai,
-				 unsigned int tx_num, unsigned int *tx_slot,
-				 unsigned int rx_num, unsigned int *rx_slot)
+				 unsigned int tx_num, const unsigned int *tx_slot,
+				 unsigned int rx_num, const unsigned int *rx_slot)
 {
 	struct tasha_priv *tasha;
 	struct wcd9xxx *core;
@@ -14496,11 +14496,11 @@ static void tasha_add_child_devices(struct work_struct *work)
 
 	for_each_child_of_node(wcd9xxx->dev->of_node, node) {
 		if (!strcmp(node->name, "swr_master"))
-			strlcpy(plat_dev_name, "tasha_swr_ctrl",
+			strscpy(plat_dev_name, "tasha_swr_ctrl",
 				(WCD9335_STRING_LEN - 1));
 		else if (strnstr(node->name, "msm_cdc_pinctrl",
 				 strlen("msm_cdc_pinctrl")) != NULL)
-			strlcpy(plat_dev_name, node->name,
+			strscpy(plat_dev_name, node->name,
 				(WCD9335_STRING_LEN - 1));
 		else
 			continue;
@@ -14791,9 +14791,14 @@ static int tasha_remove(struct platform_device *pdev)
 	return 0;
 }
 
+static void tasha_remove_void(struct platform_device *pdev)
+{
+	tasha_remove(pdev);
+}
+
 static struct platform_driver tasha_codec_driver = {
 	.probe = tasha_probe,
-	.remove = tasha_remove,
+	.remove = tasha_remove_void,
 	.driver = {
 		.name = "tasha_codec",
 		.owner = THIS_MODULE,

@@ -316,6 +316,11 @@ static const struct of_device_id audio_ref_clk_match[] = {
 };
 MODULE_DEVICE_TABLE(of, audio_ref_clk_match);
 
+static void audio_ref_clk_remove_void(struct platform_device *pdev)
+{
+	audio_ref_clk_remove(pdev);
+}
+
 static struct platform_driver audio_ref_clk_driver = {
 	.driver = {
 		.name = "audio-ref-clk",
@@ -324,7 +329,7 @@ static struct platform_driver audio_ref_clk_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = audio_ref_clk_probe,
-	.remove = audio_ref_clk_remove,
+	.remove = audio_ref_clk_remove_void,
 };
 
 int audio_ref_clk_platform_init(void)

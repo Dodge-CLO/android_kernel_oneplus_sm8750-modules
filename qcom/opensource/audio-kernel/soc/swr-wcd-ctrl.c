@@ -1927,9 +1927,14 @@ static const struct of_device_id swrm_dt_match[] = {
 	{}
 };
 
+static void swrm_remove_void(struct platform_device *pdev)
+{
+	swrm_remove(pdev);
+}
+
 static struct platform_driver swr_mstr_driver = {
 	.probe = swrm_probe,
-	.remove = swrm_remove,
+	.remove = swrm_remove_void,
 	.driver = {
 		.name = SWR_WCD_NAME,
 		.owner = THIS_MODULE,

@@ -733,6 +733,11 @@ static const struct of_device_id adsp_loader_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, adsp_loader_dt_match);
 
+static void adsp_loader_remove_void(struct platform_device *pdev)
+{
+	adsp_loader_remove(pdev);
+}
+
 static struct platform_driver adsp_loader_driver = {
 	.driver = {
 		.name = "adsp-loader",
@@ -741,7 +746,7 @@ static struct platform_driver adsp_loader_driver = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = adsp_loader_probe,
-	.remove = adsp_loader_remove,
+	.remove = adsp_loader_remove_void,
 };
 
 static int __init adsp_loader_init(void)

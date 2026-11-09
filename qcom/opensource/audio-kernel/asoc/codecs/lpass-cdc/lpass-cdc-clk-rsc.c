@@ -691,6 +691,11 @@ static const struct of_device_id lpass_cdc_clk_rsc_dt_match[] = {
 };
 MODULE_DEVICE_TABLE(of, lpass_cdc_clk_rsc_dt_match);
 
+static void lpass_cdc_clk_rsc_remove_void(struct platform_device *pdev)
+{
+	lpass_cdc_clk_rsc_remove(pdev);
+}
+
 static struct platform_driver lpass_cdc_clk_rsc_mgr = {
 	.driver = {
 		.name = "lpass-cdc-clk-rsc-mngr",
@@ -699,7 +704,7 @@ static struct platform_driver lpass_cdc_clk_rsc_mgr = {
 		.suppress_bind_attrs = true,
 	},
 	.probe = lpass_cdc_clk_rsc_probe,
-	.remove = lpass_cdc_clk_rsc_remove,
+	.remove = lpass_cdc_clk_rsc_remove_void,
 };
 
 int lpass_cdc_clk_rsc_mgr_init(void)
