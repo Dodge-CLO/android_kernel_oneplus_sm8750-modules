@@ -1017,6 +1017,7 @@ static const struct file_operations msm_lease_fops = {
 	.read               = drm_read,
 	.llseek             = no_llseek,
 	.mmap               = msm_lease_mmap,
+	.fop_flags          = FOP_UNSIGNED_OFFSET,
 };
 
 static int msm_lease_notifier(struct notifier_block *nb, unsigned long action, void *data)
