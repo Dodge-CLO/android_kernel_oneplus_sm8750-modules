@@ -4742,6 +4742,13 @@ ssize_t oplus_ofp_notify_fp_press_attr(struct kobject *obj,
 }
 
 /* ----- aod part ----- */
+/*
+ * Set by a "<mode> force" write to aod_light_mode_set: the user picked a level, so
+ * the bare levels the sensors HAL writes from the AOD light sensor are ignored
+ * until a "<mode> auto" write hands the level back.
+ */
+static bool oplus_ofp_aod_light_mode_forced;
+
 /* aod_light_mode_set */
 int oplus_ofp_set_aod_light_mode(void *buf)
 {
@@ -4756,6 +4763,11 @@ int oplus_ofp_set_aod_light_mode(void *buf)
 	if (!buf || !display || !p_oplus_ofp_params) {
 		OFP_ERR("Invalid params\n");
 		return -EINVAL;
+	}
+
+	if (oplus_ofp_aod_light_mode_forced) {
+		OFP_INFO("aod_light_mode is forced, ignore %u\n", *aod_light_mode);
+		return 0;
 	}
 
 	last_aod_light_mode = p_oplus_ofp_params->aod_light_mode;
@@ -4826,6 +4838,7 @@ ssize_t oplus_ofp_set_aod_light_mode_attr(struct kobject *obj,
 {
 	int rc = 0;
 	unsigned int aod_light_mode = 0;
+	char tag[8] = {0};
 	static unsigned int last_aod_light_mode = 0;
 	struct dsi_display *display = oplus_display_get_current_display();
 	struct oplus_ofp_params *p_oplus_ofp_params = oplus_ofp_get_params(oplus_ofp_display_id);
@@ -4837,7 +4850,21 @@ ssize_t oplus_ofp_set_aod_light_mode_attr(struct kobject *obj,
 		return count;
 	}
 
-	sscanf(buf, "%u", &aod_light_mode);
+	if (sscanf(buf, "%u %7s", &aod_light_mode, tag) < 1) {
+		OFP_ERR("Invalid aod_light_mode %s\n", buf);
+		return count;
+	}
+
+	if (!strcmp(tag, "auto")) {
+		oplus_ofp_aod_light_mode_forced = false;
+		OFP_INFO("aod_light_mode back to auto\n");
+		return count;
+	} else if (!strcmp(tag, "force")) {
+		oplus_ofp_aod_light_mode_forced = true;
+	} else if (oplus_ofp_aod_light_mode_forced) {
+		OFP_INFO("aod_light_mode is forced, ignore %u\n", aod_light_mode);
+		return count;
+	}
 
 	last_aod_light_mode = p_oplus_ofp_params->aod_light_mode;
 	p_oplus_ofp_params->aod_light_mode = aod_light_mode;
