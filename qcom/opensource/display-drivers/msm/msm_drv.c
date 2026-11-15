@@ -1223,7 +1223,12 @@ static void msm_lastclose(struct drm_device *dev)
 	msm_atomic_flush_display_threads(priv);
 
 	if (priv->fbdev) {
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 112))
+		rc = drm_fb_helper_restore_fbdev_mode_unlocked(priv->fbdev,
+							       false);
+#else
 		rc = drm_fb_helper_restore_fbdev_mode_unlocked(priv->fbdev);
+#endif
 		if (rc)
 			DRM_ERROR("restore FBDEV mode failed: %d\n", rc);
 	} else if (kms && kms->client.dev) {
