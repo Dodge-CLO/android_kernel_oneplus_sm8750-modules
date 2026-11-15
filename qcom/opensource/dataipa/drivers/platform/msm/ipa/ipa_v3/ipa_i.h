@@ -39,8 +39,6 @@
 #include "ipa_pm.h"
 #include "ipa_defs.h"
 #include "ipa_opt_log.h"
-#include <linux/mailbox_client.h>
-#include <linux/mailbox/qmp.h>
 #include <linux/rmnet_ipa_fd_ioctl.h>
 #include "ipa_uc_holb_monitor.h"
 #include <soc/qcom/minidump.h>
@@ -579,8 +577,6 @@ enum {
 #endif /* #ifdef CONFIG_COMPAT */
 
 #define IPA_TZ_UNLOCK_ATTRIBUTE 0x0C0311
-
-#define MBOX_TOUT_MS 100
 
 #define IPA_RULE_CNT_MAX 512
 
@@ -2054,11 +2050,6 @@ struct ipa3_char_device_context {
 	struct cdev cdev;
 };
 
-struct ipa3_pc_mbox_data {
-	struct mbox_client mbox_client;
-	struct mbox_chan *mbox;
-};
-
 enum ipa_fw_load_state {
 	IPA_FW_LOAD_STATE_INIT,
 	IPA_FW_LOAD_STATE_FWFILE_READY,
@@ -2520,7 +2511,6 @@ struct ipa3_context {
 	u32 sd_state;
 	void __iomem *reg_collection_base;
 	struct ipa3_wdi2_ctx wdi2_ctx;
-	struct ipa3_pc_mbox_data pc_mbox;
 	struct ipa3_wdi3_ctx wdi3_ctx;
 	struct ipa3_usb_ctx usb_ctx;
 	struct ipa3_mhip_ctx mhip_ctx;

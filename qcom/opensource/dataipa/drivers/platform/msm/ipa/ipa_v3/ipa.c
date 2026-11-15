@@ -5,6 +5,7 @@
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
 
+#include <linux/soc/qcom/qcom_aoss.h>
 #include <linux/clk.h>
 #include <linux/compat.h>
 #include <linux/device.h>
@@ -12304,45 +12305,28 @@ int ipa_get_smmu_params(struct ipa_smmu_in_params *in,
 }
 EXPORT_SYMBOL(ipa_get_smmu_params);
 
-#define MAX_LEN 96
-
 void ipa_pc_qmp_enable(void)
 {
-	char buf[MAX_LEN] = "{class: bcm, res: ipa_pc, val: 1}";
-	struct qmp_pkt pkt;
-	int ret = 0;
-	struct ipa3_pc_mbox_data *mbox_data = &ipa3_ctx->pc_mbox;
+	struct qmp *qmp;
+	int ret;
 
 	IPADBG("Enter\n");
 
-	/* prepare the mailbox struct */
-	mbox_data->mbox_client.dev = &ipa3_ctx->master_pdev->dev;
-	mbox_data->mbox_client.tx_block = true;
-	mbox_data->mbox_client.tx_tout = MBOX_TOUT_MS;
-	mbox_data->mbox_client.knows_txdone = false;
-
-	mbox_data->mbox = mbox_request_channel(&mbox_data->mbox_client, 0);
-	if (IS_ERR(mbox_data->mbox)) {
-		ret = PTR_ERR(mbox_data->mbox);
+	qmp = qmp_get(&ipa3_ctx->master_pdev->dev);
+	if (IS_ERR(qmp)) {
+		ret = PTR_ERR(qmp);
 		if (ret != -EPROBE_DEFER)
-			IPAERR("mailbox channel request failed, ret=%d\n", ret);
-
+			IPAERR("failed to get AOSS QMP, ret=%d\n", ret);
 		return;
 	}
 
-	/* prepare the QMP packet to send */
-	pkt.size = MAX_LEN;
-	pkt.data = buf;
-
-	/* send the QMP packet to AOP */
-	ret = mbox_send_message(mbox_data->mbox, &pkt);
-	if (ret < 0)
+	ret = qmp_send(qmp, "{class: bcm, res: ipa_pc, val: 1}");
+	if (ret)
 		IPAERR("qmp message send failed, ret=%d\n", ret);
 
-	if (mbox_data->mbox) {
-		mbox_free_channel(mbox_data->mbox);
-		mbox_data->mbox = NULL;
-	}
+	qmp_put(qmp);
+
+	IPADBG("Exit\n");
 }
 
 /**************************************************************

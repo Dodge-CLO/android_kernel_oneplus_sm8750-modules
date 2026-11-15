@@ -211,7 +211,7 @@ def define_modules(target, variant):
             "//msm-kernel:all_headers",
             ":{}_gsim".format(kernel_build_variant),
             "//vendor/oplus/sm8750-modules/qcom/opensource/datarmnet-ext/mem:{}_rmnet_mem".format(kernel_build_variant),
-        ] + soc_modules(["mdt_loader", "qcom-scm", "qcom_iommu_util", "qcom_ipc_logging", "qcom_ramdump", "qcom_va_minidump", "qmi_helpers", "rproc_qcom_common", "smem", "usb_f_gsi"]),
+        ] + soc_modules(["mdt_loader", "qcom-scm", "qcom_iommu_util", "qcom_ipc_logging", "qcom_ramdump", "qcom_va_minidump", "qcom_aoss", "qmi_helpers", "rproc_qcom_common", "smem", "usb_f_gsi"]),
     )
     mod_list.append("{}_ipam".format(kernel_build_variant))
 
